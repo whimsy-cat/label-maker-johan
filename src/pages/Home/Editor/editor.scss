@@ -1,0 +1,43 @@
+.editor {
+    background-color: rgb(5, 43, 84);
+    position: relative;
+    width: 80%;
+    height: 80%;
+    left: 10%;
+    top: 10%;
+    opacity: 90%;
+    .container {
+        margin-left: 5%;
+        width: 90%;        
+        h1 {
+            margin-top: 50px;
+            font-weight: bold;
+            font-family: bradley hand, cursive;
+            text-shadow: 2px 2px 1px #010b18a0;
+            color: rgb(236, 56, 116);
+        }
+        h2 {
+            color: white;
+            font-size: 22px;
+            margin-top: 15px;
+        }
+        h3{ 
+            color: white;
+            font-size: 15px;
+            line-height: 1.5;
+            font-weight: 200;
+            margin-right: 50px;
+        }
+        h4 {
+            color: rgb(208, 255, 18);
+            font-size: 16px;
+        }
+        input {
+            font-size: 18px;
+            padding: 5px 10px;
+            width: 100%;
+            background-color: #fffffff0;
+            border-radius: 5px;
+        };
+    }
+}

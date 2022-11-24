@@ -3,12 +3,15 @@ import React from "react";
 // import stylesheets
 import "./home.scss";
 
+// import sub components
+import Sidebar from "./Sidebar";
+import Editor from "./Editor";
+
 const Home = () => {
   return (
-    <div>
-      <h1 className="text-3xl font-bold text-red-600 text-center">
-        React + Typescript + Tailwind + Redux + Router
-      </h1>
+    <div className="bg">
+      <Sidebar />
+      <Editor />
     </div>
   );
 };
