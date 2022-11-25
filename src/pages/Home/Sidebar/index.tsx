@@ -93,13 +93,6 @@ export default function PersistentDrawerLeft() {
           >
             <MenuIcon />
           </IconButton>
-          <img
-            src={logo}
-            width={350}
-            height={90}
-            alt="label maker"
-            style={{ border: "5px", borderColor: "white" }}
-          />
         </Toolbar>
       </AppBar>
       <Drawer
