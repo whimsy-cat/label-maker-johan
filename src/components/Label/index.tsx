@@ -45,7 +45,7 @@ const Label = ({ wineName, vol, cl, tagLine, color }: LabelProps) => {
     imgWindow?.document.write(image.outerHTML);
   };
   return (
-    <div className="label">
+    <label className="label">
       <ImgCrop rotate>
         <Upload
           action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
@@ -54,7 +54,18 @@ const Label = ({ wineName, vol, cl, tagLine, color }: LabelProps) => {
           onChange={onChange}
           onPreview={onPreview}
         >
-          {fileList.length < 1 && "+ Upload"}
+          {fileList.length < 1 && (
+            <h5
+              style={{
+                fontSize: "20px",
+                fontWeight: "bold",
+                fontFamily: "bradley hand, cursive",
+              }}
+            >
+              {" "}
+              Your logo here{" "}
+            </h5>
+          )}
         </Upload>
       </ImgCrop>
       <div className="label-text">
@@ -67,7 +78,7 @@ const Label = ({ wineName, vol, cl, tagLine, color }: LabelProps) => {
           <p>{cl} cl</p>
         </div>
       </div>
-    </div>
+    </label>
   );
 };
 

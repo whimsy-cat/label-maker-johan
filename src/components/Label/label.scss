@@ -31,14 +31,14 @@
             }
         }
     }
-    // ::before {
-    //     background: linear-gradient(to right, #000000, #ffa00030 20%, #ffa00030 90%, #000000 100%);
-    //     opacity: 0.4;
-    //     width: 180px;
-    //     position: absolute;
-    //     height: 245px;
-    //     z-index: 20;
-    // }
+    ::before {
+        background: linear-gradient(to right, hsl(0, 0%, 0%), #ffa00010 20%, #ffa00010 90%, #000000 100%);
+        opacity: 0.4;
+        width: 180px;
+        position: absolute;
+        height: 245px;
+        z-index: 20;
+    }
 }
 
 .ant-upload {
