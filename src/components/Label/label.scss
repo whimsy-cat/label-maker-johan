@@ -1,0 +1,59 @@
+.label {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    height: 220px;
+    .upload-image {
+        width: 100%;
+        height: auto;
+    }
+    .label-text{
+        background-color: #ffffff;
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        padding: 10px 10px 15px 10px;
+        font-size: 10px;   
+        font-weight: 600;
+        .label-text-footer {
+            display: flex;
+            margin-top: 5px;
+            font-size: 8px;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+    }
+}
+
+.ant-upload {
+    width: 100% !important;
+    height: 150px !important;
+}
+.ant-upload-select {
+    width: 100% !important;
+    height: 150px !important;
+}
+
+.ant-upload-list-item-container {
+    width: 100% !important;
+    height: 150px !important;
+}
+.ant-upload-list-item {
+    border: none !important;
+    width: 100% !important;
+    height: 150px !important;
+    padding: 0 0 !important;
+}
+
+.ant-upload-list-item::before
+{
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.ant-upload-list-item-thumbnail {
+    height: 180px !important;
+}

@@ -1,20 +1,21 @@
 import React from "react";
 
 // import stylesheets
-import "./home.scss";
+import "./checkout.scss";
 
 // import sub components
 import Sidebar from "../../components/Sidebar";
-import Editor from "./Editor";
-const Home = () => {
+import Checkbox from "./Checkbox";
+
+const Checkout = () => {
   return (
     <>
-      <div className="back">
+      <div className="bg">
         <Sidebar />
-        <Editor />
+        <Checkbox />
       </div>
     </>
   );
 };
 
-export default Home;
+export default Checkout;
