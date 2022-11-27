@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 // use antd
 import { Upload } from "antd";
@@ -13,10 +13,20 @@ interface LabelProps {
   vol: string;
   cl: string;
   tagLine: string;
+  color: string;
 }
 
-const Label = ({ wineName, vol, cl, tagLine }: LabelProps) => {
+const Label = ({ wineName, vol, cl, tagLine, color }: LabelProps) => {
+  const [fontHeaderSize, setFontHeaderSize] = useState(15);
   const [fileList, setFileList] = useState<UploadFile[]>([]);
+
+  useEffect(() => {
+    if (wineName.length > 0 && wineName.length <= 14) setFontHeaderSize(15);
+    else if (wineName.length > 14 && wineName.length <= 18)
+      setFontHeaderSize(12);
+    else if (wineName.length > 18) setFontHeaderSize(10);
+  }, [wineName]);
+
   const onChange: UploadProps["onChange"] = ({ fileList: newFileList }) => {
     setFileList(newFileList);
   };
@@ -48,8 +58,10 @@ const Label = ({ wineName, vol, cl, tagLine }: LabelProps) => {
         </Upload>
       </ImgCrop>
       <div className="label-text">
-        <div>{wineName}</div>
-        <div>{tagLine}</div>
+        <div style={{ color: color, fontSize: `${fontHeaderSize}px` }}>
+          {wineName}
+        </div>
+        <div className="label-text-tagline">{tagLine}</div>
         <div className="label-text-footer">
           <p>{vol}% /vol</p>
           <p>{cl} cl</p>

@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { CirclePicker } from "react-color";
 import Button from "react-bootstrap/Button";
+
+import html2canvas from "html2canvas";
+import { jsPDF } from "jspdf";
 
 // import stylesheets
 import "./editor.scss";
@@ -21,14 +24,16 @@ import wine5 from "../../../assets/images/wine5.webp";
 import Label from "../../../components/Label";
 
 const Home = () => {
-  const [color, setColor] = useState("#fff");
+  const [color, setColor] = useState("#000000");
   const [wineName, setWineName] = useState("WineName");
   const [vol, setVol] = useState("4.8");
   const [cl, setCl] = useState("33");
   const [tagLine, setTagLine] = useState("TagLine");
+  const printRef = React.useRef<HTMLDivElement>(null);
 
   const updateWineName = (event: any) => {
     const text = event.target.value;
+    if (text.length > 22) return;
     setWineName(text);
   };
 
@@ -54,7 +59,22 @@ const Home = () => {
   };
 
   const onColorChange = (color: any, event: any) => {
-    alert(color.hex);
+    const text = color.hex;
+    setColor(text);
+  };
+
+  const handleDownloadPdf = async () => {
+    const element: any = printRef.current;
+    const canvas = await html2canvas(element);
+    const data = canvas.toDataURL("image/png");
+
+    const pdf = new jsPDF("portrait", "px", "a7");
+    const imgProperties = pdf.getImageProperties(data);
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width;
+
+    pdf.addImage(data, "PNG", 0, 0, pdfWidth, pdfHeight);
+    pdf.save("label.pdf");
   };
 
   return (
@@ -126,8 +146,9 @@ const Home = () => {
               <Col className="col-lg-8" style={{ color: "white" }}>
                 or
                 <a
-                  href="javascript();"
+                  href="#download"
                   style={{ color: "white", padding: "0 15px" }}
+                  onClick={handleDownloadPdf}
                 >
                   Download
                 </a>
@@ -151,7 +172,16 @@ const Home = () => {
           >
             <div className="bottle" style={{ width: "180px", height: "100%" }}>
               <div style={{ width: "100%", height: "55%" }}></div>
-              <Label wineName={wineName} vol={vol} cl={cl} tagLine={tagLine} />
+              <div ref={printRef} className="overlay">
+                <Label
+                  wineName={wineName}
+                  vol={vol}
+                  cl={cl}
+                  tagLine={tagLine}
+                  color={color}
+                />
+              </div>
+              {/* <div className="overlay"></div> */}
             </div>
           </Col>
         </Row>

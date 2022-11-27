@@ -2,9 +2,8 @@
     background-color: #ffffff;
     display: flex;
     flex-direction: column;
-
     width: 100%;
-    height: 220px;
+    height: auto;
     .upload-image {
         width: 100%;
         height: auto;
@@ -14,18 +13,32 @@
         z-index: 10;
         display: flex;
         flex-direction: column;
-        justify-content: start;
         padding: 10px 10px 15px 10px;
-        font-size: 10px;   
+        font-size: 15px;   
         font-weight: 600;
+        .label-text-tagline {
+            font-size: 13px;
+        }
         .label-text-footer {
             display: flex;
             margin-top: 5px;
-            font-size: 8px;
+            font-size: 10px;
             flex-direction: row;
+            font-weight: 900;
             justify-content: space-between;
+            p {
+                margin-bottom: 0;
+            }
         }
     }
+    // ::before {
+    //     background: linear-gradient(to right, #000000, #ffa00030 20%, #ffa00030 90%, #000000 100%);
+    //     opacity: 0.4;
+    //     width: 180px;
+    //     position: absolute;
+    //     height: 245px;
+    //     z-index: 20;
+    // }
 }
 
 .ant-upload {
@@ -56,4 +69,6 @@
 
 .ant-upload-list-item-thumbnail {
     height: 180px !important;
+    position: absolute !important;
+    top: 0 !important;
 }
