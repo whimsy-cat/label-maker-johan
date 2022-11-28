@@ -48,13 +48,13 @@
             background-size: cover;
 
             .overlay{
-                background: linear-gradient(to right, #000000, #ffa00030 20%, #ffa00030 80%, #000000 100%);
-                opacity: 0.4;
+                background: linear-gradient(to right, #000000A0 0%, #ffa00010 20%, #ffa00010 90%, #000000B0 100%);
+                // opacity: 0.4;
                 width: 100%;
                 position: relative;
-                top: -245px;
-                height: 245px;
-                z-index: -20;
+                top: -237px;
+                height: 237px;
+                z-index: 20;
             }
         }
     }

@@ -1,10 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-// use antd
-import { Upload } from "antd";
-import ImgCrop from "antd-img-crop";
-import type { RcFile, UploadFile, UploadProps } from "antd/es/upload/interface";
-
 // import stylesheets
 import "./label.scss";
 
@@ -14,11 +9,11 @@ interface LabelProps {
   cl: string;
   tagLine: string;
   color: string;
+  file: string;
 }
 
-const Label = ({ wineName, vol, cl, tagLine, color }: LabelProps) => {
+const Label = ({ wineName, vol, cl, tagLine, color, file }: LabelProps) => {
   const [fontHeaderSize, setFontHeaderSize] = useState(15);
-  const [fileList, setFileList] = useState<UploadFile[]>([]);
 
   useEffect(() => {
     if (wineName.length > 0 && wineName.length <= 14) setFontHeaderSize(15);
@@ -27,47 +22,9 @@ const Label = ({ wineName, vol, cl, tagLine, color }: LabelProps) => {
     else if (wineName.length > 18) setFontHeaderSize(10);
   }, [wineName]);
 
-  const onChange: UploadProps["onChange"] = ({ fileList: newFileList }) => {
-    setFileList(newFileList);
-  };
-  const onPreview = async (file: UploadFile) => {
-    let src = file.url as string;
-    if (!src) {
-      src = await new Promise((resolve) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file.originFileObj as RcFile);
-        reader.onload = () => resolve(reader.result as string);
-      });
-    }
-    const image = new Image();
-    image.src = src;
-    const imgWindow = window.open(src);
-    imgWindow?.document.write(image.outerHTML);
-  };
   return (
-    <label className="label">
-      <ImgCrop rotate>
-        <Upload
-          action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-          listType="picture-card"
-          fileList={fileList}
-          onChange={onChange}
-          onPreview={onPreview}
-        >
-          {fileList.length < 1 && (
-            <h5
-              style={{
-                fontSize: "20px",
-                fontWeight: "bold",
-                fontFamily: "bradley hand, cursive",
-              }}
-            >
-              {" "}
-              Your logo here{" "}
-            </h5>
-          )}
-        </Upload>
-      </ImgCrop>
+    <div className="label">
+      <img src={file} height={150} alt="upload" />
       <div className="label-text">
         <div style={{ color: color, fontSize: `${fontHeaderSize}px` }}>
           {wineName}
@@ -78,7 +35,7 @@ const Label = ({ wineName, vol, cl, tagLine, color }: LabelProps) => {
           <p>{cl} cl</p>
         </div>
       </div>
-    </label>
+    </div>
   );
 };
 

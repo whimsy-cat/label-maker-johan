@@ -1,10 +1,11 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { CirclePicker } from "react-color";
-import Button from "react-bootstrap/Button";
+
+import Button from "@mui/material/Button";
 
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
@@ -12,16 +13,11 @@ import { jsPDF } from "jspdf";
 // import stylesheets
 import "./editor.scss";
 
-// import assets
-import bottle1 from "../../../assets/main/bottle1.webp";
-import wine1 from "../../../assets/images/wine1.jpg";
-import wine2 from "../../../assets/images/wine2.jpg";
-import wine3 from "../../../assets/images/wine3.jpg";
-import wine4 from "../../../assets/images/bottles/bot3.png";
-import wine5 from "../../../assets/images/wine5.webp";
-
 // import labels
 import Label from "../../../components/Label";
+
+// import images
+import Img from "../../../assets/images/bg2.jpg";
 
 const Home = () => {
   const [color, setColor] = useState("#000000");
@@ -30,6 +26,8 @@ const Home = () => {
   const [cl, setCl] = useState("33");
   const [tagLine, setTagLine] = useState("TagLine");
   const printRef = React.useRef<HTMLDivElement>(null);
+
+  const [file, setFile] = useState(Img);
 
   const updateWineName = (event: any) => {
     const text = event.target.value;
@@ -63,19 +61,28 @@ const Home = () => {
     setColor(text);
   };
 
+  const handleChange = (e: any) => {
+    const imageUrl: any = URL.createObjectURL(e.target.files[0]);
+    setFile(imageUrl);
+  };
+
   const handleDownloadPdf = async () => {
     const element: any = printRef.current;
+    console.log("element : " + element);
     const canvas = await html2canvas(element);
+    console.log("canvas" + canvas);
     const data = canvas.toDataURL("image/png");
+    console.log("data : " + data);
 
-    const pdf = new jsPDF("portrait", "mm", "a7");
+    const pdf = new jsPDF("portrait", "px", "a7");
     const imgProperties = pdf.getImageProperties(data);
+    console.log("imgProp : " + imgProperties);
 
     const pdfWidth = pdf.internal.pageSize.getWidth();
+    console.log("pdfWidth : " + pdfWidth);
 
-    // const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width;
-
-    var pdfHeight = pdf.internal.pageSize.getHeight();
+    const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width;
+    console.log("pdfHeight : " + pdfHeight);
 
     pdf.addImage(data, "PNG", 0, 0, pdfWidth, pdfHeight);
     pdf.save("label.pdf");
@@ -143,9 +150,18 @@ const Home = () => {
               }}
             >
               <Col className="col-lg-4">
-                <Button variant="danger" style={{ width: "100%" }}>
+                <button
+                  style={{
+                    width: "100%",
+                    padding: "10px 20px",
+                    color: "white",
+                    backgroundColor: "#ff3333",
+                    border: "none",
+                    borderRadius: "5px",
+                  }}
+                >
                   Buy Stickers
-                </Button>
+                </button>
               </Col>
               <Col className="col-lg-8" style={{ color: "white" }}>
                 or
@@ -172,20 +188,36 @@ const Home = () => {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              flexDirection: "column",
             }}
           >
             <div className="bottle" style={{ width: "180px", height: "100%" }}>
               <div style={{ width: "100%", height: "55%" }}></div>
-              <div ref={printRef} className="print-label">
+              <div ref={printRef}>
                 <Label
                   wineName={wineName}
                   vol={vol}
                   cl={cl}
                   tagLine={tagLine}
                   color={color}
+                  file={file}
                 />
               </div>
+              <div className="overlay"></div>
             </div>
+            <Button
+              variant="contained"
+              component="label"
+              style={{ backgroundColor: "#ff3333" }}
+            >
+              Upload Image
+              <input
+                hidden
+                accept="image/*"
+                type="file"
+                onChange={handleChange}
+              />
+            </Button>
           </Col>
         </Row>
       </Container>

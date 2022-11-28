@@ -1,25 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { CirclePicker } from "react-color";
-import Button from "react-bootstrap/Button";
-import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
-import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
 // import stylesheets
-import "./checkout.scss";
+import "./checkbox.scss";
 
 // import assets
 import bottle1 from "../../../assets/main/bottle1.webp";
 import swedenFlag from "../../../assets/main/fg-sw.png";
 import freeBadge from "../../../assets/main/free-badge.png";
-import leftArrow from "../../../assets/main/left-arrow.webp";
-import rightArrow from "../../../assets/main/right-arrow.webp";
 
 const Home = () => {
-  const [color, setColor] = useState("#fff");
   return (
     <div className="checkout">
       <h1> LABEL.COM </h1>
