@@ -27,7 +27,7 @@ import FeedIcon from "@mui/icons-material/Feed";
 import LocalPoliceIcon from "@mui/icons-material/LocalPolice";
 import BugReportIcon from "@mui/icons-material/BugReport";
 
-import logo from "../../../assets/images/logo1.webp";
+import logo from "../../assets/images/logo1.webp";
 
 import "./sidebar.scss";
 
@@ -93,6 +93,13 @@ export default function PersistentDrawerLeft() {
           >
             <MenuIcon />
           </IconButton>
+          <img
+            src={logo}
+            width={350}
+            height={90}
+            alt="label maker"
+            style={{ border: "5px", borderColor: "white" }}
+          />
         </Toolbar>
       </AppBar>
       <Drawer

@@ -65,21 +65,17 @@ const Home = () => {
 
   const handleDownloadPdf = async () => {
     const element: any = printRef.current;
-    console.log("element : " + element);
     const canvas = await html2canvas(element);
-    console.log("canvas" + canvas);
     const data = canvas.toDataURL("image/png");
-    console.log("data : " + data);
 
-    const pdf = new jsPDF("portrait", "px", "a7");
+    const pdf = new jsPDF("portrait", "mm", "a7");
     const imgProperties = pdf.getImageProperties(data);
-    console.log("imgProp : " + imgProperties);
 
     const pdfWidth = pdf.internal.pageSize.getWidth();
-    console.log("pdfWidth : " + pdfWidth);
 
-    const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width;
-    console.log("pdfHeight : " + pdfHeight);
+    // const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width;
+
+    var pdfHeight = pdf.internal.pageSize.getHeight();
 
     pdf.addImage(data, "PNG", 0, 0, pdfWidth, pdfHeight);
     pdf.save("label.pdf");
@@ -180,7 +176,7 @@ const Home = () => {
           >
             <div className="bottle" style={{ width: "180px", height: "100%" }}>
               <div style={{ width: "100%", height: "55%" }}></div>
-              <div ref={printRef}>
+              <div ref={printRef} className="print-label">
                 <Label
                   wineName={wineName}
                   vol={vol}
@@ -189,7 +185,6 @@ const Home = () => {
                   color={color}
                 />
               </div>
-              <div className="overlay"></div>
             </div>
           </Col>
         </Row>

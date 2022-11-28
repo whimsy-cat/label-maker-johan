@@ -1,0 +1,50 @@
+.orderbox {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    color: white;
+    position: relative;
+    width: 50%;
+    height: auto;
+    margin: auto 30px;
+    padding-bottom: 30px;
+    left: 10%;
+    top: 10%;
+    font-family: bradley hand, cursive;
+
+    > div {
+        margin-top: 20px;
+    }
+    h1 {
+        font-size: 50px;
+        margin-top: 10px;
+        font-weight: 900;
+        text-shadow: 2px 2px 1px #010b18a0;
+        color: #ffc404;
+    }
+    h2 {
+        color: #ffc404;
+        font-size: 22px;
+        margin-top: 15px;
+        font-weight: bold;
+    }
+    h3{ 
+        color: #ffc404;
+        font-size: 15px;
+        font-weight: bold;
+        line-height: 1.5;
+        margin-right: 30px;
+        margin-top: 20px;
+    }
+    h4 {
+        color: #ffc404;
+        font-weight: bold;
+        font-size: 16px;
+    }
+    .order-buttons {
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+        align-items: center;
+    }
+}

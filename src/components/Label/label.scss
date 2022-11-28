@@ -4,6 +4,8 @@
     flex-direction: column;
     width: 100%;
     height: auto;
+    border-bottom: 3px solid #0d0f04c0;
+    border-top: 3px solid #0d0f04c0;
     .upload-image {
         width: 100%;
         height: auto;
@@ -16,11 +18,13 @@
         padding: 10px 10px 15px 10px;
         font-size: 15px;   
         font-weight: 600;
+        position: relative;
         .label-text-tagline {
             font-size: 13px;
         }
         .label-text-footer {
             display: flex;
+             
             margin-top: 5px;
             font-size: 10px;
             flex-direction: row;

@@ -34,22 +34,22 @@ const Home = () => {
               justifyContent: "center",
             }}
           >
-            {/* <img
+            <img
               src={freeBadge}
-              width={170}
-              height={170}
+              width={160}
+              height={160}
               alt="freeBadge"
               style={{
                 position: "absolute",
-                top: "-140px",
+                top: "-150px",
                 left: 0,
               }}
-            ></img> */}
+            ></img>
             <button className="left-arrow-btn"></button>
             <button className="right-arrow-btn"></button>
             <img
               src={bottle1}
-              width={260}
+              width={180}
               height={650}
               alt="bottle1"
               style={{
