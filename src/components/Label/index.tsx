@@ -24,7 +24,13 @@ const Label = ({ wineName, vol, cl, tagLine, color, file }: LabelProps) => {
 
   return (
     <div className="label">
-      <img src={file} height={150} alt="upload" />
+      <img
+        src={file}
+        height={150}
+        width="auto"
+        alt="upload"
+        style={{ margin: "0 auto", maxWidth: "100%" }}
+      />
       <div className="label-text">
         <div style={{ color: color, fontSize: `${fontHeaderSize}px` }}>
           {wineName}

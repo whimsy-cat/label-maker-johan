@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { CirclePicker } from "react-color";
+import { CirclePicker, SliderPicker } from "react-color";
 
 import Button from "@mui/material/Button";
 
@@ -18,6 +18,7 @@ import Label from "../../../components/Label";
 
 // import images
 import Img from "../../../assets/images/bg2.jpg";
+import { Slider } from "@mui/material";
 
 const Home = () => {
   const [color, setColor] = useState("#000000");
@@ -68,21 +69,15 @@ const Home = () => {
 
   const handleDownloadPdf = async () => {
     const element: any = printRef.current;
-    console.log("element : " + element);
     const canvas = await html2canvas(element);
-    console.log("canvas" + canvas);
     const data = canvas.toDataURL("image/png");
-    console.log("data : " + data);
 
     const pdf = new jsPDF("portrait", "px", "a7");
     const imgProperties = pdf.getImageProperties(data);
-    console.log("imgProp : " + imgProperties);
 
     const pdfWidth = pdf.internal.pageSize.getWidth();
-    console.log("pdfWidth : " + pdfWidth);
-
-    const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width;
-    console.log("pdfHeight : " + pdfHeight);
+    // const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width;
+    const pdfHeight = pdf.internal.pageSize.getHeight();
 
     pdf.addImage(data, "PNG", 0, 0, pdfWidth, pdfHeight);
     pdf.save("label.pdf");
@@ -93,7 +88,7 @@ const Home = () => {
       <Container className="container">
         <Row>
           <Col
-            className="col-lg-6"
+            className="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-xs-12"
             style={{
               display: "flex",
               flexDirection: "column",
@@ -138,6 +133,7 @@ const Home = () => {
               <Col className="col-lg-6">
                 <h4>Color</h4>
                 <CirclePicker width="100%" onChange={onColorChange} />
+                {/* <SliderPicker color={color} onChange={onColorChange} /> */}
               </Col>
             </Row>
 
@@ -183,7 +179,7 @@ const Home = () => {
             </Row>
           </Col>
           <Col
-            className="col-lg-6"
+            className="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-xs-12"
             style={{
               display: "flex",
               justifyContent: "center",
@@ -191,7 +187,7 @@ const Home = () => {
               flexDirection: "column",
             }}
           >
-            <div className="bottle" style={{ width: "180px", height: "100%" }}>
+            <div className="bottle">
               <div style={{ width: "100%", height: "55%" }}></div>
               <div ref={printRef}>
                 <Label
