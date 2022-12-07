@@ -1,0 +1,76 @@
+.editor {
+    background-color: #641313A0;
+    border-radius: 10px;
+    position: relative;
+    width: 60%;
+    height: auto;
+    min-height: 80%;
+    margin: auto 30px;
+    padding-bottom: 30px;
+    left: 10%;
+    top: 10%;
+    display: flex;
+    align-items: center;
+    
+    @media (max-width: 1650px) {
+        width: 80%;
+        margin: 0 0;
+        margin-bottom: 250px;
+    }
+    .container {
+        margin-left: 5%;
+        width: 90%;
+        display: flex;   
+        align-items: flex-start;
+        h1 {
+            font-size: 50px;
+            margin-top: 50px;
+            font-weight: 900;
+            font-family: bradley hand, cursive;
+            text-shadow: 2px 2px 1px #010b18a0;
+            color: #ffc404;
+        }
+        h2 {
+            color: white;
+            font-size: 22px;
+            margin-top: 15px;
+        }
+        h3{ 
+            color: white;
+            font-size: 15px;
+            line-height: 1.5;
+            font-weight: 200;
+            margin-right: 30px;
+        }
+        h4 {
+            color: rgb(208, 255, 18);
+            font-size: 16px;
+        }
+        input {
+            font-size: 18px;
+            padding: 5px 10px;
+            width: 100%;
+            background-color: #fffffff0;
+            border-radius: 5px;
+        }
+        .bottle {
+            background: url("../../../assets/main/bottle1.webp") no-repeat scroll center;
+            background-size: cover;
+            width: 180px;
+            height: 100%;
+
+            @media (max-width: 1200px) {
+                height: 700px;
+                
+            }
+            .overlay{
+                background: linear-gradient(to right, #000000A0 0%, #ffa00010 20%, #ffa00010 90%, #000000B0 100%);
+                width: 100%;
+                position: relative;
+                top: -237px;
+                height: 237px;
+                z-index: 20;
+            }
+        }
+    }
+}

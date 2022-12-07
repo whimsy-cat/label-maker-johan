@@ -3,13 +3,26 @@ import React from "react";
 // import stylesheets
 import "./home.scss";
 
-const Home = () => {
+// import sub components
+import Sidebar from "../../components/Sidebar";
+import Editor from "./Editor";
+
+// import signin modal
+import Login from "../Auth";
+
+interface HomeProps {
+  status: String;
+}
+
+const Home = ({ status }: HomeProps) => {
   return (
-    <div>
-      <h1 className="text-3xl font-bold text-red-600 text-center">
-        React + Typescript + Tailwind + Redux + Router
-      </h1>
-    </div>
+    <>
+      <div className="back">
+        <Sidebar />
+        <Editor />
+        {status === "Sign In" ? <Login /> : ""}
+      </div>
+    </>
   );
 };
 
