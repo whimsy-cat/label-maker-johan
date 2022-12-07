@@ -11,9 +11,11 @@
     top: 10%;
     display: flex;
     align-items: center;
+    
     @media (max-width: 1650px) {
         width: 80%;
         margin: 0 0;
+        margin-bottom: 250px;
     }
     .container {
         margin-left: 5%;
@@ -63,7 +65,6 @@
             }
             .overlay{
                 background: linear-gradient(to right, #000000A0 0%, #ffa00010 20%, #ffa00010 90%, #000000B0 100%);
-                // opacity: 0.4;
                 width: 100%;
                 position: relative;
                 top: -237px;

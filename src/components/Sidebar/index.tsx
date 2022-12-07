@@ -27,6 +27,8 @@ import FeedIcon from "@mui/icons-material/Feed";
 import LocalPoliceIcon from "@mui/icons-material/LocalPolice";
 import BugReportIcon from "@mui/icons-material/BugReport";
 
+import { useNavigate } from "react-router-dom";
+
 import logo from "../../assets/images/logo1.webp";
 
 import "./sidebar.scss";
@@ -73,6 +75,12 @@ export default function PersistentDrawerLeft() {
 
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+
+  const SideNavigation = (text: any) => {
+    // let navigate = useNavigate();
+    alert("123");
+    // navigate("/login");
   };
 
   return (
@@ -139,7 +147,11 @@ export default function PersistentDrawerLeft() {
             "Report A Bug",
             "Contact US",
           ].map((text, index) => (
-            <ListItem key={text} disablePadding>
+            <ListItem
+              key={text}
+              disablePadding
+              onClick={() => SideNavigation(text)}
+            >
               <ListItemButton>
                 <ListItemIcon>
                   {index === 0 ? (

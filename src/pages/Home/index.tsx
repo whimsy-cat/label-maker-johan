@@ -6,12 +6,21 @@ import "./home.scss";
 // import sub components
 import Sidebar from "../../components/Sidebar";
 import Editor from "./Editor";
-const Home = () => {
+
+// import signin modal
+import Login from "../Auth";
+
+interface HomeProps {
+  status: String;
+}
+
+const Home = ({ status }: HomeProps) => {
   return (
     <>
       <div className="back">
         <Sidebar />
         <Editor />
+        {status === "Sign In" ? <Login /> : ""}
       </div>
     </>
   );
