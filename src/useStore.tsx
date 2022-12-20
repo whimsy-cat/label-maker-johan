@@ -1,7 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { nonWhiteSpace } from "html2canvas/dist/types/css/syntax/parser";
 import { useSelector, useDispatch } from "react-redux";
-// import { toast } from "react-toastify";
-// import { useHistory } from "react-router-dom";
+
+const locales = {
+  "en-US": require("./locales/en-US.json"),
+  "es-ES": require("./locales/es-ES.json"),
+  "sw-SW": require("./locales/sw-SW.json"),
+
+  // "zh-CN": require("./locales/zh-CN.json"),
+} as { [lang: string]: { [key: string]: string } };
 
 export const NF = (n: string | number) =>
   String(n).replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
@@ -50,7 +57,38 @@ declare interface StoreObject {
   theme: string;
   cookie?: string;
   loading: boolean;
+
+  // label info
+  bottleName: string;
+  bottleType: string;
+  tagLine: string;
+  cl: string;
+  vol: string;
+  batchDate: string;
+  color: string;
+  price: number;
+  size: string;
+
+  //personal info
+  firstname: string;
+  lastname: string;
   name: string;
+  email: string;
+  phone: string;
+  country: string;
+  city: string;
+  state: string;
+  street: string;
+  zipcode: string;
+
+  //payment info
+  payment: string;
+  orderid: number;
+  created: string;
+
+  // label
+  curLabel: number;
+  file: string;
 }
 const appKey = "myProject-v.1.10";
 
@@ -92,7 +130,37 @@ const initialState: StoreObject = {
   lang: "en-US",
   cookie: "",
   loading: false,
-  name: "jacob",
+
+  // bottle info
+  bottleName: "Sarah",
+  bottleType: "100% Natural",
+  tagLine: "Healthy",
+  cl: "4.5",
+  vol: "33",
+  batchDate: "2022.12.12",
+  color: "#111e0a",
+  price: 14,
+  size: "small",
+
+  // contact info
+  firstname: "",
+  lastname: "",
+  name: "",
+  email: "",
+  phone: "",
+  country: "",
+  city: "",
+  state: "",
+  zipcode: "",
+  street: "",
+
+  //payment info
+  payment: "Credit Card",
+  created: "",
+  orderid: 10000,
+
+  curLabel: 4,
+  file: "",
 };
 
 export const slice = createSlice({
@@ -111,13 +179,27 @@ export const slice = createSlice({
 
 const useStore = () => {
   const G = useSelector((state: StoreObject) => state);
+  const L = locales[G.lang];
   const dispatch = useDispatch();
   const update = (payload: Partial<StoreObject>) =>
-    dispatch(slice.actions.update(payload));
-
+    dispatch(slice.actions.update(payload as any));
+  const T = (
+    key: string,
+    args?: { [key: string]: string | number } | string | number
+  ): string => {
+    let text = L[key];
+    if (text === undefined) throw new Error("Undefined lang key[" + key + "]");
+    if (typeof args === "string" || typeof args === "number") {
+      text = text.replace(/\{\w+\}/, String(args));
+    } else if (args) {
+      for (let k in args)
+        text = text.replace(new RegExp("{" + k + "}", "g"), String(args[k]));
+    }
+    return text;
+  };
   const showLoading = (show: boolean) => update({ loading: show });
 
-  return { ...G, update, showLoading };
+  return { ...G, T, update, showLoading };
 };
 
 export default useStore;
