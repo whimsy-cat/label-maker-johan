@@ -7,7 +7,7 @@ import itLocal from "i18n-iso-countries/langs/it.json";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import myStore from "../../../useStore";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 // import stylesheets
 import "./reviewbox.scss";
 import useStore from "../../../useStore";
@@ -50,7 +50,7 @@ import { BigLabel29 } from "../../../components/Label/Label29";
 import { BigLabel30 } from "../../../components/Label/Label30";
 import html2canvas from "html2canvas";
 
-import domtoimage from "dom-to-image";
+// import domtoimage from "dom-to-image";
 import { jsPDF } from "jspdf";
 
 declare module "react-stripe-checkout" {
@@ -60,10 +60,10 @@ declare module "react-stripe-checkout" {
 }
 
 const ReviewBox: React.FC = () => {
-  const { T, update } = useStore();
+  const { T } = useStore();
   const G: any = myStore();
   const printRef = React.useRef<HTMLDivElement>(null);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   countries.registerLocale(enLocale);
   countries.registerLocale(itLocal);
   const [messageApi, contextHolder] = message.useMessage();
@@ -104,7 +104,7 @@ const ReviewBox: React.FC = () => {
       lwidth = 97.6;
       lheight = 90;
     }
-    const pdf = new jsPDF("portrait", "mm", [100, 100]);
+    const pdf = new jsPDF("portrait", "mm", [lwidth, lheight]);
     console.log("element : ");
     console.log(element);
 

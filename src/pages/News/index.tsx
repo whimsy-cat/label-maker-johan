@@ -1,6 +1,5 @@
 import React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
-import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 
 import Row from "react-bootstrap/Row";
@@ -13,7 +12,7 @@ import useStore from "../../useStore";
 import TopMenuBar from "../../components/TopMenuBar";
 
 const News = () => {
-  const { T, update } = useStore();
+  const { T } = useStore();
   return (
     <div>
       <React.Fragment>

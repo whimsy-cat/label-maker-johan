@@ -1,18 +1,13 @@
-import React, { useState, useRef } from "react";
+import React from "react";
 import { styled } from "@mui/material/styles";
-import Stack from "@mui/material/Stack";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
-import Check from "@mui/icons-material/Check";
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
 import PaidIcon from "@mui/icons-material/Paid";
 import PointOfSaleIcon from "@mui/icons-material/PointOfSale";
-import SettingsIcon from "@mui/icons-material/Settings";
 
-import GroupAddIcon from "@mui/icons-material/GroupAdd";
-import VideoLabelIcon from "@mui/icons-material/VideoLabel";
 import StepConnector, {
   stepConnectorClasses,
 } from "@mui/material/StepConnector";

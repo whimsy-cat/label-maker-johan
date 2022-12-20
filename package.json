@@ -2,7 +2,6 @@
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://fixalabel.com",
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
@@ -29,6 +28,7 @@
     "@types/react": "^18.0.0",
     "@types/react-color": "^3.0.6",
     "@types/react-dom": "^18.0.0",
+    "@types/react-image-gallery": "^1.2.0",
     "antd": "^5.0.2",
     "antd-img-crop": "^4.5.1",
     "axios": "^1.2.1",
@@ -47,6 +47,7 @@
     "react-color": "^2.19.3",
     "react-dom": "^18.2.0",
     "react-draggable": "^4.4.5",
+    "react-image-gallery": "^1.2.11",
     "react-pick-color": "^1.0.2",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.4.3",

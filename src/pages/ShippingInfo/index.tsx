@@ -1,6 +1,5 @@
 import React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
-import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 
 import Row from "react-bootstrap/Row";
@@ -15,7 +14,7 @@ import useStore from "../../useStore";
 import img1 from "../../assets/main/shipping.png";
 
 const ShippingInfo = () => {
-  const { T, update } = useStore();
+  const { T } = useStore();
   return (
     <div>
       <React.Fragment>

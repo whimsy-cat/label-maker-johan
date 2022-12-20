@@ -34,7 +34,7 @@ export interface SimpleDialogProps {
 function SimpleDialog(props: SimpleDialogProps) {
   const { onClose, selectedValue, open } = props;
   const navigate = useNavigate();
-  const { T, update } = useStore();
+  const { update } = useStore();
 
   const handleClose = () => {
     onClose(selectedValue);
@@ -42,9 +42,9 @@ function SimpleDialog(props: SimpleDialogProps) {
 
   const handleListItemClick = (value: string) => {
     onClose(value);
-    if (value == "English") update({ lang: "en-US" });
-    if (value == "Swedish") update({ lang: "sw-SW" });
-    if (value == "Spanish") update({ lang: "es-ES" });
+    if (value === "English") update({ lang: "en-US" });
+    if (value === "Swedish") update({ lang: "sw-SW" });
+    if (value === "Spanish") update({ lang: "es-ES" });
     navigate("/edit");
   };
 

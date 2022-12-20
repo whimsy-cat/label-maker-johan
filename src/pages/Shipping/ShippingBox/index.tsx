@@ -98,9 +98,9 @@ const ShippingBox: React.FC = () => {
   const handleCityChange = (e: any) => {
     setCity(e.target.value);
   };
-  const handleStateChange = (e: any) => {
-    setState(e.target.value);
-  };
+  // const handleStateChange = (e: any) => {
+  //   setState(e.target.value);
+  // };
   const handleZipcodeChange = (e: any) => {
     setZipcode(e.target.value);
   };

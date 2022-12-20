@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { nonWhiteSpace } from "html2canvas/dist/types/css/syntax/parser";
 import { useSelector, useDispatch } from "react-redux";
 
 const locales = {
