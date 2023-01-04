@@ -12,6 +12,8 @@ import News from "../pages/News";
 import ShippingInfo from "../pages/ShippingInfo";
 import Review from "../pages/Review";
 import Splash from "../pages/Splash";
+import Confirmation from "../pages/Confirmation";
+import Download from "../pages/Download";
 
 const Routers = () => {
   return (
@@ -28,6 +30,8 @@ const Routers = () => {
       <Route path="/news" element={<News />} />
       <Route path="/shippinginfo" element={<ShippingInfo />} />
       <Route path="/review" element={<Review />} />
+      <Route path="/confirmation" element={<Confirmation />} />
+      <Route path="/download" element={<Download />} />
     </Routes>
   );
 };

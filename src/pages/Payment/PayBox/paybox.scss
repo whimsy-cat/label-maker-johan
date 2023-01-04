@@ -2,7 +2,6 @@
   height: auto;
   display: flex;
   align-items: flex-end;
-  margin-top: 100px;
   .container {
     width: 100%;
     h1,
@@ -12,7 +11,8 @@
       font-weight: 900;
       width: 60%;
       line-height: 40px;
-      color: #fea150;
+      color: black;
+      font-family: "Space Mono";
     }
     h2,
     .h2 {

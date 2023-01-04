@@ -55,16 +55,17 @@ import Stripe from "../../../assets/main/payment/Stripe.svg";
 import Paypal from "../../../assets/main/payment/Paypal.svg";
 import Crypto from "../../../assets/main/payment/Crypto.svg";
 
+import SalesTax from "sales-tax";
+
 // import images
-const appUrl = process.env.REACT_APP_API_URL || "";
-const appMode = process.env.REACT_APP_MODE === "1";
+const appUrl = "https://stripe-server-johan-production.up.railway.app"; // process.env.REACT_APP_API_URL || "";
 
 declare module "react-stripe-checkout" {
   interface StripeCheckoutProps {
+
     children?: React.ReactNode;
   }
 }
-
 const PayBox: React.FC = () => {
   const G: any = myStore();
   const { T, update }: any = myStore();
@@ -73,6 +74,7 @@ const PayBox: React.FC = () => {
   countries.registerLocale(itLocal);
   const [paymentId, setPaymentId] = useState<number>(2022);
   const [messageApi, contextHolder] = message.useMessage();
+  const [rate, setRate] = useState(0.2);
 
   const [price, setPrice]: any = useState("100");
 
@@ -84,7 +86,17 @@ const PayBox: React.FC = () => {
   };
 
   const handleToken = async (token: Token) => {
-    const data = { token };
+    var currency_value = "EUR";
+    if (G.lang == "sw-SW") currency_value = "SEK";
+    const data = {
+      token: token,
+      otherInfo: {
+        amount: price,
+        currency: currency_value,
+        country_code: G.country_code,
+      },
+    };
+    console.log(data);
     try {
       const result = await axios.post(`${appUrl}/checkout`, { data });
       if (result.data.status) {
@@ -93,11 +105,9 @@ const PayBox: React.FC = () => {
         update({ orderid: paymentId, created: now.toLocaleString() });
         navigate("/review");
       } else {
-        error();
+        console.log("ERROR!");
       }
-    } catch (error) {
-      if (appMode) console.log(error);
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -106,11 +116,28 @@ const PayBox: React.FC = () => {
     const max = 999999;
     const rand = Math.round(Math.random() * (max - min) + min);
     setPaymentId(rand);
+    getTaxRates(G.country_code);
   }, []);
+
+  const getTaxRates = async (country_code: string) => {
+    const data = {
+      country_code: country_code,
+    };
+    console.log(data);
+    try {
+      const result = await axios.post(`${appUrl}/taxrates`, { data });
+      if (result.data) {
+        setRate(result.data.rate);
+      } else {
+        console.log("ERROR!");
+      }
+    } catch (error) {}
+  };
 
   return (
     <div className="paybox" style={{ zIndex: "50" }}>
       {contextHolder}
+
       <div className="container">
         <div className="row">
           <div
@@ -177,13 +204,13 @@ const PayBox: React.FC = () => {
               <Col className="col-4">
                 <img src={Stripe} width={100} height={100} alt="Stripe"></img>
               </Col>
-              <Col className="col-4">
+              {/* <Col className="col-4">
                 <img src={Paypal} width={100} height={100} alt="Paypal"></img>
               </Col>
 
               <Col className="col-4">
                 <img src={Crypto} width={100} height={100} alt="Crypto"></img>
-              </Col>
+              </Col> */}
             </Row>
             <Row
               style={{
@@ -209,7 +236,7 @@ const PayBox: React.FC = () => {
                 <StripeCheckout
                   stripeKey={process.env.REACT_APP_STRIPE_PUBLIC_KEY || ""}
                   token={handleToken}
-                  amount={price * 100}
+                  amount={price * 100 + price * 100 * rate}
                   currency="USD"
                   name={`You are paying $${price}`}
                 >
@@ -356,7 +383,7 @@ const PayBox: React.FC = () => {
                   color={G && G.color}
                   batchDate={G && G.batchDate}
                   bottleType={G && G.bottleType}
-                  // file={file}
+                  file={G && G.file}
                 />
               ) : G.curLabel === 9 ? (
                 <BigLabel9

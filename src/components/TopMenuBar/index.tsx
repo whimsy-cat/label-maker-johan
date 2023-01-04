@@ -35,6 +35,23 @@ const TopMenuBar = (props: Props) => {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [contact, setContact] = React.useState(false);
+
+  const [isVisible, setIsVisible] = React.useState(true);
+  // React.useEffect(() => {
+  //   window?.addEventListener("scroll", listenToScroll);
+  //   return () => window?.removeEventListener("scroll", listenToScroll);
+  // }, []);
+  // const listenToScroll = () => {
+  //   let heightToHideFrom = 200;
+  //   const winScroll =
+  //     document.body.scrollTop || document.documentElement.scrollTop;
+
+  //   if (winScroll > heightToHideFrom) {
+  //     isVisible && setIsVisible(false);
+  //   } else {
+  //     setIsVisible(true);
+  //   }
+  // };
   // const navigate = useNavigate();
 
   const handleDrawerToggle = () => {
@@ -97,7 +114,11 @@ const TopMenuBar = (props: Props) => {
       <Box sx={{ display: "flex" }}>
         <AppBar
           component="nav"
-          sx={{ bgcolor: "transparent", color: "black" }}
+          sx={{
+            bgcolor: "transparent",
+            color: "black",
+            position: "relative !important",
+          }}
           elevation={0}
         >
           <Toolbar sx={{ height: "100px", mr: 15, ml: 5 }}>
@@ -106,7 +127,7 @@ const TopMenuBar = (props: Props) => {
               aria-label="open drawer"
               edge="start"
               onClick={handleDrawerToggle}
-              sx={{ mr: 2, display: { lg: "none" }, color: "#fea150" }}
+              sx={{ mr: 2, display: { lg: "none" }, color: "#333" }}
             >
               <MenuIcon />
             </IconButton>

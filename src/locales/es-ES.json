@@ -88,5 +88,7 @@
   "shippinginfo.quiz2": "¿Cuánto cuesta el envío?",
   "shippinginfo.answer2": "El envío está incluido en el precio de nuestras etiquetas.",
   "shippinginfo.quiz3": "¿Qué métodos de envío utilizan? ¿Puedo obtener un número de seguimiento?",
-  "shippinginfo.answer3": "Enviamos por el servicio postal de EE. UU. Lamentablemente, este método de envío NO incluye seguimiento"
+  "shippinginfo.answer3": "Enviamos por el servicio postal de EE. UU. Lamentablemente, este método de envío NO incluye seguimiento",
+
+  "browselabels.header": "buscar etiquetas"
 }

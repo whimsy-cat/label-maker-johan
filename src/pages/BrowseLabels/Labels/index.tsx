@@ -20,9 +20,13 @@ const Labels = () => {
   };
   return (
     <div className="labels">
-      <h1>Browse Labels</h1>
+      <h1> {T("browselabels.header")}</h1>
       <Row>
-        <Col style={{ margin: "5px" }}>
+        <Col
+          style={{
+            margin: "5px",
+          }}
+        >
           <img
             src="/labels/Label-1.svg"
             width={150}
@@ -30,6 +34,7 @@ const Labels = () => {
             alt="label"
             onClick={() => handleImgClick(1)}
           />
+          <p style={{ textAlign: "center", fontWeight: "900" }}>1</p>
         </Col>
         <Col style={{ margin: "5px" }}>
           <img
@@ -39,6 +44,7 @@ const Labels = () => {
             alt="label"
             onClick={() => handleImgClick(2)}
           />
+          <p style={{ textAlign: "center", fontWeight: "900" }}>2</p>
         </Col>
         <Col style={{ margin: "5px" }}>
           <img
@@ -48,6 +54,7 @@ const Labels = () => {
             alt="label"
             onClick={() => handleImgClick(3)}
           />
+          <p style={{ textAlign: "center", fontWeight: "900" }}>3</p>
         </Col>
         <Col style={{ margin: "5px" }}>
           <img
@@ -57,6 +64,7 @@ const Labels = () => {
             alt="label"
             onClick={() => handleImgClick(4)}
           />
+          <p style={{ textAlign: "center", fontWeight: "900" }}>4</p>
         </Col>
 
         <Col style={{ margin: "5px" }}>
@@ -67,6 +75,7 @@ const Labels = () => {
             alt="label"
             onClick={() => handleImgClick(5)}
           />
+          <p style={{ textAlign: "center", fontWeight: "900" }}>5</p>
         </Col>
 
         <Col style={{ margin: "5px" }}>
@@ -77,6 +86,7 @@ const Labels = () => {
             alt="label"
             onClick={() => handleImgClick(6)}
           />
+          <p style={{ textAlign: "center", fontWeight: "900" }}>6</p>
         </Col>
       </Row>
       <Row style={{ marginTop: "10px" }}>
@@ -88,6 +98,7 @@ const Labels = () => {
             alt="label"
             onClick={() => handleImgClick(7)}
           />
+          <p style={{ textAlign: "center", fontWeight: "900" }}>7</p>
         </Col>
         <Col style={{ margin: "5px" }}>
           <img
@@ -97,6 +108,7 @@ const Labels = () => {
             alt="label"
             onClick={() => handleImgClick(8)}
           />
+          <p style={{ textAlign: "center", fontWeight: "900" }}>8</p>
         </Col>
         <Col style={{ margin: "5px" }}>
           <img
@@ -106,6 +118,7 @@ const Labels = () => {
             alt="label"
             onClick={() => handleImgClick(9)}
           />
+          <p style={{ textAlign: "center", fontWeight: "900" }}>9</p>
         </Col>
         <Col style={{ margin: "5px" }}>
           <img
@@ -115,6 +128,7 @@ const Labels = () => {
             alt="label"
             onClick={() => handleImgClick(10)}
           />
+          <p style={{ textAlign: "center", fontWeight: "900" }}>10</p>
         </Col>
 
         <Col style={{ margin: "5px" }}>
@@ -125,6 +139,7 @@ const Labels = () => {
             alt="label"
             onClick={() => handleImgClick(11)}
           />
+          <p style={{ textAlign: "center", fontWeight: "900" }}>11</p>
         </Col>
 
         <Col style={{ margin: "5px" }}>
@@ -135,6 +150,7 @@ const Labels = () => {
             alt="label"
             onClick={() => handleImgClick(12)}
           />
+          <p style={{ textAlign: "center", fontWeight: "900" }}>12</p>
         </Col>
       </Row>
       <Row style={{ marginTop: "10px" }}>
@@ -146,6 +162,7 @@ const Labels = () => {
             alt="label"
             onClick={() => handleImgClick(13)}
           />
+          <p style={{ textAlign: "center", fontWeight: "900" }}>13</p>
         </Col>
         <Col style={{ margin: "5px" }}>
           <img
@@ -155,6 +172,7 @@ const Labels = () => {
             alt="label"
             onClick={() => handleImgClick(14)}
           />
+          <p style={{ textAlign: "center", fontWeight: "900" }}>14</p>
         </Col>
         <Col style={{ margin: "5px" }}>
           <img
@@ -164,6 +182,7 @@ const Labels = () => {
             alt="label"
             onClick={() => handleImgClick(15)}
           />
+          <p style={{ textAlign: "center", fontWeight: "900" }}>15</p>
         </Col>
         <Col style={{ margin: "5px" }}>
           <img
@@ -173,6 +192,7 @@ const Labels = () => {
             alt="label"
             onClick={() => handleImgClick(16)}
           />
+          <p style={{ textAlign: "center", fontWeight: "900" }}>16</p>
         </Col>
 
         <Col style={{ margin: "5px" }}>
@@ -183,6 +203,7 @@ const Labels = () => {
             alt="label"
             onClick={() => handleImgClick(17)}
           />
+          <p style={{ textAlign: "center", fontWeight: "900" }}>17</p>
         </Col>
 
         <Col style={{ margin: "5px" }}>
@@ -193,6 +214,7 @@ const Labels = () => {
             alt="label"
             onClick={() => handleImgClick(18)}
           />
+          <p style={{ textAlign: "center", fontWeight: "900" }}>18</p>
         </Col>
       </Row>
       <Row style={{ marginTop: "10px" }}>
@@ -204,6 +226,7 @@ const Labels = () => {
             alt="label"
             onClick={() => handleImgClick(19)}
           />
+          <p style={{ textAlign: "center", fontWeight: "900" }}>19</p>
         </Col>
         <Col style={{ margin: "5px" }}>
           <img
@@ -213,6 +236,7 @@ const Labels = () => {
             alt="label"
             onClick={() => handleImgClick(20)}
           />
+          <p style={{ textAlign: "center", fontWeight: "900" }}>20</p>
         </Col>
         <Col style={{ margin: "5px" }}>
           <img
@@ -222,6 +246,7 @@ const Labels = () => {
             alt="label"
             onClick={() => handleImgClick(21)}
           />
+          <p style={{ textAlign: "center", fontWeight: "900" }}>21</p>
         </Col>
         <Col style={{ margin: "5px" }}>
           <img
@@ -231,6 +256,7 @@ const Labels = () => {
             alt="label"
             onClick={() => handleImgClick(22)}
           />
+          <p style={{ textAlign: "center", fontWeight: "900" }}>22</p>
         </Col>
 
         <Col style={{ margin: "5px" }}>
@@ -241,6 +267,7 @@ const Labels = () => {
             alt="label"
             onClick={() => handleImgClick(23)}
           />
+          <p style={{ textAlign: "center", fontWeight: "900" }}>23</p>
         </Col>
 
         <Col style={{ margin: "5px" }}>
@@ -251,6 +278,7 @@ const Labels = () => {
             alt="label"
             onClick={() => handleImgClick(24)}
           />
+          <p style={{ textAlign: "center", fontWeight: "900" }}>24</p>
         </Col>
       </Row>
       <Row style={{ marginTop: "10px" }}>
@@ -262,6 +290,7 @@ const Labels = () => {
             alt="label"
             onClick={() => handleImgClick(25)}
           />
+          <p style={{ textAlign: "center", fontWeight: "900" }}>25</p>
         </Col>
         <Col style={{ margin: "5px" }}>
           <img
@@ -271,6 +300,7 @@ const Labels = () => {
             alt="label"
             onClick={() => handleImgClick(26)}
           />
+          <p style={{ textAlign: "center", fontWeight: "900" }}>26</p>
         </Col>
         <Col style={{ margin: "5px" }}>
           <img
@@ -280,6 +310,7 @@ const Labels = () => {
             alt="label"
             onClick={() => handleImgClick(27)}
           />
+          <p style={{ textAlign: "center", fontWeight: "900" }}>27</p>
         </Col>
         <Col style={{ margin: "5px" }}>
           <img
@@ -289,6 +320,7 @@ const Labels = () => {
             alt="label"
             onClick={() => handleImgClick(28)}
           />
+          <p style={{ textAlign: "center", fontWeight: "900" }}>28</p>
         </Col>
 
         <Col style={{ margin: "5px" }}>
@@ -299,6 +331,7 @@ const Labels = () => {
             alt="label"
             onClick={() => handleImgClick(29)}
           />
+          <p style={{ textAlign: "center", fontWeight: "900" }}>29</p>
         </Col>
 
         <Col style={{ margin: "5px" }}>
@@ -309,6 +342,7 @@ const Labels = () => {
             alt="label"
             onClick={() => handleImgClick(30)}
           />
+          <p style={{ textAlign: "center", fontWeight: "900" }}>30</p>
         </Col>
       </Row>
     </div>

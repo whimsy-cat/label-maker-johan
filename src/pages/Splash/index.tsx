@@ -86,7 +86,7 @@ const Splash = () => {
   };
 
   const handleClose = (value: string) => {
-    setOpen(false);
+    // setOpen(false);
     setSelectedValue(value);
   };
 

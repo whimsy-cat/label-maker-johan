@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 // import stylesheets
 import "./label2.scss";
@@ -26,6 +26,26 @@ const Label2 = ({
   batchDate,
   bottleType,
 }: LabelProps) => {
+  const [nameFontSize, setNameFontSize] = useState(14);
+  const [tagFontSize, setTagFontSize] = useState(7);
+
+  useEffect(() => {
+    if (bottleName.length >= 8) {
+      var t = 120 / (bottleName.length + 1);
+      setNameFontSize(t);
+    } else {
+      setNameFontSize(14);
+    }
+  }, [bottleName]);
+  useEffect(() => {
+    if (tagLine.length >= 8) {
+      var t = 120 / (tagLine.length + 1);
+      setTagFontSize(t);
+    } else {
+      setTagFontSize(7);
+    }
+  }, [tagLine]);
+
   return (
     <div
       className="label"
@@ -47,38 +67,51 @@ const Label2 = ({
       >
         <p
           style={{
-            color: "white",
-            fontSize: `14px`,
+            color: color,
+            fontSize: nameFontSize,
             position: "relative",
-            textAlign: "center",
+
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
             marginTop: "35px",
-            marginLeft: "-8px",
+            marginLeft: "0px",
             transform: "rotate(-15deg)",
+            height: "17px",
           }}
         >
           {bottleName}
         </p>
         <p
           style={{
-            color: "white",
-            fontSize: `7px`,
+            color: color,
+            fontSize: tagFontSize,
             position: "relative",
-            textAlign: "center",
+
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
             marginTop: "0px",
+            marginLeft: "2px",
             transform: "rotate(-15deg)",
+            height: "8px",
           }}
         >
           {tagLine}
         </p>
         <p
           style={{
-            color: "white",
-            fontSize: `5px`,
+            color: color,
+            fontSize: tagFontSize * 0.5,
             position: "relative",
-            textAlign: "center",
-            marginTop: "3px",
-            marginLeft: "5px",
+
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            marginTop: "1px",
+            marginLeft: "7px",
             transform: "rotate(-15deg)",
+            height: "8px",
           }}
         >
           {tagLine}
@@ -157,6 +190,26 @@ export const BigLabel2 = ({
   batchDate,
   bottleType,
 }: LabelProps) => {
+  const [nameFontSize, setNameFontSize] = useState(35);
+  const [tagFontSize, setTagFontSize] = useState(17.5);
+
+  useEffect(() => {
+    if (bottleName.length >= 8) {
+      var t = 303 / (bottleName.length + 1);
+      setNameFontSize(t);
+    } else {
+      setNameFontSize(35);
+    }
+  }, [bottleName]);
+  useEffect(() => {
+    if (tagLine.length >= 8) {
+      var t = 303 / (tagLine.length + 1);
+      setTagFontSize(t);
+    } else {
+      setTagFontSize(17.5);
+    }
+  }, [tagLine]);
+
   return (
     <div
       className="label"
@@ -180,38 +233,50 @@ export const BigLabel2 = ({
       >
         <p
           style={{
-            color: "white",
-            fontSize: `37px`,
+            color: color,
+            fontSize: nameFontSize,
             position: "relative",
-            textAlign: "center",
+
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
             marginTop: "90px",
-            marginLeft: "-18px",
             transform: "rotate(-15deg)",
+            height: "42px",
           }}
         >
           {bottleName}
         </p>
         <p
           style={{
-            color: "white",
-            fontSize: `17px`,
+            color: color,
+            fontSize: tagFontSize,
             position: "relative",
-            textAlign: "center",
+
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            marginLeft: "5px",
             marginTop: "0px",
             transform: "rotate(-15deg)",
+            height: "20px",
           }}
         >
           {tagLine}
         </p>
         <p
           style={{
-            color: "white",
-            fontSize: `12px`,
+            color: color,
+            fontSize: tagFontSize * 0.5,
             position: "relative",
-            textAlign: "center",
+
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
             marginTop: "3px",
-            marginLeft: "10px",
+            marginLeft: "18px",
             transform: "rotate(-15deg)",
+            height: "23px",
           }}
         >
           {tagLine}

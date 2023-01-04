@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { useSelector, useDispatch } from "react-redux";
 
+// import img from "./assets/images/img1.webp";
 const locales = {
   "en-US": require("./locales/en-US.json"),
   "es-ES": require("./locales/es-ES.json"),
@@ -67,6 +68,7 @@ declare interface StoreObject {
   color: string;
   price: number;
   size: string;
+  count: number;
 
   //personal info
   firstname: string;
@@ -79,6 +81,7 @@ declare interface StoreObject {
   state: string;
   street: string;
   zipcode: string;
+  country_code: string;
 
   //payment info
   payment: string;
@@ -88,6 +91,10 @@ declare interface StoreObject {
   // label
   curLabel: number;
   file: string;
+
+  // images
+  curImageX: number;
+  curImageY: number;
 }
 const appKey = "myProject-v.1.10";
 
@@ -131,15 +138,16 @@ const initialState: StoreObject = {
   loading: false,
 
   // bottle info
-  bottleName: "Sarah",
+  bottleName: "Finol",
   bottleType: "100% Natural",
-  tagLine: "Healthy",
+  tagLine: "molt",
   cl: "4.5",
   vol: "33",
   batchDate: "2022.12.12",
   color: "#111e0a",
   price: 14,
   size: "small",
+  count: 10,
 
   // contact info
   firstname: "",
@@ -152,14 +160,19 @@ const initialState: StoreObject = {
   state: "",
   zipcode: "",
   street: "",
+  country_code: "",
 
   //payment info
   payment: "Credit Card",
   created: "",
   orderid: 10000,
 
-  curLabel: 4,
+  curLabel: 18,
   file: "",
+
+  // images
+  curImageX: 0,
+  curImageY: 0,
 };
 
 export const slice = createSlice({

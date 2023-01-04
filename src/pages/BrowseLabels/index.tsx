@@ -11,7 +11,7 @@ import Labels from "./Labels";
 
 const BrowseLabels = () => {
   return (
-    <div>
+    <div className="browselabels">
       <React.Fragment>
         <CssBaseline />
         <Container maxWidth="xl">

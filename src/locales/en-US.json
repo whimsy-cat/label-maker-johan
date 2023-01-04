@@ -89,5 +89,7 @@
   "shippinginfo.quiz2": "How much is shipping?",
   "shippinginfo.answer2": "Shipping is included in the pricing of our labels.",
   "shippinginfo.quiz3": "What shipping method(s) do you use? Can I get a tracking number?",
-  "shippinginfo.answer3": "We ship using the US Postal Service. Unfortunately this shipping method does NOT include tracking."
+  "shippinginfo.answer3": "We ship using the US Postal Service. Unfortunately this shipping method does NOT include tracking.",
+
+  "browselabels.header": "Browse labels"
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 // import stylesheets
 import "./label16.scss";
@@ -27,6 +27,25 @@ const Label16 = ({
   batchDate,
   bottleType,
 }: LabelProps) => {
+  const [nameFontSize, setNameFontSize] = useState(14);
+  const [tagFontSize, setTagFontSize] = useState(10);
+
+  useEffect(() => {
+    if (bottleName.length >= 8) {
+      var t = 80 / (bottleName.length + 1);
+      setNameFontSize(t);
+    } else {
+      setNameFontSize(14);
+    }
+  }, [bottleName]);
+  useEffect(() => {
+    if (tagLine.length >= 8) {
+      var t = 80 / (tagLine.length + 1);
+      setTagFontSize(t);
+    } else {
+      setTagFontSize(10);
+    }
+  }, [tagLine]);
   return (
     <div
       className="label"
@@ -45,27 +64,34 @@ const Label16 = ({
       <div className="label-text" style={{ width: "150px", height: "150px" }}>
         <p
           style={{
-            color: "#EB696F",
-            fontSize: `14px`,
+            color: "#653116",
+            fontSize: nameFontSize,
             position: "relative",
-            textAlign: "center",
-            marginTop: "18px",
+
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            marginTop: "65px",
+            fontWeight: "900",
+            height: "15px",
           }}
         >
-          {tagLine}
+          {bottleName}
         </p>
         <p
           style={{
             color: color,
-            fontSize: `18px`,
+            fontSize: tagFontSize,
             position: "relative",
-            textAlign: "center",
-            marginTop: "38px",
-            fontFamily: "La Belle Aurore",
-            fontWeight: "900",
+
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            marginTop: "2px",
+            height: "11px",
           }}
         >
-          {bottleName}
+          {tagLine}
         </p>
 
         <div
@@ -75,8 +101,8 @@ const Label16 = ({
             alignItems: "center",
             justifyContent: "center",
             fontFamily: "Bevan",
-            marginTop: "25px",
-            color: "#EB696F",
+            marginTop: "8px",
+            color: "black",
           }}
         >
           <p
@@ -103,10 +129,11 @@ const Label16 = ({
         </div>
         <p
           style={{
-            color: "#EB696F",
+            color: "black",
             fontSize: `5px`,
             position: "relative",
             textAlign: "center",
+            height: "6px",
           }}
         >
           {bottleType}
@@ -117,7 +144,7 @@ const Label16 = ({
             textAlign: "center",
             fontSize: "6px",
             marginTop: "5px",
-            color: "#EB696F",
+            color: "black",
           }}
         >
           {batchDate}{" "}
@@ -137,11 +164,30 @@ export const BigLabel16 = ({
   batchDate,
   bottleType,
 }: LabelProps) => {
+  const [nameFontSize, setNameFontSize] = useState(37);
+  const [tagFontSize, setTagFontSize] = useState(25);
+
+  useEffect(() => {
+    if (bottleName.length >= 8) {
+      var t = 180 / (bottleName.length + 1);
+      setNameFontSize(t);
+    } else {
+      setNameFontSize(37);
+    }
+  }, [bottleName]);
+  useEffect(() => {
+    if (tagLine.length >= 8) {
+      var t = 180 / (tagLine.length + 1);
+      setTagFontSize(t);
+    } else {
+      setTagFontSize(25);
+    }
+  }, [tagLine]);
   return (
     <div
       className="label"
       style={{
-        background: "#EB696F",
+        background: "white",
         height: "380px",
         width: "380px",
         borderRadius: "80px",
@@ -157,27 +203,34 @@ export const BigLabel16 = ({
       <div className="label-text" style={{ width: "380px", height: "380px" }}>
         <p
           style={{
-            color: "#EB696F",
-            fontSize: `30px`,
+            color: "#653116",
+            fontSize: nameFontSize,
             position: "relative",
-            textAlign: "center",
-            marginTop: "40px",
+
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            marginTop: "165px",
+            fontWeight: "900",
+            height: "39px",
           }}
         >
-          {tagLine}
+          {bottleName}
         </p>
         <p
           style={{
             color: color,
-            fontSize: `46px`,
+            fontSize: tagFontSize,
             position: "relative",
-            textAlign: "center",
-            marginTop: "100px",
-            fontFamily: "La Belle Aurore",
-            fontWeight: "900",
+
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            marginTop: "5px",
+            height: "27px",
           }}
         >
-          {bottleName}
+          {tagLine}
         </p>
 
         <div
@@ -187,13 +240,13 @@ export const BigLabel16 = ({
             alignItems: "center",
             justifyContent: "center",
             fontFamily: "Bevan",
-            color: "#EB696F",
-            marginTop: "75px",
+            marginTop: "20px",
+            color: "black",
           }}
         >
           <p
             style={{
-              fontSize: `10px`,
+              fontSize: `12.5px`,
               textAlign: "center",
               marginRight: "5px",
 
@@ -205,7 +258,7 @@ export const BigLabel16 = ({
 
           <p
             style={{
-              fontSize: `10px`,
+              fontSize: `12.5px`,
               textAlign: "center",
               fontWeight: "200",
             }}
@@ -215,11 +268,11 @@ export const BigLabel16 = ({
         </div>
         <p
           style={{
-            color: "#EB696F",
-            fontSize: `10px`,
+            color: "black",
+            fontSize: `12.5px`,
             position: "relative",
             textAlign: "center",
-            marginTop: "5px",
+            height: "14px",
           }}
         >
           {bottleType}
@@ -228,9 +281,9 @@ export const BigLabel16 = ({
           style={{
             position: "relative",
             textAlign: "center",
-            fontSize: "10px",
-            marginTop: "15px",
-            color: "#EB696F",
+            fontSize: "15px",
+            marginTop: "12px",
+            color: "black",
           }}
         >
           {batchDate}{" "}

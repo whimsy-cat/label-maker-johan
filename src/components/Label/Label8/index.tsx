@@ -1,11 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 // import stylesheets
 import "./label8.scss";
 
 import label from "../../../assets/labels/Label-8.svg";
 
-import Draggable from "react-draggable";
 interface LabelProps {
   bottleName: string;
   vol: string;
@@ -27,6 +26,25 @@ const Label8 = ({
   batchDate,
   bottleType,
 }: LabelProps) => {
+  const [nameFontSize, setNameFontSize] = useState(14);
+  const [tagFontSize, setTagFontSize] = useState(8);
+
+  useEffect(() => {
+    if (bottleName.length >= 6) {
+      var t = 130 / (bottleName.length + 1);
+      setNameFontSize(t);
+    } else {
+      setNameFontSize(14);
+    }
+  }, [bottleName]);
+  useEffect(() => {
+    if (tagLine.length >= 6) {
+      var t = 100 / (tagLine.length + 1);
+      setTagFontSize(t);
+    } else {
+      setTagFontSize(8);
+    }
+  }, [tagLine]);
   return (
     <div
       className="label"
@@ -40,98 +58,115 @@ const Label8 = ({
         width={146}
         height={146}
         alt="upload"
-        style={{ margin: "2px 0px 2px 2px", maxWidth: "100%" }}
+        style={{ margin: "2px auto", maxWidth: "100%" }}
       />
-      <div className="label-image">
-        <Draggable>
-          <div>
-            <img src={file} width={146} height={146} alt="upload" />
-          </div>
-        </Draggable>
-      </div>
-
-      <div className="label-text" style={{ width: "150px", height: "150px" }}>
-        <p
-          style={{
-            color: "#A60E0E",
-            fontSize: `12px`,
-            position: "relative",
-            textAlign: "center",
-            fontFamily: "Bevan",
-            marginTop: "10px",
-          }}
-        >
-          {tagLine}
-        </p>
+      <div
+        className="label-text"
+        style={{ width: "150px", height: "150px", fontFamily: "Bevan" }}
+      >
         <p
           style={{
             color: color,
-            fontSize: `8px`,
+            fontSize: nameFontSize,
             position: "relative",
-            textAlign: "center",
-            fontFamily: "Bevan",
-            marginTop: "86px",
-            fontWeight: "900",
+
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            marginTop: "83px",
+            height: "17px",
           }}
         >
           {bottleName}
         </p>
+        <p
+          style={{
+            color: color,
+            fontSize: tagFontSize,
+            position: "relative",
+            marginTop: "9px",
+            fontWeight: "200",
+
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "10px",
+          }}
+        >
+          {tagLine}
+        </p>
         <div
           style={{
-            color: "#B12C2C",
+            color: "#B6804A",
             display: "flex",
             flexDirection: "row",
             alignItems: "center",
-            justifyContent: "center",
+            justifyContent: "space-between",
             fontFamily: "Bevan",
-            marginTop: "5px",
+            marginTop: "16px",
           }}
         >
-          <p
+          <div
             style={{
-              fontFamily: "Bevan",
-              fontSize: `5px`,
-              textAlign: "center",
-              marginRight: "5px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              fontSize: "4px",
+              marginLeft: "8px",
             }}
           >
-            {vol}% /vol
-          </p>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "center",
+                fontFamily: "Bevan",
+              }}
+            >
+              <p
+                style={{
+                  textAlign: "center",
+                  marginRight: "5px",
+                  fontWeight: "200",
+                }}
+              >
+                {vol}% /vol
+              </p>
 
+              <p
+                style={{
+                  textAlign: "center",
+                  fontWeight: "200",
+                }}
+              >
+                {cl} cl
+              </p>
+            </div>
+            <p
+              style={{
+                color: "#B6804A",
+                position: "relative",
+                textAlign: "center",
+              }}
+            >
+              {bottleType}
+            </p>
+          </div>
           <p
             style={{
-              fontSize: `5px`,
-              fontFamily: "Bevan",
+              position: "relative",
+              color: "#B6804A",
               textAlign: "center",
+              fontSize: "5px",
+              marginTop: "2px",
+              marginRight: "12px",
             }}
           >
-            {cl} cl
+            {batchDate}{" "}
           </p>
         </div>
-        <p
-          style={{
-            fontSize: `5px`,
-            position: "relative",
-            fontFamily: "Bevan",
-            marginTop: "0px",
-            color: "#B12C2C",
-            textAlign: "center",
-          }}
-        >
-          {bottleType}
-        </p>
-        <p
-          style={{
-            position: "relative",
-            textAlign: "center",
-            fontSize: "5px",
-            fontFamily: "Bevan",
-            marginTop: "2px",
-            color: "#B12C2C",
-          }}
-        >
-          {batchDate}{" "}
-        </p>
       </div>
     </div>
   );
@@ -147,13 +182,32 @@ export const BigLabel8 = ({
   batchDate,
   bottleType,
 }: LabelProps) => {
-  useEffect(() => {}, []);
+  const [nameFontSize, setNameFontSize] = useState(35.4);
+  const [tagFontSize, setTagFontSize] = useState(20);
+
+  useEffect(() => {
+    if (bottleName.length >= 6) {
+      var t = 330 / (bottleName.length + 1);
+      setNameFontSize(t);
+    } else {
+      setNameFontSize(35.4);
+    }
+  }, [bottleName]);
+  useEffect(() => {
+    if (tagLine.length >= 6) {
+      var t = 250 / (tagLine.length + 1);
+      setTagFontSize(t);
+    } else {
+      setTagFontSize(20);
+    }
+  }, [tagLine]);
   return (
     <div
       className="label"
       style={{
         height: "380px",
         width: "380px",
+        borderRadius: "80px",
       }}
     >
       <img
@@ -161,105 +215,116 @@ export const BigLabel8 = ({
         width={376}
         height={376}
         alt="upload"
-        style={{ margin: "2px 0px 2px 0px", maxWidth: "100%" }}
+        style={{ margin: "2px auto", maxWidth: "100%" }}
       />
-      <div className="label-image1">
-        <Draggable defaultPosition={{ x: 0, y: 0 }}>
-          <div>
-            <img
-              src={file}
-              width={376}
-              height={376}
-              alt="upload"
-              className="noDrag"
-              style={{ position: "absolute" }}
-            />
-          </div>
-        </Draggable>
-      </div>
-      <div className="label-text" style={{ width: "380px", height: "380px" }}>
-        <p
-          style={{
-            color: "#A60E0E",
-            fontSize: `28px`,
-            position: "relative",
-            textAlign: "center",
-            fontFamily: "Bevan",
-            marginTop: "15px",
-          }}
-        >
-          {tagLine}
-        </p>
+      <div
+        className="label-text"
+        style={{ width: "380px", height: "380px", fontFamily: "Bevan" }}
+      >
         <p
           style={{
             color: color,
-            fontSize: `20px`,
+            fontSize: nameFontSize,
             position: "relative",
-            textAlign: "center",
-            fontFamily: "Bevan",
-            marginTop: "233px",
-            fontWeight: "900",
+
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            marginTop: "215px",
+            height: "40px",
           }}
         >
           {bottleName}
         </p>
+        <p
+          style={{
+            color: color,
+            fontSize: tagFontSize,
+            position: "relative",
+            marginTop: "15px",
+            fontWeight: "200",
+
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "24px",
+          }}
+        >
+          {tagLine}
+        </p>
         <div
           style={{
-            color: "#B12C2C",
+            color: "#B6804A",
             display: "flex",
             flexDirection: "row",
             alignItems: "center",
-            justifyContent: "center",
+            justifyContent: "space-between",
             fontFamily: "Bevan",
-            fontSize: `12px`,
-            marginTop: "10px",
+            marginTop: "50px",
           }}
         >
-          <p
+          <div
             style={{
-              fontFamily: "Bevan",
-              textAlign: "center",
-              marginRight: "5px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              fontSize: "10px",
+              marginLeft: "23px",
             }}
           >
-            {vol}% /vol
-          </p>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "center",
+                fontFamily: "Bevan",
+              }}
+            >
+              <p
+                style={{
+                  textAlign: "center",
+                  marginRight: "5px",
+                  fontWeight: "200",
+                }}
+              >
+                {vol}% /vol
+              </p>
 
+              <p
+                style={{
+                  textAlign: "center",
+                  fontWeight: "200",
+                }}
+              >
+                {cl} cl
+              </p>
+            </div>
+            <p
+              style={{
+                color: "#B6804A",
+                position: "relative",
+                fontWeight: "200",
+                textAlign: "center",
+              }}
+            >
+              {bottleType}
+            </p>
+          </div>
           <p
             style={{
-              fontFamily: "Bevan",
+              position: "relative",
+              color: "#B6804A",
               textAlign: "center",
+              fontSize: "10px",
+              marginTop: "2px",
+              marginRight: "32px",
             }}
           >
-            {cl} cl
+            {batchDate}{" "}
           </p>
         </div>
-        <p
-          style={{
-            fontSize: `12px`,
-
-            position: "relative",
-            fontFamily: "Bevan",
-            marginTop: "3px",
-            color: "#B12C2C",
-            textAlign: "center",
-          }}
-        >
-          {bottleType}
-        </p>
-        <p
-          style={{
-            position: "relative",
-            textAlign: "center",
-            fontSize: `12px`,
-
-            fontFamily: "Bevan",
-            marginTop: "10px",
-            color: "#B12C2C",
-          }}
-        >
-          {batchDate}{" "}
-        </p>
       </div>
     </div>
   );

@@ -89,5 +89,7 @@
   "shippinginfo.quiz2": "Hur mycket kostar frakt?",
   "shippinginfo.answer2": "Frakt ingår i priset för våra etiketter.",
   "shippinginfo.quiz3": "Vilka fraktsätt använder du? Kan jag få ett spårningsnummer?",
-  "shippinginfo.answer3": "Vi skickar med US Postal Service. Tyvärr inkluderar denna fraktmetod INTE spårning."
+  "shippinginfo.answer3": "Vi skickar med US Postal Service. Tyvärr inkluderar denna fraktmetod INTE spårning.",
+
+  "browselabels.header": "bläddra bland etiketter"
 }

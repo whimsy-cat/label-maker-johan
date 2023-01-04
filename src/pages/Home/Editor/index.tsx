@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { CirclePicker } from "react-color";
+import { CirclePicker, BlockPicker } from "react-color";
 // import Button from "@mui/material/Button";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControl from "@mui/material/FormControl";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import { DatePicker } from "antd";
+import Img from "../../../assets/images/img1.webp";
 
 import Button from "@mui/material/Button";
 import WestIcon from "@mui/icons-material/West";
@@ -23,7 +24,7 @@ import SLabel1 from "../../../components/Label/SLabel1";
 import myStore from "../../../useStore";
 import { useNavigate } from "react-router-dom";
 
-import Img from "../../../assets/images/img1.webp";
+// import Img from "../../../assets/images/img1.webp";
 
 import Label1 from "../../../components/Label/Label1";
 import Label2 from "../../../components/Label/Label2";
@@ -61,16 +62,30 @@ const Editor = () => {
   const G: any = myStore();
   const navigate = useNavigate();
   const [color, setColor] = useState("#111e0a");
-  const [bottleName, setBottleName] = useState("Sarah");
-  const [bottleType, setBottleType] = useState("100% Natural");
-  const [vol, setVol] = useState("4.8");
-  const [cl, setCl] = useState("33");
-  const [tagLine, setTagLine] = useState("Healthy");
+  const [bottleName, setBottleName] = useState("");
+  const [bottleType, setBottleType] = useState("");
+  const [vol, setVol] = useState("");
+  const [cl, setCl] = useState("");
+  const [tagLine, setTagLine] = useState("");
   const [batchDate, setBatchDate] = useState<string>("2022-12-12");
   const printRef = React.useRef<HTMLDivElement>(null);
   const [file, setFile] = useState(Img);
+  const [popularColors, setPopularColors] = useState([
+    "#f44336",
+    "#e91e63",
+    "#673ab7",
+    "#3f51b5",
+    "#03a9f4",
+    "#00bcd4",
+    "#009688",
+    "#8bc34a",
+    "#cddc39",
+    "#ffeb3b",
+    "#ffc107",
+    "#ff9800",
+    "#232323",
+  ]);
 
-  // const [file, setFile] = useState(Img);
   const [selectedValue, setSelectedValue] = React.useState("a");
 
   useEffect(() => {
@@ -81,6 +96,12 @@ const Editor = () => {
     setCl(G && G.cl);
     setTagLine(G && G.tagLine);
     setBatchDate(G && G.batchDate);
+    console.log(G.file === "");
+
+    if (G.file !== "") {
+      setFile(G && G.file);
+    }
+    // console.log("G.file", G.file);
   }, []);
 
   const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -96,33 +117,27 @@ const Editor = () => {
   });
   const updateBottleName = (event: any) => {
     const text = event.target.value;
-    if (text.length > 7 || text.length === 0) return;
+    if (text.length > 15) return;
     setBottleName(text);
   };
 
   const updateBottleType = (event: any) => {
     const text = event.target.value;
-    if (text.length > 12 || text.length === 0) return;
+    if (text.length > 15) return;
     setBottleType(text);
   };
   const updateVol = (event: any) => {
-    const re = /^[0-9\b]+$/;
+    const re = /^[0-9\b]+$/; // re.test(event.target.value)
 
-    if (
-      event.target.value === "" ||
-      (re.test(event.target.value) && event.target.value.length <= 2)
-    ) {
+    if (event.target.value.length <= 5) {
       const text = event.target.value;
       setVol(text);
     }
   };
 
   const updateCl = (event: any) => {
-    const re = /^[0-9\b]+$/;
-    if (
-      (event.target.value === "" || re.test(event.target.value)) &&
-      event.target.value.length <= 3
-    ) {
+    const re = /^[0-9\b]+$/; // || re.test(event.target.value)
+    if (event.target.value.length <= 5) {
       const text = event.target.value;
       setCl(text);
     }
@@ -130,7 +145,7 @@ const Editor = () => {
 
   const updateTagLine = (event: any) => {
     const text = event.target.value;
-    if (text.length > 7 || text.length === 0) return;
+    if (text.length > 15) return;
     setTagLine(text);
   };
 
@@ -139,9 +154,19 @@ const Editor = () => {
     setColor(text);
   };
 
+  const setNewColor = (color: any) => {
+    const text = color;
+    setColor(text);
+    var tmpArr = popularColors;
+    // console.log(tmpArr);
+    // tmpArr.push(text);
+    // setPopularColors(tmpArr);
+  };
+
   const handleChange = (e: any) => {
     const imageUrl: any = URL.createObjectURL(e.target.files[0]);
     setFile(imageUrl);
+    update({ file: imageUrl, curImageX: 0, curImageY: 0 });
   };
 
   const toOrderPage = () => {
@@ -162,6 +187,7 @@ const Editor = () => {
     let tmp = G && G.curLabel;
     tmp -= 1;
     if (tmp === 0) tmp = 30;
+    if (tmp == 23) tmp = 22;
     update({
       curLabel: tmp,
     });
@@ -170,6 +196,7 @@ const Editor = () => {
     let tmp = G && G.curLabel;
     tmp += 1;
     if (tmp === 31) tmp = 1;
+    if (tmp == 23) tmp = 24;
     update({
       curLabel: tmp,
     });
@@ -216,7 +243,7 @@ const Editor = () => {
                   >
                     {T("home.front")}
                   </p>
-                  <Radio
+                  {/* <Radio
                     {...controlProps("b")}
                     sx={{
                       color: "#FEA150",
@@ -233,7 +260,7 @@ const Editor = () => {
                     }}
                   >
                     {T("home.back")}
-                  </p>
+                  </p> */}
                 </RadioGroup>
               </FormControl>
             </Row>
@@ -324,9 +351,19 @@ const Editor = () => {
                     padding: "0 5px",
                   }}
                 >
-                  <SettingsOutlinedIcon
+                  {/* <SettingsOutlinedIcon
                     sx={{ fontSize: "18px", color: "#354832" }}
-                  />
+                  ></SettingsOutlinedIcon> */}
+                  <input
+                    type="color"
+                    value={color}
+                    onChange={(e) => setNewColor(e.target.value)}
+                    style={{
+                      width: "25px",
+                      height: "25px",
+                      padding: "5px 5px",
+                    }}
+                  ></input>{" "}
                 </button>
               </div>
             </Row>

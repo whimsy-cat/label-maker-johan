@@ -50,6 +50,7 @@ import { BigLabel27 } from "../../../components/Label/Label27";
 import { BigLabel28 } from "../../../components/Label/Label28";
 import { BigLabel29 } from "../../../components/Label/Label29";
 import { BigLabel30 } from "../../../components/Label/Label30";
+import { useStepContext } from "@mui/material";
 
 let index = 0;
 
@@ -59,6 +60,7 @@ const OrderBox: React.FC = () => {
   const navigate = useNavigate();
 
   const [price, setPrice] = useState(14);
+  const [count, setCount] = useState(12);
   const [priceIndex, setPriceIndex] = useState(0);
   const printRef = React.useRef<HTMLDivElement>(null);
 
@@ -74,6 +76,7 @@ const OrderBox: React.FC = () => {
     "500 labels ($170)",
   ]);
   const arrPrice = [14, 22, 28, 38, 56, 86, 170];
+  const arrCount = [12, 36, 48, 72, 120, 200, 500];
   const [name, setName] = useState("");
   const inputRef = useRef<InputRef>(null);
   const onNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -102,12 +105,13 @@ const OrderBox: React.FC = () => {
   });
 
   const toShippingPage = () => {
-    update({ price: price, size: check });
+    update({ price: price, size: check, count: count });
     navigate("/shipping");
   };
 
   const handlePrice = (val: any) => {
     setPrice(arrPrice[val]);
+    setCount(arrCount[val]);
     setPriceIndex(val);
   };
 
@@ -161,7 +165,7 @@ const OrderBox: React.FC = () => {
                   >
                     {T("home.front")}
                   </p>
-                  <Radio
+                  {/* <Radio
                     {...controlProps("b")}
                     sx={{
                       color: "#FEA150",
@@ -178,7 +182,7 @@ const OrderBox: React.FC = () => {
                     }}
                   >
                     {T("home.back")}
-                  </p>
+                  </p> */}
                 </RadioGroup>
               </FormControl>
             </Row>
@@ -413,7 +417,7 @@ const OrderBox: React.FC = () => {
                   color={G && G.color}
                   batchDate={G && G.batchDate}
                   bottleType={G && G.bottleType}
-                  // file={file}
+                  file={G && G.file}
                 />
               ) : G.curLabel === 9 ? (
                 <BigLabel9

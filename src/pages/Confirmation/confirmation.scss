@@ -1,0 +1,28 @@
+@import "../../index.scss";
+.confirmation {
+  background-image: url("../../assets/images/thanks.webp");
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  font-family: "La Belle Aurore";
+  display: flex;
+  justify-content: center;
+  h1 {
+    line-height: 1.5;
+    font-weight: 900;
+    color: rgb(99, 25, 25);
+    position: absolute;
+    text-align: center;
+    margin: 600px auto;
+  }
+  span {
+    font-size: 120px;
+    font-weight: 900;
+    font-family: "Bovan";
+    margin: 100px auto;
+    color: rgb(99, 25, 25);
+  }
+}

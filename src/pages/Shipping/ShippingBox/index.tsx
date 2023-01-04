@@ -49,6 +49,11 @@ import { BigLabel28 } from "../../../components/Label/Label28";
 import { BigLabel29 } from "../../../components/Label/Label29";
 import { BigLabel30 } from "../../../components/Label/Label30";
 import { Select, MenuItem } from "@material-ui/core";
+import { getCode, getName } from "country-list";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+// import SalesTax from "sales-tax";
 
 const ShippingBox: React.FC = () => {
   const G: any = myStore();
@@ -59,16 +64,12 @@ const ShippingBox: React.FC = () => {
   const [username, setUsername] = useState("");
   const [useremail, setUseremail] = useState("");
   const [userphone, setUserphone] = useState("");
-  const [selectedCountry, setSelectedCountry] = useState("");
+  const [selectedCountry, setSelectedCountry] = useState<any>("");
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const [zipcode, setZipcode] = useState("");
   const [street, setStreet] = useState("");
-
-  const selectCountryHandler = (e: any) => {
-    setSelectedCountry(e.target.value);
-  };
-
+  const notify = () => toast("Please input all fields correctly!");
   countries.registerLocale(enLocale);
   countries.registerLocale(itLocal);
 
@@ -81,6 +82,9 @@ const ShippingBox: React.FC = () => {
     };
   });
 
+  const selectCountryHandler = (e: any) => {
+    setSelectedCountry(e.target.value);
+  };
   const handleFirstNameChange = (e: any) => {
     setFirstname(e.target.value);
     setUsername(e.target.value + " " + lastname);
@@ -109,31 +113,69 @@ const ShippingBox: React.FC = () => {
   };
 
   const toPaymentPage = () => {
+    if (
+      firstname === "" ||
+      lastname === "" ||
+      useremail === "" ||
+      userphone === "" ||
+      city === "" ||
+      zipcode === "" ||
+      street === "" ||
+      selectedCountry === ""
+    ) {
+      toast.error("Please input all fields correctly!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+      return;
+    }
     update({
-      name: username,
+      firstname: firstname,
+      lastname: lastname,
       email: useremail,
       phone: userphone,
       city: city,
-      state: state,
       zipcode: zipcode,
       street: street,
-      country: selectedCountry,
+      country_code: selectedCountry,
+      country: getName(selectedCountry),
     });
     navigate("/payment");
   };
 
   useEffect(() => {
     setUsername(G && G.name);
+    setFirstname(G && G.firstname);
+    setLastname(G && G.lastname);
     setUseremail(G && G.email);
     setUserphone(G && G.phone);
     setSelectedCountry(G && G.country);
     setCity(G && G.city);
     setState(G && G.state);
+    setStreet(G && G.street);
     setZipcode(G && G.zipcode);
   }, []);
 
   return (
     <div className="shippingbox">
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
       <div className="container">
         <div className="row">
           <div
@@ -413,7 +455,7 @@ const ShippingBox: React.FC = () => {
                   color={G && G.color}
                   batchDate={G && G.batchDate}
                   bottleType={G && G.bottleType}
-                  // file={file}
+                  file={G && G.file}
                 />
               ) : G.curLabel === 9 ? (
                 <BigLabel9

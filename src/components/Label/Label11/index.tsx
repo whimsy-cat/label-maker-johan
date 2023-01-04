@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 // import stylesheets
 import "./label11.scss";
@@ -26,6 +26,25 @@ const Label11 = ({
   batchDate,
   bottleType,
 }: LabelProps) => {
+  const [nameFontSize, setNameFontSize] = useState(10);
+  const [tagFontSize, setTagFontSize] = useState(6);
+
+  useEffect(() => {
+    if (bottleName.length >= 8) {
+      var t = 70 / (bottleName.length + 1);
+      setNameFontSize(t);
+    } else {
+      setNameFontSize(10);
+    }
+  }, [bottleName]);
+  useEffect(() => {
+    if (tagLine.length >= 8) {
+      var t = 70 / (tagLine.length + 1);
+      setTagFontSize(t);
+    } else {
+      setTagFontSize(6);
+    }
+  }, [tagLine]);
   return (
     <div
       className="label"
@@ -112,10 +131,14 @@ const Label11 = ({
           </div>
           <p
             style={{
-              color: "#DDA143",
-              fontSize: `10px`,
+              color: color,
+              fontSize: nameFontSize,
               position: "relative",
-              textAlign: "center",
+
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              height: "12px",
             }}
           >
             {bottleName}
@@ -136,7 +159,7 @@ const Label11 = ({
         <p
           style={{
             color: "white",
-            fontSize: `6px`,
+            fontSize: tagFontSize,
             position: "relative",
             textAlign: "center",
             marginTop: "12px",
@@ -160,6 +183,25 @@ export const BigLabel11 = ({
   batchDate,
   bottleType,
 }: LabelProps) => {
+  const [nameFontSize, setNameFontSize] = useState(27);
+  const [tagFontSize, setTagFontSize] = useState(13);
+
+  useEffect(() => {
+    if (bottleName.length >= 8) {
+      var t = 180 / (bottleName.length + 1);
+      setNameFontSize(t);
+    } else {
+      setNameFontSize(27);
+    }
+  }, [bottleName]);
+  useEffect(() => {
+    if (tagLine.length >= 8) {
+      var t = 180 / (tagLine.length + 1);
+      setTagFontSize(t);
+    } else {
+      setTagFontSize(13);
+    }
+  }, [tagLine]);
   return (
     <div
       className="label"
@@ -248,10 +290,14 @@ export const BigLabel11 = ({
           </div>
           <p
             style={{
-              color: "#DDA143",
-              fontSize: `27px`,
+              color: color,
+              fontSize: nameFontSize,
               position: "relative",
-              textAlign: "center",
+
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              height: "29px",
             }}
           >
             {bottleName}
@@ -272,7 +318,7 @@ export const BigLabel11 = ({
         <p
           style={{
             color: "white",
-            fontSize: `13px`,
+            fontSize: tagFontSize,
             position: "relative",
             textAlign: "center",
             marginTop: "30px",

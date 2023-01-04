@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 // import stylesheets
 import "./label30.scss";
@@ -26,6 +26,25 @@ const Label30 = ({
   batchDate,
   bottleType,
 }: LabelProps) => {
+  const [nameFontSize, setNameFontSize] = useState(14);
+  const [tagFontSize, setTagFontSize] = useState(6);
+
+  useEffect(() => {
+    if (bottleName.length >= 8) {
+      var t = 130 / (bottleName.length + 1);
+      setNameFontSize(t);
+    } else {
+      setNameFontSize(14);
+    }
+  }, [bottleName]);
+  useEffect(() => {
+    if (tagLine.length >= 8) {
+      var t = 80 / (tagLine.length + 1);
+      setTagFontSize(t);
+    } else {
+      setTagFontSize(6);
+    }
+  }, [tagLine]);
   return (
     <div
       className="label"
@@ -48,29 +67,37 @@ const Label30 = ({
         <p
           style={{
             color: "black",
-            fontSize: `14px`,
+            fontSize: nameFontSize,
             position: "relative",
-            textAlign: "center",
+
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
             marginTop: "68px",
+            height: "15px",
           }}
         >
           {bottleName}
         </p>
         <p
           style={{
-            color: "#FFFFFF",
-            fontSize: `6px`,
+            color: color,
+            fontSize: tagFontSize,
             position: "relative",
             marginTop: "8px",
             fontWeight: "200",
-            textAlign: "center",
+
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "7px",
           }}
         >
           {tagLine}
         </p>
         <div
           style={{
-            color: "#FFFFFF",
+            color: color,
             display: "flex",
             flexDirection: "row",
             alignItems: "center",
@@ -119,7 +146,7 @@ const Label30 = ({
             </div>
             <p
               style={{
-                color: "#FFFFFF",
+                color: color,
                 position: "relative",
                 textAlign: "center",
               }}
@@ -130,7 +157,7 @@ const Label30 = ({
           <p
             style={{
               position: "relative",
-              color: "#FFFFFF",
+              color: color,
               textAlign: "center",
               fontSize: "5px",
               marginTop: "2px",
@@ -155,6 +182,25 @@ export const BigLabel30 = ({
   batchDate,
   bottleType,
 }: LabelProps) => {
+  const [nameFontSize, setNameFontSize] = useState(35);
+  const [tagFontSize, setTagFontSize] = useState(15);
+
+  useEffect(() => {
+    if (bottleName.length >= 8) {
+      var t = 329 / (bottleName.length + 1);
+      setNameFontSize(t);
+    } else {
+      setNameFontSize(35);
+    }
+  }, [bottleName]);
+  useEffect(() => {
+    if (tagLine.length >= 8) {
+      var t = 202 / (tagLine.length + 1);
+      setTagFontSize(t);
+    } else {
+      setTagFontSize(15);
+    }
+  }, [tagLine]);
   return (
     <div
       className="label"
@@ -178,29 +224,37 @@ export const BigLabel30 = ({
         <p
           style={{
             color: "black",
-            fontSize: `33px`,
+            fontSize: nameFontSize,
             position: "relative",
-            textAlign: "center",
+
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
             marginTop: "170px",
+            height: "37px",
           }}
         >
           {bottleName}
         </p>
         <p
           style={{
-            color: "#FFFFFF",
-            fontSize: `15px`,
+            color: color,
+            fontSize: tagFontSize,
             position: "relative",
             marginTop: "15px",
             fontWeight: "200",
-            textAlign: "center",
+
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "19px",
           }}
         >
           {tagLine}
         </p>
         <div
           style={{
-            color: "#FFFFFF",
+            color: color,
             display: "flex",
             flexDirection: "row",
             alignItems: "center",
@@ -249,7 +303,7 @@ export const BigLabel30 = ({
             </div>
             <p
               style={{
-                color: "#FFFFFF",
+                color: color,
                 position: "relative",
                 fontWeight: "200",
                 textAlign: "center",
@@ -261,7 +315,7 @@ export const BigLabel30 = ({
           <p
             style={{
               position: "relative",
-              color: "#FFFFFF",
+              color: color,
               textAlign: "center",
               fontSize: "10px",
               marginTop: "2px",

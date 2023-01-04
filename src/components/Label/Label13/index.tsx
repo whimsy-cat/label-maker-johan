@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 // import stylesheets
 import "./label13.scss";
@@ -27,6 +27,25 @@ const Label13 = ({
   batchDate,
   bottleType,
 }: LabelProps) => {
+  const [nameFontSize, setNameFontSize] = useState(15);
+  const [tagFontSize, setTagFontSize] = useState(6);
+
+  useEffect(() => {
+    if (bottleName.length >= 6) {
+      var t = 80 / (bottleName.length + 1);
+      setNameFontSize(t);
+    } else {
+      setNameFontSize(15);
+    }
+  }, [bottleName]);
+  useEffect(() => {
+    if (tagLine.length >= 10) {
+      var t = 80 / (tagLine.length + 1);
+      setTagFontSize(t);
+    } else {
+      setTagFontSize(6);
+    }
+  }, [tagLine]);
   return (
     <div
       className="label"
@@ -48,11 +67,15 @@ const Label13 = ({
         <p
           style={{
             color: "#BF6500",
-            fontSize: `6px`,
+            fontSize: tagFontSize,
             position: "relative",
-            textAlign: "center",
+
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
             fontFamily: "Bevan",
             marginTop: "10px",
+            height: "7px",
           }}
         >
           {tagLine}
@@ -60,12 +83,16 @@ const Label13 = ({
         <p
           style={{
             color: color,
-            fontSize: `15px`,
+            fontSize: nameFontSize,
             position: "relative",
-            textAlign: "center",
+
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
             fontFamily: "Bevan",
             marginTop: "45px",
             fontWeight: "900",
+            height: "17px",
           }}
         >
           {bottleName}
@@ -78,6 +105,7 @@ const Label13 = ({
             marginTop: "0px",
             color: "#BF6500",
             textAlign: "center",
+            height: "6px",
           }}
         >
           {bottleType}
@@ -141,7 +169,25 @@ export const BigLabel13 = ({
   batchDate,
   bottleType,
 }: LabelProps) => {
-  useEffect(() => {}, []);
+  const [nameFontSize, setNameFontSize] = useState(40);
+  const [tagFontSize, setTagFontSize] = useState(15);
+
+  useEffect(() => {
+    if (bottleName.length >= 6) {
+      var t = 180 / (bottleName.length + 1);
+      setNameFontSize(t);
+    } else {
+      setNameFontSize(40);
+    }
+  }, [bottleName]);
+  useEffect(() => {
+    if (tagLine.length >= 10) {
+      var t = 180 / (tagLine.length + 1);
+      setTagFontSize(t);
+    } else {
+      setTagFontSize(15);
+    }
+  }, [tagLine]);
   return (
     <div
       className="label"
@@ -158,14 +204,18 @@ export const BigLabel13 = ({
         style={{ margin: "2px 0px 2px 0px", maxWidth: "100%" }}
       />
       <div className="label-text" style={{ width: "380px", height: "380px" }}>
-      <p
+        <p
           style={{
             color: "#BF6500",
-            fontSize: `15px`,
+            fontSize: tagFontSize,
             position: "relative",
-            textAlign: "center",
+
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
             fontFamily: "Bevan",
             marginTop: "27px",
+            height: "17px",
           }}
         >
           {tagLine}
@@ -173,12 +223,16 @@ export const BigLabel13 = ({
         <p
           style={{
             color: color,
-            fontSize: `40px`,
+            fontSize: nameFontSize,
             position: "relative",
-            textAlign: "center",
+
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
             fontFamily: "Bevan",
             marginTop: "110px",
             fontWeight: "900",
+            height: "42px",
           }}
         >
           {bottleName}
@@ -191,6 +245,7 @@ export const BigLabel13 = ({
             marginTop: "0px",
             color: "#BF6500",
             textAlign: "center",
+            height: "14px",
           }}
         >
           {bottleType}

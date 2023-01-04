@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 // import stylesheets
 import "./label21.scss";
@@ -26,6 +26,25 @@ const Label21 = ({
   batchDate,
   bottleType,
 }: LabelProps) => {
+  const [nameFontSize, setNameFontSize] = useState(14);
+  const [tagFontSize, setTagFontSize] = useState(6);
+
+  useEffect(() => {
+    if (bottleName.length >= 8) {
+      var t = 110 / (bottleName.length + 1);
+      setNameFontSize(t);
+    } else {
+      setNameFontSize(14);
+    }
+  }, [bottleName]);
+  useEffect(() => {
+    if (tagLine.length >= 8) {
+      var t = 80 / (tagLine.length + 1);
+      setTagFontSize(t);
+    } else {
+      setTagFontSize(6);
+    }
+  }, [tagLine]);
   return (
     <div
       className="label"
@@ -47,22 +66,29 @@ const Label21 = ({
       >
         <p
           style={{
-            color: "#E5B2A8",
-            fontSize: `14px`,
+            color: color,
+            fontSize: nameFontSize,
             position: "relative",
-            textAlign: "center",
-            marginTop: "78px",
+
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            marginTop: "79px",
+            height: "17px",
           }}
         >
           {bottleName}
         </p>
         <p
           style={{
-            color: "#E5B2A8",
-            fontSize: `6px`,
+            color: color,
+            fontSize: tagFontSize,
             position: "relative",
-            textAlign: "center",
-            marginTop: "2x",
+
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "8px",
           }}
         >
           {tagLine}
@@ -105,7 +131,11 @@ const Label21 = ({
             fontSize: "5px",
             marginTop: "1px",
             position: "relative",
-            textAlign: "center",
+
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "6px",
           }}
         >
           {bottleType}
@@ -136,6 +166,25 @@ export const BigLabel21 = ({
   batchDate,
   bottleType,
 }: LabelProps) => {
+  const [nameFontSize, setNameFontSize] = useState(37);
+  const [tagFontSize, setTagFontSize] = useState(17);
+
+  useEffect(() => {
+    if (bottleName.length >= 8) {
+      var t = 278 / (bottleName.length + 1);
+      setNameFontSize(t);
+    } else {
+      setNameFontSize(37);
+    }
+  }, [bottleName]);
+  useEffect(() => {
+    if (tagLine.length >= 8) {
+      var t = 202 / (tagLine.length + 1);
+      setTagFontSize(t);
+    } else {
+      setTagFontSize(17);
+    }
+  }, [tagLine]);
   return (
     <div
       className="label"
@@ -158,22 +207,29 @@ export const BigLabel21 = ({
       >
         <p
           style={{
-            color: "#E5B2A8",
-            fontSize: `37px`,
+            color: color,
+            fontSize: nameFontSize,
             position: "relative",
-            textAlign: "center",
-            marginTop: "196px",
+
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            marginTop: "205px",
+            height: "40px",
           }}
         >
           {bottleName}
         </p>
         <p
           style={{
-            color: "#E5B2A8",
-            fontSize: `17px`,
+            color: color,
+            fontSize: tagFontSize,
             position: "relative",
-            textAlign: "center",
-            marginTop: "2px",
+
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            marginTop: "0px",
           }}
         >
           {tagLine}
@@ -215,7 +271,11 @@ export const BigLabel21 = ({
             fontSize: "12px",
             marginTop: "3px",
             position: "relative",
-            textAlign: "center",
+
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "13px",
           }}
         >
           {bottleType}

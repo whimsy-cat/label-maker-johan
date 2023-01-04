@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { message } from "antd";
 
 import countries from "i18n-iso-countries";
@@ -7,9 +7,10 @@ import itLocal from "i18n-iso-countries/langs/it.json";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import myStore from "../../../useStore";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // import stylesheets
 import "./reviewbox.scss";
+import axios from "axios";
 import useStore from "../../../useStore";
 
 // import labels
@@ -50,23 +51,32 @@ import { BigLabel29 } from "../../../components/Label/Label29";
 import { BigLabel30 } from "../../../components/Label/Label30";
 import html2canvas from "html2canvas";
 
-// import domtoimage from "dom-to-image";
+import domtoimage from "dom-to-image";
 import { jsPDF } from "jspdf";
 
+import FormData from "form-data";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+const appUrl = "https://stripe-server-johan-production.up.railway.app"; // process.env.REACT_APP_API_URL || "";
 declare module "react-stripe-checkout" {
   interface StripeCheckoutProps {
     children?: React.ReactNode;
   }
 }
 
+var sendPDF: any;
+
 const ReviewBox: React.FC = () => {
   const { T } = useStore();
   const G: any = myStore();
   const printRef = React.useRef<HTMLDivElement>(null);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   countries.registerLocale(enLocale);
   countries.registerLocale(itLocal);
   const [messageApi, contextHolder] = message.useMessage();
+  const [pdfToSend, setPdfToSend] = useState<any>(1);
+  const notify = () => toast("You paid successfuly paid!");
 
   const success = () => {
     messageApi.open({
@@ -87,16 +97,73 @@ const ReviewBox: React.FC = () => {
   // };
 
   useEffect(() => {
-    success();
+    toast.success(" You paid successfuly! ", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
   }, []);
 
   const finish = () => {
     handleDownloadPdf();
-    // navigate("/");
+    sendEmail();
+
+    navigate("/confirmation");
+  };
+
+  const replaceSpace = (str: string) => {
+    var tmp = str.replace("#", "");
+    return tmp.replace(" ", "%20");
+  };
+
+  const sendEmail = async () => {
+    const info = {
+      order_id: G.orderid,
+      order_date: G.created,
+      order_name: G.firstname + " " + G.lastname,
+      order_email: G.email,
+      order_country: G.country,
+      order_city: G.city,
+      order_street: G.street,
+      order_zipcode: G.zipcode,
+      order_amount: G.price,
+      order_count: G.count,
+      order_label: G.curLabel,
+      order_size: G.size,
+    };
+    const data = {
+      email: "order@fixalabel.com",
+      // email1: "johan@fixalabel.com",
+      // email2: "erik@fixalabel.com",
+      subject: `New Order ${G && G.orderid}`,
+      info: info,
+      html: `https://fixalabel.com/download?cur=${
+        G && G.curLabel
+      }&name=${replaceSpace(G && G.bottleName)}&type=${replaceSpace(
+        G && G.bottleType
+      )}&tag=${replaceSpace(G && G.tagLine)}&acl=${replaceSpace(
+        G && G.cl
+      )}&volumn=${replaceSpace(G && G.vol)}&date=${replaceSpace(
+        G && G.batchDate
+      )}&color=${replaceSpace(G && G.color)}`,
+    };
+    console.log(data);
+    try {
+      const result = await axios.post(`${appUrl}/send-email`, data);
+      console.log("result : " + result);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleDownloadPdf = async () => {
     const element: any = printRef.current;
+
     let lwidth = 104; // mm
     let lheight = 100; // mm
 
@@ -104,38 +171,52 @@ const ReviewBox: React.FC = () => {
       lwidth = 97.6;
       lheight = 90;
     }
-    const pdf = new jsPDF("portrait", "mm", [lwidth, lheight]);
-    console.log("element : ");
-    console.log(element);
+    const pdf = new jsPDF("portrait", "mm", [lheight, lwidth]);
 
     const pdfWidth = pdf.internal.pageSize.getWidth();
     // const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width;
     const pdfHeight = pdf.internal.pageSize.getHeight();
-    html2canvas(element, {
-      scale: 5,
-    }).then(function (canvas) {
-      var data = canvas.toDataURL("image/png");
-      console.log("canvas : ");
-      console.log(canvas);
-      pdf.addImage(data, "PNG", 0, 0, pdfWidth, pdfHeight);
-      pdf.save("label.pdf");
-    });
-    // domtoimage
-    //   .toJpeg(element)
-    //   .then(function (dataUrl) {
-    //     // pdf.addImage(dataUrl, "PNG", 0, 0, pdfWidth, pdfHeight);
-    //     pdf.addImage(dataUrl, "PNG", 0, 0, pdfWidth, pdfHeight);
+    if (G.curLabel !== 8) {
+      html2canvas(element, {
+        scale: 5,
+      }).then(function (canvas) {
+        var data = canvas.toDataURL();
 
-    //     pdf.save("label.pdf");
-    //   })
-    //   .catch(function (error) {
-    //     console.error("oops, something went wrong!", error);
-    //   });
+        pdf.addImage(data, "PNG", 0, 0, pdfWidth, pdfHeight);
+        pdf.save("label.pdf");
+      });
+    } else {
+      domtoimage
+        .toJpeg(element)
+        .then(function (dataUrl) {
+          // pdf.addImage(dataUrl, "PNG", 0, 0, pdfWidth, pdfHeight);
+          pdf.addImage(dataUrl, "PNG", 0, 0, 100, 100);
+          var img = new Image();
+          img.src = dataUrl;
+          document.body.appendChild(img);
+          pdf.save("label.pdf");
+        })
+        .catch(function (error) {
+          console.error("oops, something went wrong!", error);
+        });
+    }
   };
 
   return (
     <div className="reviewbox" style={{ zIndex: "50" }}>
       {contextHolder}
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
       <div className="container">
         <div className="row">
           <div
@@ -273,7 +354,7 @@ const ReviewBox: React.FC = () => {
                   {G && G.created}
                 </span>
                 <span className="h4" style={{ marginTop: "5px" }}>
-                  {G && G.name}
+                  {G && G.firstname} {G && G.lastname}
                 </span>
                 <span className="h4" style={{ marginTop: "5px" }}>
                   {G && G.email}
@@ -303,7 +384,15 @@ const ReviewBox: React.FC = () => {
               flexDirection: "column",
             }}
           >
-            <div ref={printRef} style={{ height: "380px" }} id="my-node">
+            <div
+              ref={printRef}
+              style={{
+                height: "380px",
+                width: "380px",
+                transform: "rotate(90deg)",
+                zIndex: "-200",
+              }}
+            >
               {G.curLabel === 0 ? (
                 <SBigLabel1
                   bottleName={G && G.bottleName}
@@ -401,7 +490,7 @@ const ReviewBox: React.FC = () => {
                   color={G && G.color}
                   batchDate={G && G.batchDate}
                   bottleType={G && G.bottleType}
-                  // file={file}
+                  file={G && G.file}
                 />
               ) : G.curLabel === 9 ? (
                 <BigLabel9

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 // import stylesheets
 import "./label25.scss";
@@ -26,6 +26,25 @@ const Label25 = ({
   batchDate,
   bottleType,
 }: LabelProps) => {
+  const [nameFontSize, setNameFontSize] = useState(14);
+  const [tagFontSize, setTagFontSize] = useState(10);
+
+  useEffect(() => {
+    if (bottleName.length >= 8) {
+      var t = 110 / (bottleName.length + 1);
+      setNameFontSize(t);
+    } else {
+      setNameFontSize(14);
+    }
+  }, [bottleName]);
+  useEffect(() => {
+    if (tagLine.length >= 8) {
+      var t = 100 / (tagLine.length + 1);
+      setTagFontSize(t);
+    } else {
+      setTagFontSize(10);
+    }
+  }, [tagLine]);
   return (
     <div
       className="label"
@@ -49,10 +68,13 @@ const Label25 = ({
         <p
           style={{
             color: color,
-            fontSize: `14px`,
+            fontSize: nameFontSize,
             position: "relative",
-            textAlign: "center",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
             marginTop: "40px",
+            height: "16px",
           }}
         >
           {bottleName}
@@ -60,11 +82,14 @@ const Label25 = ({
         <p
           style={{
             color: color,
-            fontSize: `10px`,
+            fontSize: tagFontSize,
             position: "relative",
-            textAlign: "center",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
             marginTop: "20px",
             fontWeight: "200",
+            height: "12px",
           }}
         >
           {tagLine}
@@ -108,7 +133,10 @@ const Label25 = ({
             marginTop: "1px",
             position: "relative",
             fontWeight: "200",
-            textAlign: "center",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "6px",
           }}
         >
           {bottleType}
@@ -139,6 +167,25 @@ export const BigLabel25 = ({
   batchDate,
   bottleType,
 }: LabelProps) => {
+  const [nameFontSize, setNameFontSize] = useState(33);
+  const [tagFontSize, setTagFontSize] = useState(23.5);
+
+  useEffect(() => {
+    if (bottleName.length >= 8) {
+      var t = 281 / (bottleName.length + 1);
+      setNameFontSize(t);
+    } else {
+      setNameFontSize(33);
+    }
+  }, [bottleName]);
+  useEffect(() => {
+    if (tagLine.length >= 8) {
+      var t = 255 / (tagLine.length + 1);
+      setTagFontSize(t);
+    } else {
+      setTagFontSize(23.5);
+    }
+  }, [tagLine]);
   return (
     <div
       className="label"
@@ -163,10 +210,13 @@ export const BigLabel25 = ({
         <p
           style={{
             color: color,
-            fontSize: `33px`,
+            fontSize: nameFontSize,
             position: "relative",
-            textAlign: "center",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
             marginTop: "100px",
+            height: "36px",
           }}
         >
           {bottleName}
@@ -174,11 +224,14 @@ export const BigLabel25 = ({
         <p
           style={{
             color: color,
-            fontSize: `20px`,
+            fontSize: tagFontSize,
             position: "relative",
-            textAlign: "center",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
             marginTop: "60px",
             fontWeight: "200",
+            height: "23px",
           }}
         >
           {tagLine}
@@ -223,6 +276,7 @@ export const BigLabel25 = ({
             position: "relative",
             fontWeight: "200",
             textAlign: "center",
+            height: "12px",
           }}
         >
           {bottleType}
