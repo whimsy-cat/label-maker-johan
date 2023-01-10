@@ -12,58 +12,70 @@ import TopMenuBar from "../../components/TopMenuBar";
 import useStore from "../../useStore";
 
 import img1 from "../../assets/main/shipping.png";
+import { Helmet } from "react-helmet";
 
 const ShippingInfo = () => {
   const { T } = useStore();
   return (
-    <div>
-      <React.Fragment>
-        <CssBaseline />
-        <Container maxWidth="xl">
-          <TopMenuBar />
-          <div className="shippinginfo">
-            <h1>{T("shippinginfo.header")}</h1>
-            <Row style={{ width: "100%", marginTop: "50px" }}>
-              <Col
-                className="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12"
-                style={{ height: "auto" }}
-              >
-                <Row>
-                  <h2>{T("shippinginfo.quiz1")} </h2>
-                </Row>
-                <Row>
-                  <h3>{T("shippinginfo.answer1")}</h3>
-                </Row>
-                <Row>
-                  <h2>{T("shippinginfo.quiz2")}</h2>
-                </Row>
-                <Row>
-                  <h3>{T("shippinginfo.answer2")}</h3>
-                </Row>
-                <Row>
-                  <h2>{T("shippinginfo.quiz3")}</h2>
-                </Row>
-                <Row>
-                  <h3>{T("shippinginfo.answer3")}</h3>
-                </Row>
-              </Col>
-              <Col className="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-                <Row>
-                  <img
-                    src={img1}
-                    width="300px"
-                    height="500px"
-                    alt="about1"
-                    className="shipping-image"
-                  ></img>
-                </Row>
-                <Row></Row>
-              </Col>
-            </Row>
-          </div>
-        </Container>
-      </React.Fragment>
-    </div>
+    <>
+      <Helmet>
+        <title>Order your own personalized labels with fast delivery</title>
+        <meta
+          name="description"
+          content="Choose a design and customize your beer label. Create labels with high quality. Order now! Fast delivery."
+        />
+        <meta
+          name="keywords"
+          content="beer label, wine label, cider label, jam label, create your own, order labels online, home brewer, label your beer batches, stickers, label, decal, wine labels, jam labels, word template, free shipping, brewed beer, custom labels"
+        />
+      </Helmet>
+
+      <div>
+        <React.Fragment>
+          <CssBaseline />
+          <Container maxWidth="xl">
+            <TopMenuBar />
+            <div className="shippinginfo">
+              <h1>{T("shippinginfo.header")}</h1>
+              <Row className="shipping-row">
+                <Col className="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                  <Row>
+                    <h2>{T("shippinginfo.quiz1")} </h2>
+                  </Row>
+                  <Row>
+                    <h3>{T("shippinginfo.answer1")}</h3>
+                  </Row>
+                  <Row>
+                    <h2>{T("shippinginfo.quiz2")}</h2>
+                  </Row>
+                  <Row>
+                    <h3>{T("shippinginfo.answer2")}</h3>
+                  </Row>
+                  <Row>
+                    <h2>{T("shippinginfo.quiz3")}</h2>
+                  </Row>
+                  <Row>
+                    <h3>{T("shippinginfo.answer3")}</h3>
+                  </Row>
+                </Col>
+                <Col className="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                  <Row>
+                    <img
+                      src={img1}
+                      width="300px"
+                      height="500px"
+                      alt="shipping lables"
+                      className="shipping-image"
+                    ></img>
+                  </Row>
+                  <Row></Row>
+                </Col>
+              </Row>
+            </div>
+          </Container>
+        </React.Fragment>
+      </div>
+    </>
   );
 };
 

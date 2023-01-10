@@ -14,6 +14,7 @@ import Review from "../pages/Review";
 import Splash from "../pages/Splash";
 import Confirmation from "../pages/Confirmation";
 import Download from "../pages/Download";
+import NotFound from "../pages/404";
 
 const Routers = () => {
   return (
@@ -32,6 +33,7 @@ const Routers = () => {
       <Route path="/review" element={<Review />} />
       <Route path="/confirmation" element={<Confirmation />} />
       <Route path="/download" element={<Download />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 };

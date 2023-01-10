@@ -155,7 +155,7 @@ const ShippingBox: React.FC = () => {
     setLastname(G && G.lastname);
     setUseremail(G && G.email);
     setUserphone(G && G.phone);
-    setSelectedCountry(G && G.country);
+    setSelectedCountry(G && G.country_code);
     setCity(G && G.city);
     setState(G && G.state);
     setStreet(G && G.street);
@@ -178,82 +178,47 @@ const ShippingBox: React.FC = () => {
       />
       <div className="container">
         <div className="row">
-          <div
-            className="col-xl-5 col-lg-12 col-md-12 col-sm-12 col-xs-12"
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              textAlign: "left",
-            }}
-          >
-            <div
-              style={{
-                background: "#89898940",
-                padding: "5px 10px",
-                borderRadius: "5px",
-              }}
-            >
+          <div className="col-xl-5 col-lg-12 col-md-12 col-sm-12 col-xs-12 shipping-box">
+            <div className="step-div">
               <Steps />
             </div>
             <h1 className="gradient-h1">{T("shipping.header")}</h1>
-            <span className="h3">{T("shipping.content")}</span>
-            <Row style={{ marginTop: "20px" }}>
-              <span className="h4">{T("shipping.personalinfo")}</span>
+            <h2>{T("shipping.content")}</h2>
+            <Row className="mt-20">
+              <h3>{T("shipping.personalinfo")}</h3>
 
               <input
                 type="text"
                 placeholder="First Name"
                 value={firstname}
                 onChange={(e) => handleFirstNameChange(e)}
-                style={{
-                  borderBottomLeftRadius: "0px",
-                  borderBottomRightRadius: "0px",
-                  borderTopRightRadius: "0px",
-                  borderBottom: "none",
-                  borderRight: "none",
-                  width: "50%",
-                }}
+                className="first-name"
               ></input>
               <input
                 type="text"
                 placeholder="Last Name"
                 value={lastname}
                 onChange={(e) => handleLastNameChange(e)}
-                style={{
-                  borderBottomLeftRadius: "0px",
-                  borderBottomRightRadius: "0px",
-                  borderTopLeftRadius: "0px",
-                  borderBottom: "none",
-                  borderLeft: "none",
-                  width: "50%",
-                }}
+                className="last-name"
               ></input>
               <input
                 type="email"
                 placeholder="Email"
                 value={useremail}
                 onChange={(e) => handleUserEmailChange(e)}
-                style={{
-                  borderRadius: "0px",
-                  borderTop: "none",
-                  borderBottom: "none",
-                }}
+                className="customer-email"
               ></input>
               <input
                 type="phone"
                 placeholder="Phone"
                 value={userphone}
                 onChange={(e) => handleUserPhoneChange(e)}
-                style={{
-                  borderTopLeftRadius: "0px",
-                  borderTopRightRadius: "0px",
-                  borderTop: "none",
-                }}
+                className="customer-phone"
               ></input>
             </Row>
-            <Row style={{ marginTop: "20px" }}>
+            <Row className="mt-20">
               <Col className="col-12">
-                <span className="h4">{T("shipping.street")}</span>
+                <h3>{T("shipping.street")}</h3>
                 <input
                   type="text"
                   value={street}
@@ -262,9 +227,9 @@ const ShippingBox: React.FC = () => {
                 ></input>
               </Col>
             </Row>
-            <Row style={{ marginTop: "20px" }}>
+            <Row className="mt-20">
               <Col className="col-7">
-                <span className="h4">{T("shipping.city")}</span>
+                <h3>{T("shipping.city")}</h3>
                 <input
                   type="text"
                   value={city}
@@ -283,18 +248,13 @@ const ShippingBox: React.FC = () => {
               </Col>
             </Row>
 
-            <Row style={{ marginTop: "20px" }}>
+            <Row className="mt-20">
               <Col className="col-12">
-                <span className="h4">{T("shipping.country")}</span>
+                <h3>{T("shipping.country")}</h3>
                 <Select
                   value={selectedCountry}
                   onChange={selectCountryHandler}
-                  style={{
-                    width: "100%",
-                    padding: "5px 20px !important",
-                    border: "3px solid #d9d9d9",
-                    borderRadius: "5px !important",
-                  }}
+                  className="select-country"
                 >
                   {!!countryArr?.length &&
                     countryArr.map(({ label, value }) => (
@@ -305,42 +265,15 @@ const ShippingBox: React.FC = () => {
                 </Select>
               </Col>
             </Row>
-            <Row
-              style={{
-                marginTop: "50px",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
+            <Row className="mt-50">
               <Col className="col-4">
-                <button
-                  style={{
-                    width: "100%",
-                    fontSize: "14px",
-                    fontWeight: "900",
-                    padding: "10px 25px",
-                    color: "white",
-                    backgroundColor: "#FEA150",
-                    border: "none",
-                    borderRadius: "50px",
-                  }}
-                  onClick={toPaymentPage}
-                >
+                <button className="shipping-btn" onClick={toPaymentPage}>
                   {T("order.next")}
                 </button>
               </Col>
               <Col className="col-4">
                 or
-                <Link
-                  to="/order"
-                  style={{
-                    background: "none",
-                    border: "none",
-                    textDecoration: "underline",
-                    color: "black",
-                  }}
-                >
+                <Link to="/order" className="back-link">
                   {" "}
                   {T("order.back")}{" "}
                 </Link>
@@ -348,16 +281,8 @@ const ShippingBox: React.FC = () => {
               <Col className="col-4"></Col>
             </Row>
           </div>
-          <div
-            className="col-xl-7 col-lg-12 col-md-12 col-sm-12 col-xs-12"
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              flexDirection: "column",
-            }}
-          >
-            <div style={{ height: "380px" }}>
+          <div className="col-xl-7 col-lg-12 col-md-12 col-sm-12 col-xs-12 shipping-right-div">
+            <div className="height-380">
               {G.curLabel === 0 ? (
                 <SBigLabel1
                   bottleName={G && G.bottleName}

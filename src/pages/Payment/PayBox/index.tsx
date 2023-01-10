@@ -56,13 +56,13 @@ import Paypal from "../../../assets/main/payment/Paypal.svg";
 import Crypto from "../../../assets/main/payment/Crypto.svg";
 
 import SalesTax from "sales-tax";
+import { setEnvironmentData } from "worker_threads";
 
 // import images
-const appUrl = "https://stripe-server-johan-production.up.railway.app"; // process.env.REACT_APP_API_URL || "";
+const appUrl = "https://stripe-server-johan-production.up.railway.app"; // process.env.REACT_APP_API_URL || ""; ;
 
 declare module "react-stripe-checkout" {
   interface StripeCheckoutProps {
-
     children?: React.ReactNode;
   }
 }
@@ -74,9 +74,11 @@ const PayBox: React.FC = () => {
   countries.registerLocale(itLocal);
   const [paymentId, setPaymentId] = useState<number>(2022);
   const [messageApi, contextHolder] = message.useMessage();
+  const [vat, setVAT] = useState(0.0);
   const [rate, setRate] = useState(0.2);
+  const [currency, setCurrency] = useState("eur");
 
-  const [price, setPrice]: any = useState("100");
+  const [price, setPrice]: any = useState(100.0);
 
   const error = () => {
     messageApi.open({
@@ -111,12 +113,16 @@ const PayBox: React.FC = () => {
   };
 
   useEffect(() => {
-    setPrice(G && G.price);
     const min = 10000;
     const max = 999999;
     const rand = Math.round(Math.random() * (max - min) + min);
     setPaymentId(rand);
     getTaxRates(G.country_code);
+    var now = new Date();
+
+    update({ orderid: paymentId, created: now.toLocaleString() });
+
+    if (G.lang == "sw-SW") setCurrency("kr");
   }, []);
 
   const getTaxRates = async (country_code: string) => {
@@ -128,6 +134,13 @@ const PayBox: React.FC = () => {
       const result = await axios.post(`${appUrl}/taxrates`, { data });
       if (result.data) {
         setRate(result.data.rate);
+
+        const p = Number(G.price * 100 + G.price * 100 * result.data.rate);
+        const vat = Number(G.price * 100 * result.data.rate);
+        const t = p / 100;
+        update({ paid: t });
+        setVAT(vat);
+        setPrice(p);
       } else {
         console.log("ERROR!");
       }
@@ -135,74 +148,57 @@ const PayBox: React.FC = () => {
   };
 
   return (
-    <div className="paybox" style={{ zIndex: "50" }}>
+    <div className="paybox">
       {contextHolder}
 
       <div className="container">
         <div className="row">
-          <div
-            className="col-xl-5 col-lg-12 col-md-12 col-sm-12 col-xs-12"
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              textAlign: "left",
-            }}
-          >
-            <div
-              style={{
-                background: "#89898940",
-                padding: "5px 10px",
-                borderRadius: "5px",
-              }}
-            >
+          <div className="col-xl-5 col-lg-12 col-md-12 col-sm-12 col-xs-12 pay-div">
+            <div className="step-div">
               <Steps />
             </div>
             <h1 className="gradient-h1">{T("payment.header")}</h1>
-            <div
-              style={{
-                backgroundColor: "#53535330",
-                padding: "10px 20px",
-                borderRadius: "5px",
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <span className="h4">36 {T("payment.frontlabels")}</span>
-                <span className="h4">$22</span>
+            <div className="recipe-div">
+              <div className="paper-div">
+                <h2>
+                  {G.count} {T("payment.frontlabels")}
+                </h2>
+                <h2>
+                  {G.price * (currency == "kr" ? 10 : 1)} {currency}
+                </h2>
               </div>
 
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <span className="h4">{T("payment.worldwideshipping")}</span>
-                <span className="h4">{T("payment.free")}</span>
+              <div className="paper-div">
+                <h2>{T("payment.worldwideshipping")}</h2>
+                <h2>{T("payment.free")}</h2>
               </div>
 
-              <div
-                style={{
-                  marginTop: "10px",
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <span className="h4">{T("payment.total")}</span>
-                <span className="h4">$22</span>
+              <div className="paper-div">
+                <h2>{T("payment.tax")}</h2>
+                <h2>
+                  {Number((vat / 100) * (currency == "kr" ? 10 : 1)).toFixed(3)}{" "}
+                  {currency}
+                </h2>
+              </div>
+              <div className="paybox-div">
+                <h2>{T("payment.total")}</h2>
+                <h2>
+                  {Number((price / 100) * (currency == "kr" ? 10 : 1)).toFixed(
+                    3
+                  )}{" "}
+                  {currency}
+                </h2>
               </div>
             </div>
-            <Row style={{ marginTop: "20px" }}>
-              <span className="h4">{T("payment.method")}</span>
+            <Row className="row-mt-20">
+              <h2>{T("payment.method")}</h2>
               <Col className="col-4">
-                <img src={Stripe} width={100} height={100} alt="Stripe"></img>
+                <img
+                  src={Stripe}
+                  width={100}
+                  height={100}
+                  alt="mastercard"
+                ></img>
               </Col>
               {/* <Col className="col-4">
                 <img src={Paypal} width={100} height={100} alt="Paypal"></img>
@@ -212,62 +208,37 @@ const PayBox: React.FC = () => {
                 <img src={Crypto} width={100} height={100} alt="Crypto"></img>
               </Col> */}
             </Row>
-            <Row
-              style={{
-                marginTop: "50px",
-                display: "flex",
-                justifyContent: "left",
-                alignItems: "center",
-              }}
-            >
-              <Col className="col-5">
-                {/* <Link
-                  style={{
-                    width: "100%",
-                    fontSize: "14px",
-                    fontWeight: "900",
-                    padding: "10px 10px",
-                    color: "white",
-                    backgroundColor: "#FEA150",
-                    border: "none",
-                    borderRadius: "50px",
-                  }}
-                > */}
+            <Row className="row-mt-50">
+              {/* <Col className="col-4">
+                
                 <StripeCheckout
                   stripeKey={process.env.REACT_APP_STRIPE_PUBLIC_KEY || ""}
                   token={handleToken}
-                  amount={price * 100 + price * 100 * rate}
-                  currency="USD"
-                  name={`You are paying $${price}`}
+                  amount={price * (currency == "kr" ? 10 : 1)}
+                  currency={currency == "kr" ? "SEK" : "EUR"}
+                  name={`You are paying ${
+                    (price / 100) * (currency == "kr" ? 10 : 1)
+                  }${currency}`}
                 >
-                  <button
-                    style={{
-                      width: "100%",
-                      fontSize: "14px",
-                      fontWeight: "900",
-                      padding: "10px 10px",
-                      color: "white",
-                      backgroundColor: "#FEA150",
-                      border: "none",
-                      borderRadius: "50px",
-                    }}
-                  >
+                  <button className="pay-btn">
                     {T("payment.paywith")} {}
                   </button>
                 </StripeCheckout>
-                {/* </Link> */}
+              </Col> */}
+
+              <Col className="col-4">
+                <form
+                  action={`${appUrl}/klarna_checkout?currency=${
+                    currency == "kr" ? "SEK" : "EUR"
+                  }&price=${price * (currency == "kr" ? 10 : 1)}`}
+                  method="POST"
+                >
+                  <button className="pay-btn">{T("payment.paywith")}</button>
+                </form>
               </Col>
               <Col className="col-4">
                 or
-                <Link
-                  to="/shipping"
-                  style={{
-                    background: "none",
-                    border: "none",
-                    textDecoration: "underline",
-                    color: "black",
-                  }}
-                >
+                <Link to="/shipping" className="back-link">
                   {" "}
                   {T("order.back")}{" "}
                 </Link>
@@ -276,16 +247,8 @@ const PayBox: React.FC = () => {
             </Row>
           </div>
 
-          <div
-            className="col-xl-7 col-lg-12 col-md-12 col-sm-12 col-xs-12"
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              flexDirection: "column",
-            }}
-          >
-            <div style={{ height: "380px" }}>
+          <div className="col-xl-7 col-lg-12 col-md-12 col-sm-12 col-xs-12 pay-bottle-div">
+            <div className="height-380">
               {G.curLabel === 0 ? (
                 <SBigLabel1
                   bottleName={G && G.bottleName}

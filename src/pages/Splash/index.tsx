@@ -22,6 +22,8 @@ import spain from "../../assets/flags/spain.svg";
 import us from "../../assets/flags/us.svg";
 import sweden from "../../assets/flags/sweden.svg";
 import useStore from "../../useStore";
+import { Helmet } from "react-helmet";
+import axios from "axios";
 
 const emails = ["English", "Swedish", "Spanish"];
 
@@ -61,11 +63,11 @@ function SimpleDialog(props: SimpleDialogProps) {
             <ListItemAvatar>
               <Avatar sx={{ bgcolor: blue[100], color: blue[600] }}>
                 {index === 0 ? (
-                  <img src={us} width="40" height="40" alt="index" />
+                  <img src={us} width="40" height="40" alt="us label" />
                 ) : index === 1 ? (
-                  <img src={sweden} width="40" height="40" alt="index" />
+                  <img src={sweden} width="40" height="40" alt="sweden label" />
                 ) : (
-                  <img src={spain} width="40" height="40" alt="index" />
+                  <img src={spain} width="40" height="40" alt="spain label" />
                 )}
               </Avatar>
             </ListItemAvatar>
@@ -80,11 +82,20 @@ function SimpleDialog(props: SimpleDialogProps) {
 const Splash = () => {
   const [open, setOpen] = React.useState(false);
   const [selectedValue, setSelectedValue] = React.useState(emails[1]);
+  const { update } = useStore();
 
   const handleClickOpen = () => {
+    getIPAddress();
     setOpen(true);
   };
 
+  const getIPAddress = async () => {
+    const result = await axios.get(`https://geolocation-db.com/json/`);
+    update({
+      country: result.data.country_name,
+      country_code: result.data.country_code,
+    });
+  };
   const handleClose = (value: string) => {
     // setOpen(false);
     setSelectedValue(value);
@@ -92,24 +103,37 @@ const Splash = () => {
 
   useEffect(() => {
     // Wait for 3 seconds
-    setTimeout(() => {
-      handleClickOpen();
-    }, 3000);
+    handleClickOpen();
   }, []);
 
   return (
-    <div className="splash">
-      <React.Fragment>
-        <ScaleLoader color="white" width={15} height={50} margin={5} />
-      </React.Fragment>
-      <div>
-        <SimpleDialog
-          selectedValue={selectedValue}
-          open={open}
-          onClose={handleClose}
+    <>
+      <Helmet>
+        <title>Labels with printing. Design your own beer or wine labels</title>
+        <meta
+          name="description"
+          content="Create personalized beer labels for you or your company; for parties, weddings and more! Do you need stylish, self-designed brand with your own message. Our custom beer or wine labels are durable and waterproof."
         />
+        <meta
+          name="keywords"
+          content="beer label, wine label, cider label, jam label, create your own, order labels online, home brewer, label your beer batches, stickers, label, decal, wine labels, jam labels, word template, free shipping, brewed beer, custom labels"
+        />
+      </Helmet>
+
+      <div className="splash">
+        <h1>Label for Homebrew</h1>
+        <React.Fragment>
+          <ScaleLoader color="white" width={15} height={50} margin={5} />
+        </React.Fragment>
+        <div>
+          <SimpleDialog
+            selectedValue={selectedValue}
+            open={open}
+            onClose={handleClose}
+          />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -1,18 +1,21 @@
 @import "../../index.scss";
-.about {
+.error {
   height: auto;
   display: flex;
   align-items: center;
   flex-direction: column;
-
+  justify-content: center;
+  margin-top: 50px;
   h1 {
     font-weight: 900;
-    color: #fea150;
+    color: black;
+    font-size: 100px;
     margin-bottom: 50px;
   }
   h2 {
-    font-size: 20px;
+    font-size: 50px;
     margin-bottom: 20px;
+    font-weight: bold;
     line-height: 2;
   }
   h3 {

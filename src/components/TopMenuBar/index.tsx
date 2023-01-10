@@ -17,7 +17,6 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import "./topmenubar.scss";
 
-import ContactUs from "../../pages/Contact";
 import useStore from "../../useStore";
 
 interface Props {
@@ -92,9 +91,9 @@ const TopMenuBar = (props: Props) => {
                   ? "/news"
                   : item === T("menu.shipping")
                   ? "/shippinginfo"
-                  : "/order"
+                  : "/edit"
               }
-              style={{ textDecoration: "none", color: "#333" }}
+              className="link-menu"
             >
               <ListItemButton sx={{ textAlign: "center" }}>
                 <ListItemText primary={item} />
@@ -110,7 +109,6 @@ const TopMenuBar = (props: Props) => {
     window !== undefined ? () => window().document.body : undefined;
   return (
     <div className="top-menu">
-      {contact && <ContactUs />}
       <Box sx={{ display: "flex" }}>
         <AppBar
           component="nav"
@@ -221,7 +219,6 @@ const TopMenuBar = (props: Props) => {
                     fontSize: "14px",
                     lineHeight: "21px",
                   }}
-                  onClick={() => onHandleClick(item)}
                 >
                   <Link
                     to={
@@ -233,9 +230,9 @@ const TopMenuBar = (props: Props) => {
                         ? "/news"
                         : item === T("menu.shipping")
                         ? "/shippinginfo"
-                        : "/order"
+                        : "/edit"
                     }
-                    style={{ textDecoration: "none", color: "#333" }}
+                    className="link-menu"
                   >
                     {item}
                   </Link>

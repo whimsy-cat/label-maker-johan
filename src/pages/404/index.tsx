@@ -1,39 +1,41 @@
 import React from "react";
-
 import CssBaseline from "@mui/material/CssBaseline";
 import Container from "@mui/material/Container";
 
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 // import stylesheets
-import "./shipping.scss";
+import "./404.scss";
 
 // import sub components
 import TopMenuBar from "../../components/TopMenuBar";
-import ShippingBox from "./ShippingBox";
+
+import img1 from "../../assets/main/about-1.png";
+import useStore from "../../useStore";
+
 import { Helmet } from "react-helmet";
 
-const Shipping = () => {
+const Error404 = () => {
+  const { T, update } = useStore();
   return (
     <>
       <Helmet>
-        <title>
-          Design your stylish labels for your home-brewed beer or wine
-        </title>
-        <meta
-          name="description"
-          content="If you make juice, beer, schnapps or wine yourself, you can give the bottles a nice look by putting your own labels on the bottles."
-        />
+        <title>Page Not Found : Fixalabel</title>
+        <meta name="description" content="Page Not Found" />
         <meta
           name="keywords"
           content="beer label, wine label, cider label, jam label, create your own, order labels online, home brewer, label your beer batches, stickers, label, decal, wine labels, jam labels, word template, free shipping, brewed beer, custom labels"
         />
       </Helmet>
-      <div className="shipping">
+      <div>
         <React.Fragment>
           <CssBaseline />
           <Container maxWidth="xl">
             <TopMenuBar />
-            <ShippingBox />
-            {/* {status === "Sign In" ? <Login /> : ""} */}
+            <div className="error">
+              <h1>404</h1>
+              <h2>{T("error.404")}</h2>
+            </div>
           </Container>
         </React.Fragment>
       </div>
@@ -41,4 +43,4 @@ const Shipping = () => {
   );
 };
 
-export default Shipping;
+export default Error404;

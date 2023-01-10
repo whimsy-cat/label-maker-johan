@@ -98,7 +98,7 @@ const DownloadBox: React.FC = () => {
   };
 
   useEffect(() => {
-    toast.success("New Order Received!", {
+    toast.success("New Label Order Received!", {
       position: "top-right",
       autoClose: 5000,
       hideProgressBar: false,
@@ -185,7 +185,7 @@ const DownloadBox: React.FC = () => {
   };
 
   return (
-    <div className="downloadbox" style={{ zIndex: "50" }}>
+    <div className="downloadbox">
       {contextHolder}
       <ToastContainer
         position="top-right"
@@ -201,23 +201,8 @@ const DownloadBox: React.FC = () => {
       />
       <div className="container">
         <div className="row">
-          <div
-            className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12"
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              flexDirection: "column",
-            }}
-          >
-            <div
-              ref={printRef}
-              style={{
-                height: "380px",
-                width: "380px",
-                transform: "rotate(90deg)",
-              }}
-            >
+          <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 download-box">
+            <div ref={printRef} className="download-pdf">
               {cur === 0 ? (
                 <SBigLabel1
                   bottleName={bottleName}
@@ -564,7 +549,7 @@ const DownloadBox: React.FC = () => {
           </div>
         </div>
         <div className="row">
-          <h1>Downloading ...</h1>
+          <h1>Downloading label pdf...</h1>
         </div>
       </div>
     </div>
