@@ -103,6 +103,9 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Dialog from "@mui/material/Dialog";
 import { blue } from "@mui/material/colors";
 import axios from "axios";
+
+import { Helmet } from "react-helmet";
+
 const appUrl = "https://stripe-server-johan-production.up.railway.app"; // process.env.REACT_APP_API_URL || ""; "http://localhost:8080";
 
 export interface SimpleDialogProps {
@@ -120,6 +123,7 @@ function SimpleDialog(props: SimpleDialogProps) {
   };
 
   return (
+    
     <Dialog onClose={handleClose} open={open}>
       <div className="height-380">
         {G.curLabel === 0 ? (
@@ -516,7 +520,6 @@ const Editor = () => {
     setCl(G && G.cl);
     setTagLine(G && G.tagLine);
     setBatchDate(G && G.batchDate);
-    console.log(G.file === "");
 
     if (G.file !== "") {
       setFile(G && G.file);
@@ -524,22 +527,35 @@ const Editor = () => {
     getTaxRates(G.country_code);
     if (G.lang == "sw-SW") update({ currency: "SEK" });
     else update({ currency: "EUR" });
-    // console.log("G.file", G.file);
+
+    const chat_lang = G.lang == "en-US" ? "en" : G.lang == "sw-SW" ? "sv" : "es";
+    const script = document.createElement("script");
+    
+    script.type = 'text/javascript';
+    script.async = true;
+    script.innerHTML = `CRISP_RUNTIME_CONFIG = {locale : '${chat_lang}'}; window.$crisp = [];
+    window.CRISP_WEBSITE_ID = "ea46d69f-d028-44ab-ad10-ce0ded68092b";
+    (function () {
+      d = document;
+      s = d.createElement("script");
+      s.src = "https://client.crisp.chat/l.js";
+      s.async = 1;
+      d.getElementsByTagName("head")[0].appendChild(s);
+    })();`;
+
+    document.body.appendChild(script);
   }, []);
 
   const getTaxRates = async (country_code: string) => {
     const data = {
       country_code: country_code,
     };
-    console.log(data);
     try {
       const result = await axios.post(`${appUrl}/taxrates`, { data });
       if (result.data) {
         setRate(result.data.rate);
-        console.log(result.data.rate);
         update({ vat: result.data.rate });
       } else {
-        console.log("ERROR!");
       }
     } catch (error) {}
   };
@@ -630,7 +646,6 @@ const Editor = () => {
       color: text,
     });
     var tmpArr = popularColors;
-    // console.log(tmpArr);
     // tmpArr.push(text);
     // setPopularColors(tmpArr);
   };
@@ -652,7 +667,16 @@ const Editor = () => {
       color: color,
       file: file,
     });
-    navigate("/order");
+    if (G.lang === "en-US") 
+    { 
+      navigate("/en/order");
+    }
+    if (G.lang === "sw-SW") {
+      navigate("/sv/order");
+    }
+    if (G.lang === "es-ES") {
+      navigate("/es/order");
+    }
   };
 
   const setDate = (e: any) => {
@@ -682,6 +706,21 @@ const Editor = () => {
   };
 
   return (
+    <>
+      <Helmet>
+        <title>
+          {T("title.edit")}
+        </title>
+        <meta name="title" content={T("title.edit")} />
+        <meta
+          name="description"
+          content={T("description.edit")}
+        />
+        <meta
+          name="keywords"
+          content={T("keyword.common")}
+        />
+      </Helmet>
     <div className="editor">
       <SimpleDialog
         selectedValue={selectedValue}
@@ -1211,6 +1250,7 @@ const Editor = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

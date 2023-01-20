@@ -51,6 +51,7 @@ import { BigLabel28 } from "../../../components/Label/Label28";
 import { BigLabel29 } from "../../../components/Label/Label29";
 import { BigLabel30 } from "../../../components/Label/Label30";
 import { useStepContext } from "@mui/material";
+import { Helmet } from "react-helmet";
 
 let index = 0;
 
@@ -63,6 +64,7 @@ const OrderBox: React.FC = () => {
   const [count, setCount] = useState(5);
   const [priceIndex, setPriceIndex] = useState(0);
   const printRef = React.useRef<HTMLDivElement>(null);
+  const [lang, setLang] = useState("/en");
 
   const [check, setCheck] = useState("small");
   const [selectedValue, setSelectedValue] = React.useState("a");
@@ -122,9 +124,24 @@ const OrderBox: React.FC = () => {
     inputProps: { "aria-label": item },
   });
 
+  useEffect(() => {
+    if(G.lang == "en-US") setLang("/en");
+    else if(G.lang == "sw-SW") setLang("/sv");
+    else setLang("/es");
+  }, []);
+
   const toShippingPage = () => {
     update({ price: price, size: check, count: count });
-    navigate("/shipping");
+    if (G.lang === "en-US") 
+    { 
+      navigate("/en/shipping");
+    }
+    if (G.lang === "sw-SW") {
+      navigate("/sv/shipping");
+    }
+    if (G.lang === "es-ES") {
+      navigate("/es/shipping");
+    }
   };
 
   const handlePrice = (val: any) => {
@@ -134,6 +151,21 @@ const OrderBox: React.FC = () => {
   };
 
   return (
+    <>
+      <Helmet>
+        <title>
+          {T("title.browse")}
+        </title>
+        <meta name="title" content={T("title.browse")} />
+        <meta
+          name="description"
+          content={T("description.browse")}
+        />
+        <meta
+          name="keywords"
+          content={T("keyword.common")}
+        />
+      </Helmet>
     <div className="orderbox">
       <div className="container">
         <div className="row">
@@ -268,7 +300,7 @@ const OrderBox: React.FC = () => {
 
               <Col className="col-4">
                 or
-                <Link to="/edit">
+                <Link to={lang + "/edit"}>
                   <button className="back-btn">{T("order.back")}</button>
                 </Link>
               </Col>
@@ -624,6 +656,7 @@ const OrderBox: React.FC = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

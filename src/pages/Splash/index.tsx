@@ -44,10 +44,19 @@ function SimpleDialog(props: SimpleDialogProps) {
 
   const handleListItemClick = (value: string) => {
     onClose(value);
-    if (value === "English") update({ lang: "en-US" });
-    if (value === "Swedish") update({ lang: "sw-SW" });
-    if (value === "Spanish") update({ lang: "es-ES" });
-    navigate("/edit");
+    if (value === "English") 
+    { 
+      update({ lang: "en-US" });  
+      navigate("/en/edit");
+    };
+    if (value === "Swedish") {
+      update({ lang: "sw-SW" });
+      navigate("/sv/edit");
+    }
+    if (value === "Spanish") {
+      update({ lang: "es-ES" });
+      navigate("/es/edit");
+    }
   };
 
   return (
@@ -82,7 +91,7 @@ function SimpleDialog(props: SimpleDialogProps) {
 const Splash = () => {
   const [open, setOpen] = React.useState(false);
   const [selectedValue, setSelectedValue] = React.useState(emails[1]);
-  const { update } = useStore();
+  const { T, update } = useStore();
 
   const handleClickOpen = () => {
     getIPAddress();
@@ -109,14 +118,17 @@ const Splash = () => {
   return (
     <>
       <Helmet>
-        <title>Labels with printing. Design your own beer or wine labels</title>
+        <title>
+          {T("title.about")}
+        </title>
+        <meta name="title" content={T("title.about")} />
         <meta
           name="description"
-          content="Create personalized beer labels for you or your company; for parties, weddings and more! Do you need stylish, self-designed brand with your own message. Our custom beer or wine labels are durable and waterproof."
+          content={T("description.about")}
         />
         <meta
           name="keywords"
-          content="beer label, wine label, cider label, jam label, create your own, order labels online, home brewer, label your beer batches, stickers, label, decal, wine labels, jam labels, word template, free shipping, brewed beer, custom labels"
+          content={T("keyword.common")}
         />
       </Helmet>
 

@@ -13,15 +13,19 @@
   "step.review": "Review",
 
   "about.header": "About our labels",
-  "about.header2": "There are many times when a custom label goes a long way!",
-  "about.content": "Have you boiled juice, brewed beer, mixed mulled wine or arranged the company's very own wine? Then you need stylish, self-designed labels with your brand's logo or message. Being able to offer bottles of the company's own drinks on fairs, conferences or events is a valued feature. It is also a guaranteed eye-opener and something that starts a conversation. The little extra and can serve as a nice gift for customers and partners Here on our site you can easily with a few simple clicks create a custom label. We offer fast delivery. Our labels are 97.6mm wide by 90mm high or 104mm wide by 100mm high.",
+  "about.header2": "Have you boiled juice, brewed beer, mixed mulled wine or arranged the company's very own wine?", 
+  "about.header3": "Then you need stylish, self-designed labels with your brand's logo or message. Being able to offer bottles of the company's own drinks on fairs, conferences or events is a valued feature. It is also a guaranteed eye-opener and something that starts a conversation. The little extra and can serve as a nice gift for customers and partners. Here on our site, you can easily with a few simple clicks create your own label.",
+  "about.content": "We offer fast delivery. Our labels are 97.6mm wide by 90mm high or 104mm wide by 100mm high.",
   "about.name": "Fixalabel Sweden AB",
   "about.addr1": "Alängsgatan 2",
   "about.addr2": "523 37 Ulricehamn",
   "about.addr3": "Sweden",
-
-  "about.phone": "Phone: 0321-266 00",
+  "about.phone": "+46 (0)321 26605",
   "about.email": "Email: order@fixalabel.com",
+
+  "about.terms": "Terms & Conditions",
+  "about.cookie": "Cookie Policy",
+  "about.privacy": "Privacy Policy",
 
   "contact.header": "Contact US",
   "contact.content": "If you have any problems using the site, don't be afraid to email us for help. We'll get back to you as soon as possible. We also appreciate any feedback about the site. If you have any suggestions for how the site can be improved please contact us on the email below. admin@jamlabelizer.com",
@@ -42,7 +46,7 @@
   "home.upload": "Upload images",
 
   "news.header": "Frequently Asked Questions",
-  "news.subheader": "Below you will find questions received from our customers and answers to them.",
+  "news.subheader": "Questions and answers from our customers",
   "news.news1": "How to make your own labels?",
   "news.news2": "How do I create my own wine labels?",
   "news.news3": "What delivery options can I choose?",
@@ -50,12 +54,12 @@
   "news.news5": "How to make labels for bottles?",
   "news.news6": "Can I print my own labels?",
 
-  "news.content1": "We offer 30 different customizable templates for both beer, wine and cider. They can be put on cans, bottles and promotional gifts. You can easily customize our labels on our website and order with a few clicks. Choose a classic style or give your home-brewed beer a stylish touch with a custom-designed mold. They're printed on durable paper or plastic – with waterproof and grease-resistant options – so your unique labels are built to last.",
-  "news.content2": "Surprise your friend with a personalized wine label. It can be for a wedding, birthday or for an ordinary Friday. It's not difficult to make your own label and it doesn't take that long either. Add your favorite photo, a name or text in the label. Order as many as you need and stick on your wine bottles.",
-  "news.content3": "At the moment it is not possible to choose a delivery option. Your labels are sent either as a package or regular mail. Do you want to know which option applies to your order? Please contact our customer service.",
-  "news.content4": "You pay easily by bank card.",
-  "news.content5": "Now you can buy labels for your beer bottles and in addition to the label showing what kind of beer you have made, there are also fields for you to fill in yourself. Enter the brewer and brewing date and the bottles are ready for the world!",
-  "news.content6": "We have many years of experience, work with high quality and offer fast deliveries. Create your labels using our editing tool. Easy and convenient! No extra fees. Materials for outdoor use.",
+  "news.content1": "We offer 30 different customizable templates for both beer, wine and cider. They can be placed on cans, bottles and promotional giveaways. You can easily customize our labels on our website and order with a few clicks. Choose a classic style or give your home brew a fancy touch with a custom designed shape. They're printed on durable matte or glossy paper so your one-of-a-kind labels are built to last.",
+  "news.content2": "Surprise your friend with a personalized wine label. It can be for a wedding, a birthday or any Friday. It's not difficult to make your own label and it doesn't take that long either. Order as many as you need and paste in your wine bottles.",
+  "news.content3": "At the moment it is not possible to choose a shipping option. Your labels are sent as parcel or regular mail. Do you want to know which option applies to your order? Contact our customer service . ",
+  "news.content4": "You pay easily with a bank card or Klarna.",
+  "news.content5": "You can now buy labels for your beer bottles, and in addition to the label showing what kind of beer you've made, there are also fields for you to fill in yourself. Enter the manufacturer and brew date and the bottles are ready for the world!",
+  "news.content6": "We have many years of experience, we work with high quality and offer fast delivery. Create your labels with our editing tool. Easy and fluid! No additional charges.",
 
   "order.title": "Order Labels",
   "order.content": "Your finished label design will be printed with high quality on roll and shipped to you quickly.",
@@ -116,5 +120,19 @@
   "confirmation.header": "We will ship labels as soon as possible.",
   "confirmation.name": "Johan Kuikka",
 
-  "error.404": "Page Not Found"
+  "error.404": "Page Not Found",
+
+  "title.about" : "Custom printed labels. Design your own beer, cider or wine labels.",
+  "title.news" : "Create your own brand with your own self-adhesive labels",
+  "title.shippinginfo": "Order your own personalized labels with fast delivery",
+  "title.edit": "Create your own labels, fast and cheap.",
+  "title.browse": "Design your own stylish labels for your juice bottles, your own cider or your home-brewed beer. Flat-easy.",
+  "title.404": "Page not found : Fixalabel",
+
+  "description.about": "Create personalized beer labels for you or your business; for parties, weddings and more! Need stylish, custom-designed labels with your own message. Our custom beer or wine labels are durable and waterproof.",
+  "description.news": "With your self-adhesive labels, your beer, wine or cider will not only taste like 'a real beer' but also look like 'a real beer'. The labels include boxes for name, brew date and explanation. Name your beer and write your bottling date and you'll know what you're drinking and when you're going to drink it!",
+  "description.shippinginfo": "Choose a design and customize your beer label. Create high quality labels. Order now! Fast delivery.",
+  "description.edit": "Create your own labels quickly and easily with Fixalabel.com. Design your own stylish labels for your juice bottles, your own cider or your home-brewed beer.",
+  "description.browse": "If you make juice, beer, schnapps or wine yourself, you can give the bottles a nice look by putting your own labels on the bottles.",
+  "keyword.common" : "beer label, wine label, cider label, jam label, create your own, order labels online, home brewer, label your beer batches, stickers, label, decal, wine labels, jam labels, word template, free shipping, brewed beer , self-designed labels"
 }

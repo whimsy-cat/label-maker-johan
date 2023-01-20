@@ -70,14 +70,17 @@ const News = () => {
   return (
     <>
       <Helmet>
-        <title>Create your own brand with your own self-adhesive labels</title>
+        <title>
+          {T("title.news")}
+        </title>
+        <meta name="title" content={T("title.news")} />
         <meta
           name="description"
-          content="With your self-adhesive labels, your beer, wine or cider will not only taste like 'a real beer' but also look like 'a real beer'. The labels contain boxes for name, brew date and explanation. Name your beer and write your bottling date and you'll know what you're drinking and when you're going to drink it!"
+          content={T("description.news")}
         />
         <meta
           name="keywords"
-          content="beer label, wine label, cider label, jam label, create your own, order labels online, home brewer, label your beer batches, stickers, label, decal, wine labels, jam labels, word template, free shipping, brewed beer, custom labels"
+          content={T("keyword.common")}
         />
       </Helmet>
       <div>
@@ -87,9 +90,12 @@ const News = () => {
             <TopMenuBar />
             <div className="news">
               <h1>{T("news.header")}</h1>
+              <h2>{T("news.subheader")}</h2>
               <Accordion
                 expanded={expanded === "panel1"}
                 onChange={handleChange("panel1")}
+                className="faq"
+
               >
                 <AccordionSummary
                   aria-controls="panel1d-content"
@@ -104,6 +110,7 @@ const News = () => {
               <Accordion
                 expanded={expanded === "panel2"}
                 onChange={handleChange("panel2")}
+                className="faq"
               >
                 <AccordionSummary
                   aria-controls="panel2d-content"
@@ -118,6 +125,8 @@ const News = () => {
               <Accordion
                 expanded={expanded === "panel3"}
                 onChange={handleChange("panel3")}
+                className="faq"
+
               >
                 <AccordionSummary
                   aria-controls="panel3d-content"
@@ -149,6 +158,7 @@ const News = () => {
               <Accordion
                 expanded={expanded === "panel5"}
                 onChange={handleChange("panel5")}
+                className="faq"
               >
                 <AccordionSummary
                   aria-controls="panel5d-content"

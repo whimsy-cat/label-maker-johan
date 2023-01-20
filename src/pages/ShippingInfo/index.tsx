@@ -19,14 +19,18 @@ const ShippingInfo = () => {
   return (
     <>
       <Helmet>
-        <title>Order your own personalized labels with fast delivery</title>
+        
+      <title>
+          {T("title.shippinginfo")}
+        </title>
+        <meta name="title" content={T("title.shippinginfo")} />
         <meta
           name="description"
-          content="Choose a design and customize your beer label. Create labels with high quality. Order now! Fast delivery."
+          content={T("description.shippinginfo")}
         />
         <meta
           name="keywords"
-          content="beer label, wine label, cider label, jam label, create your own, order labels online, home brewer, label your beer batches, stickers, label, decal, wine labels, jam labels, word template, free shipping, brewed beer, custom labels"
+          content={T("keyword.common")}
         />
       </Helmet>
 

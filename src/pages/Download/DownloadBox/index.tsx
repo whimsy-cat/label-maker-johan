@@ -85,6 +85,7 @@ const DownloadBox: React.FC = () => {
   const [date, setDate] = useState<any>("");
   const [color, setColor] = useState<any>("");
   const [cur, setCur] = useState<any>(1);
+  const [size, setSize] = useState<any>('small');
 
   const success = () => {
     messageApi.open({
@@ -118,6 +119,7 @@ const DownloadBox: React.FC = () => {
     const vol_param = queryParameters.get("volumn");
     const date_param = queryParameters.get("date");
     const color_param = queryParameters.get("color");
+    const size_param = queryParameters.get("size");
     setCur(cur_param);
     setBottleName(name_param);
     setBottleType(type_param);
@@ -125,6 +127,7 @@ const DownloadBox: React.FC = () => {
     setAlc(alc_param);
     setVol(vol_param);
     setDate(date_param);
+    setSize(size_param);
     setColor("#" + color_param);
     setTimeout(() => {
       finish();
@@ -138,13 +141,14 @@ const DownloadBox: React.FC = () => {
   const handleDownloadPdf = async () => {
     const element: any = printRef.current;
 
-    let lwidth = 104; // mm
-    let lheight = 100; // mm
+    let lwidth = 100; // mm
+    let lheight = 104; // mm
 
-    if (G.size === "small") {
-      lwidth = 97.6;
-      lheight = 90;
+    if (size === "small") {
+      lwidth = 90;
+      lheight = 97.6;
     }
+    console.log(size);
     const pdf = new jsPDF("portrait", "mm", [lheight, lwidth]);
 
     const pdfWidth = pdf.internal.pageSize.getWidth();

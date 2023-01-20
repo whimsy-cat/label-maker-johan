@@ -123,9 +123,7 @@ const getStore = (initialState: StoreObject) => {
       }
     }
     _init.loading = false;
-  } catch (err) {
-    console.log(err);
-  }
+  } catch (err) {}
   return _init;
 };
 

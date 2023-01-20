@@ -52,11 +52,13 @@ import { BigLabel29 } from "../../../components/Label/Label29";
 import { BigLabel30 } from "../../../components/Label/Label30";
 
 import Stripe from "../../../assets/main/payment/Stripe.svg";
+import Klarna from "../../../assets/main/payment/Klarna.svg";
 import Paypal from "../../../assets/main/payment/Paypal.svg";
 import Crypto from "../../../assets/main/payment/Crypto.svg";
 
 import SalesTax from "sales-tax";
 import { setEnvironmentData } from "worker_threads";
+import { Helmet } from "react-helmet";
 
 // import images
 const appUrl = "https://stripe-server-johan-production.up.railway.app"; // process.env.REACT_APP_API_URL || ""; ;
@@ -80,6 +82,11 @@ const PayBox: React.FC = () => {
 
   const [price, setPrice]: any = useState(100.0);
 
+  const [paperPrice1, setPaperPrice1] = useState("7.0");
+  const [paperPrice2, setPaperPrice2] = useState("7.0");
+  const [paperPrice3, setPaperPrice3] = useState("7.0");
+  const [lang, setLang] = useState("/en");
+
   const error = () => {
     messageApi.open({
       type: "error",
@@ -98,16 +105,22 @@ const PayBox: React.FC = () => {
         country_code: G.country_code,
       },
     };
-    console.log(data);
     try {
       const result = await axios.post(`${appUrl}/checkout`, { data });
       if (result.data.status) {
-        console.log(result);
         var now = new Date();
         update({ orderid: paymentId, created: now.toLocaleString() });
-        navigate("/review");
+        if (G.lang === "en-US") 
+        { 
+          navigate("/en/review");
+        }
+        if (G.lang === "sw-SW") {
+          navigate("/sv/review");
+        }
+        if (G.lang === "es-ES") {
+          navigate("/es/review");
+        }
       } else {
-        console.log("ERROR!");
       }
     } catch (error) {}
   };
@@ -118,18 +131,22 @@ const PayBox: React.FC = () => {
     const rand = Math.round(Math.random() * (max - min) + min);
     setPaymentId(rand);
     getTaxRates(G.country_code);
-    var now = new Date();
-
-    update({ orderid: paymentId, created: now.toLocaleString() });
 
     if (G.lang == "sw-SW") setCurrency("kr");
+    
+    if(G.lang == "en-US") setLang("/en");
+    else if(G.lang == "sw-SW") setLang("/sv");
+    else setLang("/es");
   }, []);
+  useEffect(() => {
+    var now = new Date();
+    update({ orderid: paymentId, created: now.toLocaleString() });
+  }, [paymentId]);
 
   const getTaxRates = async (country_code: string) => {
     const data = {
       country_code: country_code,
     };
-    console.log(data);
     try {
       const result = await axios.post(`${appUrl}/taxrates`, { data });
       if (result.data) {
@@ -142,12 +159,39 @@ const PayBox: React.FC = () => {
         setVAT(vat);
         setPrice(p);
       } else {
-        console.log("ERROR!");
       }
     } catch (error) {}
   };
 
+  useEffect(() => {
+    var price1 = String(G.price * (currency == "kr" ? 10 : 1));
+    var price2 = String(
+      Number((vat / 100) * (currency == "kr" ? 10 : 1)).toFixed(2)
+    );
+    var price3 = String(
+      Number((price / 100) * (currency == "kr" ? 10 : 1)).toFixed(2)
+    );
+    setPaperPrice1(price1.replace(".", ","));
+    setPaperPrice2(price2.replace(".", ","));
+    setPaperPrice3(price3.replace(".", ","));
+  }, [vat]);
+
   return (
+    <>
+      <Helmet>
+        <title>
+          {T("title.browse")}
+        </title>
+        <meta name="title" content={T("title.browse")} />
+        <meta
+          name="description"
+          content={T("description.browse")}
+        />
+        <meta
+          name="keywords"
+          content={T("keyword.common")}
+        />
+      </Helmet>
     <div className="paybox">
       {contextHolder}
 
@@ -164,7 +208,7 @@ const PayBox: React.FC = () => {
                   {G.count} {T("payment.frontlabels")}
                 </h2>
                 <h2>
-                  {G.price * (currency == "kr" ? 10 : 1)} {currency}
+                  {paperPrice1} {currency}
                 </h2>
               </div>
 
@@ -176,30 +220,18 @@ const PayBox: React.FC = () => {
               <div className="paper-div">
                 <h2>{T("payment.tax")}</h2>
                 <h2>
-                  {Number((vat / 100) * (currency == "kr" ? 10 : 1)).toFixed(3)}{" "}
-                  {currency}
+                  {paperPrice2} {currency}
                 </h2>
               </div>
               <div className="paybox-div">
                 <h2>{T("payment.total")}</h2>
                 <h2>
-                  {Number((price / 100) * (currency == "kr" ? 10 : 1)).toFixed(
-                    3
-                  )}{" "}
-                  {currency}
+                  {paperPrice3} {currency}
                 </h2>
               </div>
             </div>
             <Row className="row-mt-20">
-              <h2>{T("payment.method")}</h2>
-              <Col className="col-4">
-                <img
-                  src={Stripe}
-                  width={100}
-                  height={100}
-                  alt="mastercard"
-                ></img>
-              </Col>
+              
               {/* <Col className="col-4">
                 <img src={Paypal} width={100} height={100} alt="Paypal"></img>
               </Col>
@@ -230,7 +262,7 @@ const PayBox: React.FC = () => {
                 <form
                   action={`${appUrl}/klarna_checkout?currency=${
                     currency == "kr" ? "SEK" : "EUR"
-                  }&price=${price * (currency == "kr" ? 10 : 1)}`}
+                  }&price=${price * (currency == "kr" ? 10 : 1)}&lang=${lang.replace('/','')}&orderid=${paymentId}`}
                   method="POST"
                 >
                   <button className="pay-btn">{T("payment.paywith")}</button>
@@ -238,7 +270,7 @@ const PayBox: React.FC = () => {
               </Col>
               <Col className="col-4">
                 or
-                <Link to="/shipping" className="back-link">
+                <Link to={lang + "/shipping"} className="back-link">
                   {" "}
                   {T("order.back")}{" "}
                 </Link>
@@ -596,6 +628,7 @@ const PayBox: React.FC = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

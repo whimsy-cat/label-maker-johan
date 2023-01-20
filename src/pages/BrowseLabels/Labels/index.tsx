@@ -14,6 +14,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { EffectCoverflow, Pagination } from "swiper";
+import { Helmet } from "react-helmet";
+
 
 const Labels = () => {
   const { T, update }: any = myStore();
@@ -21,9 +23,33 @@ const Labels = () => {
   const navigate = useNavigate();
   const handleImgClick = (index: any) => {
     update({ curLabel: index });
-    navigate("/edit");
+    if (G.lang === "en-US") 
+    { 
+      navigate("/en/edit");
+    }
+    if (G.lang === "sw-SW") {
+      navigate("/sv/edit");
+    }
+    if (G.lang === "es-ES") {
+      navigate("/es/edit");
+    }
   };
   return (
+    <>
+      <Helmet>
+        <title>
+          {T("title.browse")}
+        </title>
+        <meta name="title" content={T("title.browse")} />
+        <meta
+          name="description"
+          content={T("description.browse")}
+        />
+        <meta
+          name="keywords"
+          content={T("keyword.common")}
+        />
+      </Helmet>
     <div className="labels">
       <h1> {T("browselabels.header")}</h1>
       {/* <div className="label-swiper">
@@ -437,6 +463,7 @@ const Labels = () => {
         </Col>
       </Row>
     </div>
+    </>
   );
 };
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Container from "@mui/material/Container";
 
@@ -15,23 +15,55 @@ import useStore from "../../useStore";
 
 import { Helmet } from "react-helmet";
 
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+
 const About = () => {
   const { T, update } = useStore();
+  const [show, setShow] = useState(false);
+  const [mHeader, setMHeader] = useState<any>("Cookie Policy");
+  const [mContent, setMContent] = useState<any>("By clicking “Accept All Cookies”, you agree to the storing of cookies on your device to enhance site navigation, analyze site usage, and assist in our marketing efforts.");
+  const handleClose = () => setShow(false);
+  const handleShow = (str : any) => {
+    setShow(true)
+    
+  };
+  
+  
   return (
     <>
       <Helmet>
         <title>
-          Labels with printing. Design your own beer or wine labels.
+          {T("title.about")}
         </title>
+        <meta name="title" content={T("title.about")} />
         <meta
           name="description"
-          content="Create personalized beer labels for you or your company; for parties, weddings and more! Do you need stylish, self-designed brand with your own message. Our custom beer or wine labels are durable and waterproof."
+          content={T("description.about")}
         />
         <meta
           name="keywords"
-          content="beer label, wine label, cider label, jam label, create your own, order labels online, home brewer, label your beer batches, stickers, label, decal, wine labels, jam labels, word template, free shipping, brewed beer, custom labels"
+          content={T("keyword.common")}
         />
       </Helmet>
+      <div className="my-modal">
+        <Modal show={show} onHide={handleClose} size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+            {mHeader}
+          </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <p>
+              {mContent}
+            </p>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={handleClose}>Close</Button>
+          </Modal.Footer>
+        </Modal>
+      </div>
+      
       <div>
         <React.Fragment>
           <CssBaseline />
@@ -41,12 +73,20 @@ const About = () => {
               <h1>{T("about.header")}</h1>
               <Row className="about-row">
                 <Col className="col-xl-7 col-lg-7 col-md-12 col-sm-12 col-12">
-                  <Row>
                     <h2>{T("about.header2")}</h2>
-                  </Row>
-                  <Row>
-                    <h2>{T("about.content")}</h2>
-                  </Row>
+                    <p>{T("about.header3")}</p>
+                    <p>{T("about.content")}</p>
+                    <p>{T("about.name")}</p>
+                    <p>{T("about.addr1")}</p>
+                    <p>{T("about.addr2")}</p>
+                    <p>{T("about.addr3")}</p>
+                    <p>{T("about.phone")}</p>
+                    <p>{T("about.email")}</p>
+                    <div className="bottom-links">
+                      <div><button onClick={() => handleShow('terms')}>{T("about.terms")}</button></div>
+                      <div><button onClick={() => handleShow('terms')}>{T("about.cookie")}</button></div>
+                      <div><button onClick={() => handleShow('terms')}>{T("about.privacy")}</button></div>
+                    </div>
                 </Col>
                 <Col className="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12">
                   <Row>

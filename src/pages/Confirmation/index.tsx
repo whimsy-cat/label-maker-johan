@@ -8,13 +8,23 @@ import useStore from "../../useStore";
 
 const Confirmation = () => {
   const navigate = useNavigate();
+  const G: any = useStore();
   const { T } = useStore();
 
   const [seconds, setSeconds] = useState(5);
   useEffect(() => {
     // Wait for 3 seconds
     setTimeout(() => {
-      navigate("/edit");
+      if (G.lang === "en-US") 
+      { 
+        navigate("/en/edit");
+      }
+      if (G.lang === "sw-SW") {
+        navigate("/sv/edit");
+      }
+      if (G.lang === "es-ES") {
+        navigate("/es/edit");
+      }
     }, 5000);
   }, []);
 

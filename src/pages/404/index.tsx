@@ -20,11 +20,14 @@ const Error404 = () => {
   return (
     <>
       <Helmet>
-        <title>Page Not Found : Fixalabel</title>
-        <meta name="description" content="Page Not Found" />
+      <title>
+          {T("title.404")}
+        </title>
+        <meta name="title" content={T("title.404")} />
+
         <meta
           name="keywords"
-          content="beer label, wine label, cider label, jam label, create your own, order labels online, home brewer, label your beer batches, stickers, label, decal, wine labels, jam labels, word template, free shipping, brewed beer, custom labels"
+          content={T("keyword.common")}
         />
       </Helmet>
       <div>

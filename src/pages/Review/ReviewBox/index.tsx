@@ -6,7 +6,6 @@ import enLocale from "i18n-iso-countries/langs/en.json";
 import itLocal from "i18n-iso-countries/langs/it.json";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import myStore from "../../../useStore";
 import { useNavigate } from "react-router-dom";
 // import stylesheets
 import "./reviewbox.scss";
@@ -69,7 +68,7 @@ var sendPDF: any;
 
 const ReviewBox: React.FC = () => {
   const { T } = useStore();
-  const G: any = myStore();
+  const G: any = useStore();
   const printRef = React.useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   countries.registerLocale(enLocale);
@@ -113,7 +112,16 @@ const ReviewBox: React.FC = () => {
     handleDownloadPdf();
     sendEmail();
 
-    navigate("/confirmation");
+    if (G.lang === "en-US") 
+    { 
+      navigate("/en/confirmation");
+    }
+    if (G.lang === "sw-SW") {
+      navigate("/sv/confirmation");
+    }
+    if (G.lang === "es-ES") {
+      navigate("/es/confirmation");
+    }
   };
 
   const replaceSpace = (str: string) => {
@@ -150,15 +158,11 @@ const ReviewBox: React.FC = () => {
         G && G.cl
       )}&volumn=${replaceSpace(G && G.vol)}&date=${replaceSpace(
         G && G.batchDate
-      )}&color=${replaceSpace(G && G.color)}`,
+      )}&color=${replaceSpace(G && G.color)}&size=${G.size}`,
     };
-    console.log(data);
     try {
       const result = await axios.post(`${appUrl}/send-email`, data);
-      console.log("result : " + result);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   const handleDownloadPdf = async () => {
@@ -219,7 +223,7 @@ const ReviewBox: React.FC = () => {
       />
       <div className="container">
         <div className="row">
-          <div className="col-xl-5 col-lg-12 col-md-12 col-sm-12 col-xs-12 review-row">
+          <div className="col-xl-7 col-lg-12 col-md-12 col-sm-12 col-xs-12 review-row">
             <div className="step-div">
               <Steps />
             </div>
@@ -272,7 +276,7 @@ const ReviewBox: React.FC = () => {
             </div>
           </div>
 
-          <div className="col-xl-7 col-lg-12 col-md-12 col-sm-12 col-xs-12 review-right-div">
+          <div className="col-xl-5 col-lg-12 col-md-12 col-sm-12 col-xs-12 review-right-div">
             <div className="review-print" ref={printRef}>
               {G.curLabel === 0 ? (
                 <SBigLabel1

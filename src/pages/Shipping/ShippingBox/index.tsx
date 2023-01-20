@@ -55,6 +55,9 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // import SalesTax from "sales-tax";
 
+import { Helmet } from "react-helmet";
+
+
 const ShippingBox: React.FC = () => {
   const G: any = myStore();
   const { T, update }: any = myStore();
@@ -74,6 +77,7 @@ const ShippingBox: React.FC = () => {
   countries.registerLocale(itLocal);
 
   const countryObj = countries.getNames("en", { select: "official" });
+  const [lang, setLang] = useState("/en");
 
   const countryArr = Object.entries(countryObj).map(([key, value]) => {
     return {
@@ -146,7 +150,16 @@ const ShippingBox: React.FC = () => {
       country_code: selectedCountry,
       country: getName(selectedCountry),
     });
-    navigate("/payment");
+    if (G.lang === "en-US") 
+    { 
+      navigate("/en/payment");
+    }
+    if (G.lang === "sw-SW") {
+      navigate("/sv/payment");
+    }
+    if (G.lang === "es-ES") {
+      navigate("/es/payment");
+    }
   };
 
   useEffect(() => {
@@ -160,9 +173,29 @@ const ShippingBox: React.FC = () => {
     setState(G && G.state);
     setStreet(G && G.street);
     setZipcode(G && G.zipcode);
+    
+    if(G.lang == "en-US") setLang("/en");
+    else if(G.lang == "sw-SW") setLang("/sv");
+    else setLang("/es");
   }, []);
 
   return (
+    <>
+      <Helmet>
+        <title>
+          {T("title.about")}
+        </title>
+        <meta name="title" content={T("title.about")} />
+        <meta
+          name="description"
+          content={T("description.about")}
+        />
+        <meta
+          name="keywords"
+          content={T("keyword.common")}
+        />
+      </Helmet>
+    
     <div className="shippingbox">
       <ToastContainer
         position="top-right"
@@ -273,7 +306,7 @@ const ShippingBox: React.FC = () => {
               </Col>
               <Col className="col-4">
                 or
-                <Link to="/order" className="back-link">
+                <Link to={lang + "/order"} className="back-link">
                   {" "}
                   {T("order.back")}{" "}
                 </Link>
@@ -630,6 +663,7 @@ const ShippingBox: React.FC = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
