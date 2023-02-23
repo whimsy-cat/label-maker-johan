@@ -57,7 +57,8 @@ import FormData from "form-data";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-const appUrl = "https://stripe-server-johan-production.up.railway.app"; // process.env.REACT_APP_API_URL || "";
+import { getModalUtilityClass } from "@mui/material";
+const appUrl = "https://www.fixalabel.com/label-server"; //"https://stripe-server-johan-production.up.railway.app"; // process.env.REACT_APP_API_URL || ""; "http://localhost:8080";
 declare module "react-stripe-checkout" {
   interface StripeCheckoutProps {
     children?: React.ReactNode;
@@ -112,8 +113,7 @@ const ReviewBox: React.FC = () => {
     handleDownloadPdf();
     sendEmail();
 
-    if (G.lang === "en-US") 
-    { 
+    if (G.lang === "en-US") {
       navigate("/en/confirmation");
     }
     if (G.lang === "sw-SW") {
@@ -143,9 +143,12 @@ const ReviewBox: React.FC = () => {
       order_count: G.count,
       order_label: G.curLabel,
       order_size: G.size,
+      order_file: G.file,
     };
+
+    // file=${replaceSpace(G && G.file)}&
     const data = {
-      email: "order@fixalabel.com",
+      email: "tigerion.1993@gmail.com", //order@fixalabel.com
       // email1: "johan@fixalabel.com",
       // email2: "erik@fixalabel.com",
       subject: `New Order ${G && G.orderid}`,
@@ -158,11 +161,17 @@ const ReviewBox: React.FC = () => {
         G && G.cl
       )}&volumn=${replaceSpace(G && G.vol)}&date=${replaceSpace(
         G && G.batchDate
-      )}&color=${replaceSpace(G && G.color)}&size=${G.size}`,
+      )}&color=${replaceSpace(G && G.color)}&size=${G.size}&orderid=${
+        G && G.orderid
+      }`,
     };
     try {
+      console.log("Sending Email...");
       const result = await axios.post(`${appUrl}/send-email`, data);
-    } catch (error) {}
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleDownloadPdf = async () => {
@@ -180,30 +189,47 @@ const ReviewBox: React.FC = () => {
     const pdfWidth = pdf.internal.pageSize.getWidth();
     // const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width;
     const pdfHeight = pdf.internal.pageSize.getHeight();
-    if (G.curLabel !== 8) {
+    if (G.curLabel !== 14) {
       html2canvas(element, {
         scale: 5,
+        allowTaint: false,
+        useCORS: true,
       }).then(function (canvas) {
-        var data = canvas.toDataURL();
+        var data = canvas.toDataURL("image/png");
 
         pdf.addImage(data, "PNG", 0, 0, pdfWidth, pdfHeight);
-        pdf.save("label.pdf");
+        pdf.save(`${G.orderid}.pdf`);
+        // downloadURI("data:" + data, "yourImage.png");
       });
     } else {
+      var scale = 2;
       domtoimage
-        .toJpeg(element)
-        .then(function (dataUrl) {
-          // pdf.addImage(dataUrl, "PNG", 0, 0, pdfWidth, pdfHeight);
-          pdf.addImage(dataUrl, "PNG", 0, 0, 100, 100);
+        .toPng(element, {
+          width: element.clientWidth * scale,
+          height: element.clientHeight * scale,
+          style: {
+            transform: "scale(" + scale + ")",
+            transformOrigin: "top left",
+          },
+        })
+        .then((dataUrl) => {
+          pdf.addImage(dataUrl, "PNG", 0, 0, pdfWidth, pdfHeight);
+          // pdf.addImage(dataUrl, "PNG", 0, 0, 100, 100);
           var img = new Image();
           img.src = dataUrl;
-          document.body.appendChild(img);
-          pdf.save("label.pdf");
+          // document.body.appendChild(img);
+          pdf.save(`${G.orderid}.pdf`);
         })
         .catch(function (error) {
           console.error("oops, something went wrong!", error);
         });
     }
+  };
+  const downloadURI = (uri: any, name: any) => {
+    var link = document.createElement("a");
+    link.download = name;
+    link.href = uri;
+    link.click();
   };
 
   return (
@@ -287,7 +313,7 @@ const ReviewBox: React.FC = () => {
                   color={G && G.color}
                   batchDate={G && G.batchDate}
                   bottleType={G && G.bottleType}
-                  // file={file}
+                  file={G && G.file}
                 />
               ) : G.curLabel === 1 ? (
                 <BigLabel1
@@ -298,7 +324,7 @@ const ReviewBox: React.FC = () => {
                   color={G && G.color}
                   batchDate={G && G.batchDate}
                   bottleType={G && G.bottleType}
-                  // file={file}
+                  file={G && G.file}
                 />
               ) : G.curLabel === 2 ? (
                 <BigLabel2
@@ -309,7 +335,7 @@ const ReviewBox: React.FC = () => {
                   color={G && G.color}
                   batchDate={G && G.batchDate}
                   bottleType={G && G.bottleType}
-                  // file={file}
+                  file={G && G.file}
                 />
               ) : G.curLabel === 3 ? (
                 <BigLabel3
@@ -320,7 +346,7 @@ const ReviewBox: React.FC = () => {
                   color={G && G.color}
                   batchDate={G && G.batchDate}
                   bottleType={G && G.bottleType}
-                  // file={file}
+                  file={G && G.file}
                 />
               ) : G.curLabel === 4 ? (
                 <BigLabel4
@@ -331,7 +357,7 @@ const ReviewBox: React.FC = () => {
                   color={G && G.color}
                   batchDate={G && G.batchDate}
                   bottleType={G && G.bottleType}
-                  // file={file}
+                  file={G && G.file}
                 />
               ) : G.curLabel === 5 ? (
                 <BigLabel5
@@ -342,7 +368,7 @@ const ReviewBox: React.FC = () => {
                   color={G && G.color}
                   batchDate={G && G.batchDate}
                   bottleType={G && G.bottleType}
-                  // file={file}
+                  file={G && G.file}
                 />
               ) : G.curLabel === 6 ? (
                 <BigLabel6
@@ -353,7 +379,7 @@ const ReviewBox: React.FC = () => {
                   color={G && G.color}
                   batchDate={G && G.batchDate}
                   bottleType={G && G.bottleType}
-                  // file={file}
+                  file={G && G.file}
                 />
               ) : G.curLabel === 7 ? (
                 <BigLabel7
@@ -364,7 +390,7 @@ const ReviewBox: React.FC = () => {
                   color={G && G.color}
                   batchDate={G && G.batchDate}
                   bottleType={G && G.bottleType}
-                  // file={file}
+                  file={G && G.file}
                 />
               ) : G.curLabel === 8 ? (
                 <BigLabel8
@@ -386,7 +412,7 @@ const ReviewBox: React.FC = () => {
                   color={G && G.color}
                   batchDate={G && G.batchDate}
                   bottleType={G && G.bottleType}
-                  // file={file}
+                  file={G && G.file}
                 />
               ) : G.curLabel === 10 ? (
                 <BigLabel10
@@ -397,7 +423,7 @@ const ReviewBox: React.FC = () => {
                   color={G && G.color}
                   batchDate={G && G.batchDate}
                   bottleType={G && G.bottleType}
-                  // file={file}
+                  file={G && G.file}
                 />
               ) : G.curLabel === 11 ? (
                 <BigLabel11
@@ -408,7 +434,7 @@ const ReviewBox: React.FC = () => {
                   color={G && G.color}
                   batchDate={G && G.batchDate}
                   bottleType={G && G.bottleType}
-                  // file={file}
+                  file={G && G.file}
                 />
               ) : G.curLabel === 12 ? (
                 <BigLabel12
@@ -419,7 +445,7 @@ const ReviewBox: React.FC = () => {
                   color={G && G.color}
                   batchDate={G && G.batchDate}
                   bottleType={G && G.bottleType}
-                  // file={file}
+                  file={G && G.file}
                 />
               ) : G.curLabel === 13 ? (
                 <BigLabel13
@@ -430,7 +456,7 @@ const ReviewBox: React.FC = () => {
                   color={G && G.color}
                   batchDate={G && G.batchDate}
                   bottleType={G && G.bottleType}
-                  // file={file}
+                  file={G && G.file}
                 />
               ) : G.curLabel === 14 ? (
                 <BigLabel14
@@ -441,7 +467,7 @@ const ReviewBox: React.FC = () => {
                   color={G && G.color}
                   batchDate={G && G.batchDate}
                   bottleType={G && G.bottleType}
-                  // file={file}
+                  file={G && G.file}
                 />
               ) : G.curLabel === 15 ? (
                 <BigLabel15
@@ -452,7 +478,7 @@ const ReviewBox: React.FC = () => {
                   color={G && G.color}
                   batchDate={G && G.batchDate}
                   bottleType={G && G.bottleType}
-                  // file={file}
+                  file={G && G.file}
                 />
               ) : G.curLabel === 16 ? (
                 <BigLabel16
@@ -463,7 +489,7 @@ const ReviewBox: React.FC = () => {
                   color={G && G.color}
                   batchDate={G && G.batchDate}
                   bottleType={G && G.bottleType}
-                  // file={file}
+                  file={G && G.file}
                 />
               ) : G.curLabel === 17 ? (
                 <BigLabel17
@@ -474,7 +500,7 @@ const ReviewBox: React.FC = () => {
                   color={G && G.color}
                   batchDate={G && G.batchDate}
                   bottleType={G && G.bottleType}
-                  // file={file}
+                  file={G && G.file}
                 />
               ) : G.curLabel === 18 ? (
                 <BigLabel18
@@ -485,7 +511,7 @@ const ReviewBox: React.FC = () => {
                   color={G && G.color}
                   batchDate={G && G.batchDate}
                   bottleType={G && G.bottleType}
-                  // file={file}
+                  file={G && G.file}
                 />
               ) : G.curLabel === 19 ? (
                 <BigLabel19
@@ -496,7 +522,7 @@ const ReviewBox: React.FC = () => {
                   color={G && G.color}
                   batchDate={G && G.batchDate}
                   bottleType={G && G.bottleType}
-                  // file={file}
+                  file={G && G.file}
                 />
               ) : G.curLabel === 20 ? (
                 <BigLabel20
@@ -507,7 +533,7 @@ const ReviewBox: React.FC = () => {
                   color={G && G.color}
                   batchDate={G && G.batchDate}
                   bottleType={G && G.bottleType}
-                  // file={file}
+                  file={G && G.file}
                 />
               ) : G.curLabel === 21 ? (
                 <BigLabel21
@@ -518,7 +544,7 @@ const ReviewBox: React.FC = () => {
                   color={G && G.color}
                   batchDate={G && G.batchDate}
                   bottleType={G && G.bottleType}
-                  // file={file}
+                  file={G && G.file}
                 />
               ) : G.curLabel === 22 ? (
                 <BigLabel22
@@ -529,7 +555,7 @@ const ReviewBox: React.FC = () => {
                   color={G && G.color}
                   batchDate={G && G.batchDate}
                   bottleType={G && G.bottleType}
-                  // file={file}
+                  file={G && G.file}
                 />
               ) : G.curLabel === 23 ? (
                 <BigLabel23
@@ -540,7 +566,7 @@ const ReviewBox: React.FC = () => {
                   color={G && G.color}
                   batchDate={G && G.batchDate}
                   bottleType={G && G.bottleType}
-                  // file={file}
+                  file={G && G.file}
                 />
               ) : G.curLabel === 24 ? (
                 <BigLabel24
@@ -551,7 +577,7 @@ const ReviewBox: React.FC = () => {
                   color={G && G.color}
                   batchDate={G && G.batchDate}
                   bottleType={G && G.bottleType}
-                  // file={file}
+                  file={G && G.file}
                 />
               ) : G.curLabel === 25 ? (
                 <BigLabel25
@@ -562,7 +588,7 @@ const ReviewBox: React.FC = () => {
                   color={G && G.color}
                   batchDate={G && G.batchDate}
                   bottleType={G && G.bottleType}
-                  // file={file}
+                  file={G && G.file}
                 />
               ) : G.curLabel === 26 ? (
                 <BigLabel26
@@ -573,7 +599,7 @@ const ReviewBox: React.FC = () => {
                   color={G && G.color}
                   batchDate={G && G.batchDate}
                   bottleType={G && G.bottleType}
-                  // file={file}
+                  file={G && G.file}
                 />
               ) : G.curLabel === 27 ? (
                 <BigLabel27
@@ -584,7 +610,7 @@ const ReviewBox: React.FC = () => {
                   color={G && G.color}
                   batchDate={G && G.batchDate}
                   bottleType={G && G.bottleType}
-                  // file={file}
+                  file={G && G.file}
                 />
               ) : G.curLabel === 28 ? (
                 <BigLabel28
@@ -595,7 +621,7 @@ const ReviewBox: React.FC = () => {
                   color={G && G.color}
                   batchDate={G && G.batchDate}
                   bottleType={G && G.bottleType}
-                  // file={file}
+                  file={G && G.file}
                 />
               ) : G.curLabel === 29 ? (
                 <BigLabel29
@@ -606,7 +632,7 @@ const ReviewBox: React.FC = () => {
                   color={G && G.color}
                   batchDate={G && G.batchDate}
                   bottleType={G && G.bottleType}
-                  // file={file}
+                  file={G && G.file}
                 />
               ) : (
                 <BigLabel30
@@ -617,7 +643,7 @@ const ReviewBox: React.FC = () => {
                   color={G && G.color}
                   batchDate={G && G.batchDate}
                   bottleType={G && G.bottleType}
-                  // file={file}
+                  file={G && G.file}
                 />
               )}
             </div>

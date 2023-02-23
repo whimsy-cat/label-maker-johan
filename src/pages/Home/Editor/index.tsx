@@ -9,7 +9,7 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControl from "@mui/material/FormControl";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import { DatePicker } from "antd";
-import Img from "../../../assets/images/img1.webp";
+import Img from "../../../assets/images/img1.svg";
 
 import Button from "@mui/material/Button";
 import WestIcon from "@mui/icons-material/West";
@@ -23,8 +23,6 @@ import SLabel1 from "../../../components/Label/SLabel1";
 
 // import images
 import myStore from "../../../useStore";
-
-// import Img from "../../../assets/images/img1.webp";
 
 import Label1 from "../../../components/Label/Label1";
 import Label2 from "../../../components/Label/Label2";
@@ -106,10 +104,11 @@ import axios from "axios";
 
 import { Helmet } from "react-helmet";
 
-const appUrl = "https://stripe-server-johan-production.up.railway.app"; // process.env.REACT_APP_API_URL || ""; "http://localhost:8080";
+const appUrl = "https://www.fixalabel.com/label-server"; //"https://stripe-server-johan-production.up.railway.app"; // process.env.REACT_APP_API_URL || ""; "http://localhost:8080";
 
 export interface SimpleDialogProps {
   open: boolean;
+  file?: string;
   selectedValue: string;
   onClose: (value: string) => void;
 }
@@ -123,7 +122,6 @@ function SimpleDialog(props: SimpleDialogProps) {
   };
 
   return (
-    
     <Dialog onClose={handleClose} open={open}>
       <div className="height-380">
         {G.curLabel === 0 ? (
@@ -135,7 +133,7 @@ function SimpleDialog(props: SimpleDialogProps) {
             color={G && G.color}
             batchDate={G && G.batchDate}
             bottleType={G && G.bottleType}
-            // file={file}
+            file={props.file}
           />
         ) : G.curLabel === 1 ? (
           <BigLabel1
@@ -146,7 +144,7 @@ function SimpleDialog(props: SimpleDialogProps) {
             color={G && G.color}
             batchDate={G && G.batchDate}
             bottleType={G && G.bottleType}
-            // file={file}
+            file={props.file}
           />
         ) : G.curLabel === 2 ? (
           <BigLabel2
@@ -157,7 +155,7 @@ function SimpleDialog(props: SimpleDialogProps) {
             color={G && G.color}
             batchDate={G && G.batchDate}
             bottleType={G && G.bottleType}
-            // file={file}
+            file={props.file}
           />
         ) : G.curLabel === 3 ? (
           <BigLabel3
@@ -168,7 +166,7 @@ function SimpleDialog(props: SimpleDialogProps) {
             color={G && G.color}
             batchDate={G && G.batchDate}
             bottleType={G && G.bottleType}
-            // file={file}
+            file={props.file}
           />
         ) : G.curLabel === 4 ? (
           <BigLabel4
@@ -179,7 +177,7 @@ function SimpleDialog(props: SimpleDialogProps) {
             color={G && G.color}
             batchDate={G && G.batchDate}
             bottleType={G && G.bottleType}
-            // file={file}
+            file={props.file}
           />
         ) : G.curLabel === 5 ? (
           <BigLabel5
@@ -190,7 +188,7 @@ function SimpleDialog(props: SimpleDialogProps) {
             color={G && G.color}
             batchDate={G && G.batchDate}
             bottleType={G && G.bottleType}
-            // file={file}
+            file={props.file}
           />
         ) : G.curLabel === 6 ? (
           <BigLabel6
@@ -201,7 +199,7 @@ function SimpleDialog(props: SimpleDialogProps) {
             color={G && G.color}
             batchDate={G && G.batchDate}
             bottleType={G && G.bottleType}
-            // file={file}
+            file={props.file}
           />
         ) : G.curLabel === 7 ? (
           <BigLabel7
@@ -212,7 +210,7 @@ function SimpleDialog(props: SimpleDialogProps) {
             color={G && G.color}
             batchDate={G && G.batchDate}
             bottleType={G && G.bottleType}
-            // file={file}
+            file={props.file}
           />
         ) : G.curLabel === 8 ? (
           <BigLabel8
@@ -223,7 +221,7 @@ function SimpleDialog(props: SimpleDialogProps) {
             color={G && G.color}
             batchDate={G && G.batchDate}
             bottleType={G && G.bottleType}
-            file={G && G.file}
+            file={props.file}
           />
         ) : G.curLabel === 9 ? (
           <BigLabel9
@@ -234,7 +232,7 @@ function SimpleDialog(props: SimpleDialogProps) {
             color={G && G.color}
             batchDate={G && G.batchDate}
             bottleType={G && G.bottleType}
-            // file={file}
+            file={props.file}
           />
         ) : G.curLabel === 10 ? (
           <BigLabel10
@@ -245,7 +243,7 @@ function SimpleDialog(props: SimpleDialogProps) {
             color={G && G.color}
             batchDate={G && G.batchDate}
             bottleType={G && G.bottleType}
-            // file={file}
+            file={props.file}
           />
         ) : G.curLabel === 11 ? (
           <BigLabel11
@@ -256,7 +254,7 @@ function SimpleDialog(props: SimpleDialogProps) {
             color={G && G.color}
             batchDate={G && G.batchDate}
             bottleType={G && G.bottleType}
-            // file={file}
+            file={props.file}
           />
         ) : G.curLabel === 12 ? (
           <BigLabel12
@@ -267,7 +265,7 @@ function SimpleDialog(props: SimpleDialogProps) {
             color={G && G.color}
             batchDate={G && G.batchDate}
             bottleType={G && G.bottleType}
-            // file={file}
+            file={props.file}
           />
         ) : G.curLabel === 13 ? (
           <BigLabel13
@@ -278,7 +276,7 @@ function SimpleDialog(props: SimpleDialogProps) {
             color={G && G.color}
             batchDate={G && G.batchDate}
             bottleType={G && G.bottleType}
-            // file={file}
+            file={props.file}
           />
         ) : G.curLabel === 14 ? (
           <BigLabel14
@@ -289,7 +287,7 @@ function SimpleDialog(props: SimpleDialogProps) {
             color={G && G.color}
             batchDate={G && G.batchDate}
             bottleType={G && G.bottleType}
-            // file={file}
+            file={props.file}
           />
         ) : G.curLabel === 15 ? (
           <BigLabel15
@@ -300,7 +298,7 @@ function SimpleDialog(props: SimpleDialogProps) {
             color={G && G.color}
             batchDate={G && G.batchDate}
             bottleType={G && G.bottleType}
-            // file={file}
+            file={props.file}
           />
         ) : G.curLabel === 16 ? (
           <BigLabel16
@@ -311,7 +309,7 @@ function SimpleDialog(props: SimpleDialogProps) {
             color={G && G.color}
             batchDate={G && G.batchDate}
             bottleType={G && G.bottleType}
-            // file={file}
+            file={props.file}
           />
         ) : G.curLabel === 17 ? (
           <BigLabel17
@@ -322,7 +320,7 @@ function SimpleDialog(props: SimpleDialogProps) {
             color={G && G.color}
             batchDate={G && G.batchDate}
             bottleType={G && G.bottleType}
-            // file={file}
+            file={props.file}
           />
         ) : G.curLabel === 18 ? (
           <BigLabel18
@@ -333,7 +331,7 @@ function SimpleDialog(props: SimpleDialogProps) {
             color={G && G.color}
             batchDate={G && G.batchDate}
             bottleType={G && G.bottleType}
-            // file={file}
+            file={props.file}
           />
         ) : G.curLabel === 19 ? (
           <BigLabel19
@@ -344,7 +342,7 @@ function SimpleDialog(props: SimpleDialogProps) {
             color={G && G.color}
             batchDate={G && G.batchDate}
             bottleType={G && G.bottleType}
-            // file={file}
+            file={props.file}
           />
         ) : G.curLabel === 20 ? (
           <BigLabel20
@@ -355,7 +353,7 @@ function SimpleDialog(props: SimpleDialogProps) {
             color={G && G.color}
             batchDate={G && G.batchDate}
             bottleType={G && G.bottleType}
-            // file={file}
+            file={props.file}
           />
         ) : G.curLabel === 21 ? (
           <BigLabel21
@@ -366,7 +364,7 @@ function SimpleDialog(props: SimpleDialogProps) {
             color={G && G.color}
             batchDate={G && G.batchDate}
             bottleType={G && G.bottleType}
-            // file={file}
+            file={props.file}
           />
         ) : G.curLabel === 22 ? (
           <BigLabel22
@@ -377,7 +375,7 @@ function SimpleDialog(props: SimpleDialogProps) {
             color={G && G.color}
             batchDate={G && G.batchDate}
             bottleType={G && G.bottleType}
-            // file={file}
+            file={props.file}
           />
         ) : G.curLabel === 23 ? (
           <BigLabel23
@@ -388,7 +386,7 @@ function SimpleDialog(props: SimpleDialogProps) {
             color={G && G.color}
             batchDate={G && G.batchDate}
             bottleType={G && G.bottleType}
-            // file={file}
+            file={props.file}
           />
         ) : G.curLabel === 24 ? (
           <BigLabel24
@@ -399,7 +397,7 @@ function SimpleDialog(props: SimpleDialogProps) {
             color={G && G.color}
             batchDate={G && G.batchDate}
             bottleType={G && G.bottleType}
-            // file={file}
+            file={props.file}
           />
         ) : G.curLabel === 25 ? (
           <BigLabel25
@@ -410,7 +408,7 @@ function SimpleDialog(props: SimpleDialogProps) {
             color={G && G.color}
             batchDate={G && G.batchDate}
             bottleType={G && G.bottleType}
-            // file={file}
+            file={props.file}
           />
         ) : G.curLabel === 26 ? (
           <BigLabel26
@@ -421,7 +419,7 @@ function SimpleDialog(props: SimpleDialogProps) {
             color={G && G.color}
             batchDate={G && G.batchDate}
             bottleType={G && G.bottleType}
-            // file={file}
+            file={props.file}
           />
         ) : G.curLabel === 27 ? (
           <BigLabel27
@@ -432,7 +430,7 @@ function SimpleDialog(props: SimpleDialogProps) {
             color={G && G.color}
             batchDate={G && G.batchDate}
             bottleType={G && G.bottleType}
-            // file={file}
+            file={props.file}
           />
         ) : G.curLabel === 28 ? (
           <BigLabel28
@@ -443,7 +441,7 @@ function SimpleDialog(props: SimpleDialogProps) {
             color={G && G.color}
             batchDate={G && G.batchDate}
             bottleType={G && G.bottleType}
-            // file={file}
+            file={props.file}
           />
         ) : G.curLabel === 29 ? (
           <BigLabel29
@@ -454,7 +452,7 @@ function SimpleDialog(props: SimpleDialogProps) {
             color={G && G.color}
             batchDate={G && G.batchDate}
             bottleType={G && G.bottleType}
-            // file={file}
+            file={props.file}
           />
         ) : (
           <BigLabel30
@@ -465,7 +463,7 @@ function SimpleDialog(props: SimpleDialogProps) {
             color={G && G.color}
             batchDate={G && G.batchDate}
             bottleType={G && G.bottleType}
-            // file={file}
+            file={props.file}
           />
         )}
       </div>
@@ -487,7 +485,7 @@ const Editor = () => {
   const [tagLine, setTagLine] = useState("");
   const [batchDate, setBatchDate] = useState<string>("2022-12-12");
   const printRef = React.useRef<HTMLDivElement>(null);
-  const [file, setFile] = useState(Img);
+  const [file, setFile] = useState<any>();
   const [popularColors, setPopularColors] = useState([
     "#f44336",
     "#e91e63",
@@ -510,7 +508,7 @@ const Editor = () => {
   const [rate, setRate] = useState(0.2);
   const [price, setPrice]: any = useState(100.0);
 
-  const blackLabels = [14, 20, 23];
+  const blackLabels = [35]; //14, 20, 23
 
   useEffect(() => {
     setColor(G && G.color);
@@ -528,10 +526,11 @@ const Editor = () => {
     if (G.lang == "sw-SW") update({ currency: "SEK" });
     else update({ currency: "EUR" });
 
-    const chat_lang = G.lang == "en-US" ? "en" : G.lang == "sw-SW" ? "sv" : "es";
+    const chat_lang =
+      G.lang == "en-US" ? "en" : G.lang == "sw-SW" ? "sv" : "es";
     const script = document.createElement("script");
-    
-    script.type = 'text/javascript';
+
+    script.type = "text/javascript";
     script.async = true;
     script.innerHTML = `CRISP_RUNTIME_CONFIG = {locale : '${chat_lang}'}; window.$crisp = [];
     window.CRISP_WEBSITE_ID = "ea46d69f-d028-44ab-ad10-ce0ded68092b";
@@ -652,8 +651,19 @@ const Editor = () => {
 
   const handleChange = (e: any) => {
     const imageUrl: any = URL.createObjectURL(e.target.files[0]);
-    setFile(imageUrl);
-    update({ file: imageUrl, curImageX: 0, curImageY: 0 });
+    const file = e.target.files[0];
+
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+      // console.log(reader.result);
+      update({ file: reader.result, curImageX: 0, curImageY: 0 });
+      setFile(reader.result);
+    };
+
+    reader.onerror = function () {
+      // console.log(reader.error);
+    };
   };
 
   const toOrderPage = () => {
@@ -667,8 +677,7 @@ const Editor = () => {
       color: color,
       file: file,
     });
-    if (G.lang === "en-US") 
-    { 
+    if (G.lang === "en-US") {
       navigate("/en/order");
     }
     if (G.lang === "sw-SW") {
@@ -708,50 +717,43 @@ const Editor = () => {
   return (
     <>
       <Helmet>
-        <title>
-          {T("title.edit")}
-        </title>
+        <title>{T("title.edit")}</title>
         <meta name="title" content={T("title.edit")} />
-        <meta
-          name="description"
-          content={T("description.edit")}
-        />
-        <meta
-          name="keywords"
-          content={T("keyword.common")}
-        />
+        <meta name="description" content={T("description.edit")} />
+        <meta name="keywords" content={T("keyword.common")} />
       </Helmet>
-    <div className="editor">
-      <SimpleDialog
-        selectedValue={selectedValue}
-        open={open}
-        onClose={handleClose}
-      />
-      <div className="container">
-        <div className="row">
-          <div className="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-xs-12 edit-div">
-            <h1 className="gradient-h1">{T("home.header")}</h1>
-            <h2>{T("home.content")}</h2>
-            <Row className="row-mt-20">
-              <h3>{T("home.side")}</h3>
-              <FormControl>
-                <RadioGroup
-                  row
-                  aria-labelledby="demo-row-radio-buttons-group-label"
-                  name="row-radio-buttons-group"
-                  sx={{ marginLeft: "10px" }}
-                >
-                  <Radio
-                    {...controlProps("a")}
-                    sx={{
-                      color: "#FEA150",
-                      "&.Mui-checked": {
-                        color: "#EE9140",
-                      },
-                    }}
-                  />
-                  <p className="edit-text">{T("home.front")}</p>
-                  {/* <Radio
+      <div className="editor">
+        <SimpleDialog
+          selectedValue={selectedValue}
+          open={open}
+          file={file}
+          onClose={handleClose}
+        />
+        <div className="container">
+          <div className="row">
+            <div className="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-xs-12 edit-div">
+              <h1 className="gradient-h1">{T("home.header")}</h1>
+              <h2>{T("home.content")}</h2>
+              <Row className="row-mt-20">
+                <h3>{T("home.side")}</h3>
+                <FormControl>
+                  <RadioGroup
+                    row
+                    aria-labelledby="demo-row-radio-buttons-group-label"
+                    name="row-radio-buttons-group"
+                    sx={{ marginLeft: "10px" }}
+                  >
+                    <Radio
+                      {...controlProps("a")}
+                      sx={{
+                        color: "#FEA150",
+                        "&.Mui-checked": {
+                          color: "#EE9140",
+                        },
+                      }}
+                    />
+                    <p className="edit-text">{T("home.front")}</p>
+                    {/* <Radio
                     {...controlProps("b")}
                     sx={{
                       color: "#FEA150",
@@ -769,487 +771,489 @@ const Editor = () => {
                   >
                     {T("home.back")}
                   </p> */}
-                </RadioGroup>
-              </FormControl>
-            </Row>
-            <Row className="row-mt-20">
-              <Col className="col-6">
-                <h3>{T("home.bottlename")}</h3>
-                <input
-                  type="text"
-                  onChange={updateBottleName}
-                  value={bottleName}
-                />
-              </Col>
-              <Col className="col-6">
-                <h3>{T("home.bottletype")}</h3>
-                <input
-                  type="text"
-                  name="site_name"
-                  value={bottleType}
-                  onChange={updateBottleType}
-                />
-              </Col>
-            </Row>
+                  </RadioGroup>
+                </FormControl>
+              </Row>
+              <Row className="row-mt-20">
+                <Col className="col-6">
+                  <h3>{T("home.bottlename")}</h3>
+                  <input
+                    type="text"
+                    onChange={updateBottleName}
+                    value={bottleName}
+                  />
+                </Col>
+                <Col className="col-6">
+                  <h3>{T("home.bottletype")}</h3>
+                  <input
+                    type="text"
+                    name="site_name"
+                    value={bottleType}
+                    onChange={updateBottleType}
+                  />
+                </Col>
+              </Row>
 
-            <Row className="row-mt-20">
-              <Col className="col-12">
-                <h3>{T("home.tagline")}</h3>
-                <input type="text" onChange={updateTagLine} value={tagLine} />
-              </Col>
-            </Row>
+              <Row className="row-mt-20">
+                <Col className="col-12">
+                  <h3>{T("home.tagline")}</h3>
+                  <input type="text" onChange={updateTagLine} value={tagLine} />
+                </Col>
+              </Row>
 
-            <Row className="row-mt-20">
-              <Col className="col-3">
-                <h3>{T("home.acl")}</h3>
-                <input type="text" value={vol} onChange={updateVol} />
-              </Col>
-              <Col className="col-3">
-                <h3>{T("home.vol")}</h3>
-                <input type="text" value={cl} onChange={updateCl} />
-              </Col>
-              <Col className="col-6">
-                <h3>{T("home.date")}</h3>
-                <DatePicker
-                  bordered={false}
-                  onChange={(e) => setDate(String(e?.format("YYYY/MM/DD")))}
-                />
-              </Col>
-            </Row>
+              <Row className="row-mt-20">
+                <Col className="col-3">
+                  <h3>{T("home.acl")}</h3>
+                  <input type="text" value={vol} onChange={updateVol} />
+                </Col>
+                <Col className="col-3">
+                  <h3>{T("home.vol")}</h3>
+                  <input type="text" value={cl} onChange={updateCl} />
+                </Col>
+                <Col className="col-6">
+                  <h3>{T("home.date")}</h3>
+                  <DatePicker
+                    bordered={false}
+                    onChange={(e) => setDate(String(e?.format("YYYY/MM/DD")))}
+                  />
+                </Col>
+              </Row>
 
-            <Row className="row-mt-20">
-              <h3>{T("home.color")}</h3>
-              <div className="color-box">
-                <CirclePicker
-                  width="100%"
-                  circleSize={14}
-                  colors={[
-                    "#f44336",
-                    "#e91e63",
-                    "#673ab7",
-                    "#3f51b5",
-                    "#03a9f4",
-                    "#00bcd4",
-                    "#009688",
-                    "#8bc34a",
-                    "#cddc39",
-                    "#ffeb3b",
-                    "#ffc107",
-                    "#ff9800",
-                    "#232323",
-                  ]}
-                  onChange={onColorChange}
-                />
-                <button className="color-picker-btn">
-                  {/* <SettingsOutlinedIcon
+              <Row className="row-mt-20">
+                <h3>{T("home.color")}</h3>
+                <div className="color-box">
+                  <CirclePicker
+                    width="100%"
+                    circleSize={14}
+                    colors={[
+                      "#f44336",
+                      "#e91e63",
+                      "#673ab7",
+                      "#3f51b5",
+                      "#03a9f4",
+                      "#00bcd4",
+                      "#009688",
+                      "#8bc34a",
+                      "#cddc39",
+                      "#ffeb3b",
+                      "#ffc107",
+                      "#ff9800",
+                      "#232323",
+                    ]}
+                    onChange={onColorChange}
+                  />
+                  <button className="color-picker-btn">
+                    {/* <SettingsOutlinedIcon
                     sx={{ fontSize: "18px", color: "#354832" }}
                   ></SettingsOutlinedIcon> */}
-                  <input
-                    type="color"
-                    value={color}
-                    onChange={(e) => setNewColor(e.target.value)}
-                    className="color-picker-input"
-                  ></input>{" "}
-                </button>
-              </div>
-            </Row>
-            <Row>
-              <Col className="col-6">
-                <button className="buy-sticker-btn" onClick={toOrderPage}>
-                  {T("home.button")}
-                </button>
-              </Col>
-
-              <Col className="col-6"></Col>
-            </Row>
-          </div>
-          <div className="col-xl-8 col-lg-12 col-md-12 col-sm-12 col-xs-12 edit-left">
-            <div className="col-4 edit-1">
-              <div className="height-60"></div>
-              <button className="left-arrow-btn" onClick={leftLabel}>
-                <WestIcon />
-              </button>
-            </div>
-            <div className="col-4 bottle-div">
-              <div className="bottle">
-                <div className="height-55">
-                  <button className="zoom-btn" onClick={zoomIn}>
-                    <ZoomInIcon />
+                    <input
+                      type="color"
+                      value={color}
+                      onChange={(e) => setNewColor(e.target.value)}
+                      className="color-picker-input"
+                    ></input>{" "}
                   </button>
                 </div>
-                <div ref={printRef} className="height-150">
-                  {G.curLabel === 0 ? (
-                    <SLabel1
-                      bottleName={bottleName}
-                      vol={vol}
-                      cl={cl}
-                      tagLine={tagLine}
-                      color={color}
-                      batchDate={batchDate}
-                      bottleType={bottleType}
-                      // file={file}
-                    />
-                  ) : G.curLabel === 1 ? (
-                    <Label1
-                      bottleName={bottleName}
-                      vol={vol}
-                      cl={cl}
-                      tagLine={tagLine}
-                      color={color}
-                      batchDate={batchDate}
-                      bottleType={bottleType}
-                      // file={file}
-                    />
-                  ) : G.curLabel === 2 ? (
-                    <Label2
-                      bottleName={bottleName}
-                      vol={vol}
-                      cl={cl}
-                      tagLine={tagLine}
-                      color={color}
-                      batchDate={batchDate}
-                      bottleType={bottleType}
-                      // file={file}
-                    />
-                  ) : G.curLabel === 3 ? (
-                    <Label3
-                      bottleName={bottleName}
-                      vol={vol}
-                      cl={cl}
-                      tagLine={tagLine}
-                      color={color}
-                      batchDate={batchDate}
-                      bottleType={bottleType}
-                      file={file}
-                    />
-                  ) : G.curLabel === 4 ? (
-                    <Label4
-                      bottleName={bottleName}
-                      vol={vol}
-                      cl={cl}
-                      tagLine={tagLine}
-                      color={color}
-                      batchDate={batchDate}
-                      bottleType={bottleType}
-                      file={file}
-                    />
-                  ) : G.curLabel === 5 ? (
-                    <Label5
-                      bottleName={bottleName}
-                      vol={vol}
-                      cl={cl}
-                      tagLine={tagLine}
-                      color={color}
-                      batchDate={batchDate}
-                      bottleType={bottleType}
-                      file={file}
-                    />
-                  ) : G.curLabel === 6 ? (
-                    <Label6
-                      bottleName={bottleName}
-                      vol={vol}
-                      cl={cl}
-                      tagLine={tagLine}
-                      color={color}
-                      batchDate={batchDate}
-                      bottleType={bottleType}
-                      file={file}
-                    />
-                  ) : G.curLabel === 7 ? (
-                    <Label7
-                      bottleName={bottleName}
-                      vol={vol}
-                      cl={cl}
-                      tagLine={tagLine}
-                      color={color}
-                      batchDate={batchDate}
-                      bottleType={bottleType}
-                      file={file}
-                    />
-                  ) : G.curLabel === 8 ? (
-                    <Label8
-                      bottleName={bottleName}
-                      vol={vol}
-                      cl={cl}
-                      tagLine={tagLine}
-                      color={color}
-                      batchDate={batchDate}
-                      bottleType={bottleType}
-                      file={file}
-                    />
-                  ) : G.curLabel === 9 ? (
-                    <Label9
-                      bottleName={bottleName}
-                      vol={vol}
-                      cl={cl}
-                      tagLine={tagLine}
-                      color={color}
-                      batchDate={batchDate}
-                      bottleType={bottleType}
-                      file={file}
-                    />
-                  ) : G.curLabel === 10 ? (
-                    <Label10
-                      bottleName={bottleName}
-                      vol={vol}
-                      cl={cl}
-                      tagLine={tagLine}
-                      color={color}
-                      batchDate={batchDate}
-                      bottleType={bottleType}
-                      file={file}
-                    />
-                  ) : G.curLabel === 11 ? (
-                    <Label11
-                      bottleName={bottleName}
-                      vol={vol}
-                      cl={cl}
-                      tagLine={tagLine}
-                      color={color}
-                      batchDate={batchDate}
-                      bottleType={bottleType}
-                      file={file}
-                    />
-                  ) : G.curLabel === 12 ? (
-                    <Label12
-                      bottleName={bottleName}
-                      vol={vol}
-                      cl={cl}
-                      tagLine={tagLine}
-                      color={color}
-                      batchDate={batchDate}
-                      bottleType={bottleType}
-                      file={file}
-                    />
-                  ) : G.curLabel === 13 ? (
-                    <Label13
-                      bottleName={bottleName}
-                      vol={vol}
-                      cl={cl}
-                      tagLine={tagLine}
-                      color={color}
-                      batchDate={batchDate}
-                      bottleType={bottleType}
-                      file={file}
-                    />
-                  ) : G.curLabel === 14 ? (
-                    <Label14
-                      bottleName={bottleName}
-                      vol={vol}
-                      cl={cl}
-                      tagLine={tagLine}
-                      color={color}
-                      batchDate={batchDate}
-                      bottleType={bottleType}
-                      file={file}
-                    />
-                  ) : G.curLabel === 15 ? (
-                    <Label15
-                      bottleName={bottleName}
-                      vol={vol}
-                      cl={cl}
-                      tagLine={tagLine}
-                      color={color}
-                      batchDate={batchDate}
-                      bottleType={bottleType}
-                      file={file}
-                    />
-                  ) : G.curLabel === 16 ? (
-                    <Label16
-                      bottleName={bottleName}
-                      vol={vol}
-                      cl={cl}
-                      tagLine={tagLine}
-                      color={color}
-                      batchDate={batchDate}
-                      bottleType={bottleType}
-                      file={file}
-                    />
-                  ) : G.curLabel === 17 ? (
-                    <Label17
-                      bottleName={bottleName}
-                      vol={vol}
-                      cl={cl}
-                      tagLine={tagLine}
-                      color={color}
-                      batchDate={batchDate}
-                      bottleType={bottleType}
-                      file={file}
-                    />
-                  ) : G.curLabel === 18 ? (
-                    <Label18
-                      bottleName={bottleName}
-                      vol={vol}
-                      cl={cl}
-                      tagLine={tagLine}
-                      color={color}
-                      batchDate={batchDate}
-                      bottleType={bottleType}
-                      file={file}
-                    />
-                  ) : G.curLabel === 19 ? (
-                    <Label19
-                      bottleName={bottleName}
-                      vol={vol}
-                      cl={cl}
-                      tagLine={tagLine}
-                      color={color}
-                      batchDate={batchDate}
-                      bottleType={bottleType}
-                      file={file}
-                    />
-                  ) : G.curLabel === 20 ? (
-                    <Label20
-                      bottleName={bottleName}
-                      vol={vol}
-                      cl={cl}
-                      tagLine={tagLine}
-                      color={color}
-                      batchDate={batchDate}
-                      bottleType={bottleType}
-                      file={file}
-                    />
-                  ) : G.curLabel === 21 ? (
-                    <Label21
-                      bottleName={bottleName}
-                      vol={vol}
-                      cl={cl}
-                      tagLine={tagLine}
-                      color={color}
-                      batchDate={batchDate}
-                      bottleType={bottleType}
-                      file={file}
-                    />
-                  ) : G.curLabel === 22 ? (
-                    <Label22
-                      bottleName={bottleName}
-                      vol={vol}
-                      cl={cl}
-                      tagLine={tagLine}
-                      color={color}
-                      batchDate={batchDate}
-                      bottleType={bottleType}
-                      file={file}
-                    />
-                  ) : G.curLabel === 23 ? (
-                    <Label23
-                      bottleName={bottleName}
-                      vol={vol}
-                      cl={cl}
-                      tagLine={tagLine}
-                      color={color}
-                      batchDate={batchDate}
-                      bottleType={bottleType}
-                      file={file}
-                    />
-                  ) : G.curLabel === 24 ? (
-                    <Label24
-                      bottleName={bottleName}
-                      vol={vol}
-                      cl={cl}
-                      tagLine={tagLine}
-                      color={color}
-                      batchDate={batchDate}
-                      bottleType={bottleType}
-                      file={file}
-                    />
-                  ) : G.curLabel === 25 ? (
-                    <Label25
-                      bottleName={bottleName}
-                      vol={vol}
-                      cl={cl}
-                      tagLine={tagLine}
-                      color={color}
-                      batchDate={batchDate}
-                      bottleType={bottleType}
-                      file={file}
-                    />
-                  ) : G.curLabel === 26 ? (
-                    <Label26
-                      bottleName={bottleName}
-                      vol={vol}
-                      cl={cl}
-                      tagLine={tagLine}
-                      color={color}
-                      batchDate={batchDate}
-                      bottleType={bottleType}
-                      file={file}
-                    />
-                  ) : G.curLabel === 27 ? (
-                    <Label27
-                      bottleName={bottleName}
-                      vol={vol}
-                      cl={cl}
-                      tagLine={tagLine}
-                      color={color}
-                      batchDate={batchDate}
-                      bottleType={bottleType}
-                      file={file}
-                    />
-                  ) : G.curLabel === 28 ? (
-                    <Label28
-                      bottleName={bottleName}
-                      vol={vol}
-                      cl={cl}
-                      tagLine={tagLine}
-                      color={color}
-                      batchDate={batchDate}
-                      bottleType={bottleType}
-                      file={file}
-                    />
-                  ) : G.curLabel === 29 ? (
-                    <Label29
-                      bottleName={bottleName}
-                      vol={vol}
-                      cl={cl}
-                      tagLine={tagLine}
-                      color={color}
-                      batchDate={batchDate}
-                      bottleType={bottleType}
-                      file={file}
-                    />
-                  ) : (
-                    <Label30
-                      bottleName={bottleName}
-                      vol={vol}
-                      cl={cl}
-                      tagLine={tagLine}
-                      color={color}
-                      batchDate={batchDate}
-                      bottleType={bottleType}
-                      file={file}
-                    />
-                  )}
-                </div>
-                <div className="overlay"></div>
-              </div>
-              {G.curLabel === 31 && (
-                <Button
-                  variant="contained"
-                  component="label"
-                  className="upload-btn"
-                >
-                  {T("home.upload")}
-                  <input
-                    hidden
-                    accept="image/*"
-                    type="file"
-                    onChange={handleChange}
-                  />
-                </Button>
-              )}
-            </div>
-            <div className="col-4 edit-right">
-              <div className="height-60"></div>
+              </Row>
+              <Row>
+                <Col className="col-6">
+                  <button className="buy-sticker-btn" onClick={toOrderPage}>
+                    {T("home.button")}
+                  </button>
+                </Col>
 
-              <button className="right-arrow-btn" onClick={rightLabel}>
-                <EastIcon />
-              </button>
+                <Col className="col-6"></Col>
+              </Row>
+            </div>
+            <div className="col-xl-8 col-lg-12 col-md-12 col-sm-12 col-xs-12 edit-left">
+              <div className="col-4 edit-1">
+                <div className="height-60"></div>
+                <button className="left-arrow-btn" onClick={leftLabel}>
+                  <WestIcon />
+                </button>
+              </div>
+              <div className="col-4 bottle-div">
+                <div className="bottle">
+                  <div className="height-55">
+                    <button className="zoom-btn" onClick={zoomIn}>
+                      <ZoomInIcon />
+                    </button>
+                  </div>
+                  <div ref={printRef} className="height-150">
+                    {G.curLabel === 0 ? (
+                      <SLabel1
+                        bottleName={bottleName}
+                        vol={vol}
+                        cl={cl}
+                        tagLine={tagLine}
+                        color={color}
+                        batchDate={batchDate}
+                        bottleType={bottleType}
+                        file={file}
+                      />
+                    ) : G.curLabel === 1 ? (
+                      <Label1
+                        bottleName={bottleName}
+                        vol={vol}
+                        cl={cl}
+                        tagLine={tagLine}
+                        color={color}
+                        batchDate={batchDate}
+                        bottleType={bottleType}
+                        file={file}
+                      />
+                    ) : G.curLabel === 2 ? (
+                      <Label2
+                        bottleName={bottleName}
+                        vol={vol}
+                        cl={cl}
+                        tagLine={tagLine}
+                        color={color}
+                        batchDate={batchDate}
+                        bottleType={bottleType}
+                        file={file}
+                      />
+                    ) : G.curLabel === 3 ? (
+                      <Label3
+                        bottleName={bottleName}
+                        vol={vol}
+                        cl={cl}
+                        tagLine={tagLine}
+                        color={color}
+                        batchDate={batchDate}
+                        bottleType={bottleType}
+                        file={file}
+                      />
+                    ) : G.curLabel === 4 ? (
+                      <Label4
+                        bottleName={bottleName}
+                        vol={vol}
+                        cl={cl}
+                        tagLine={tagLine}
+                        color={color}
+                        batchDate={batchDate}
+                        bottleType={bottleType}
+                        file={file}
+                      />
+                    ) : G.curLabel === 5 ? (
+                      <Label5
+                        bottleName={bottleName}
+                        vol={vol}
+                        cl={cl}
+                        tagLine={tagLine}
+                        color={color}
+                        batchDate={batchDate}
+                        bottleType={bottleType}
+                        file={file}
+                      />
+                    ) : G.curLabel === 6 ? (
+                      <Label6
+                        bottleName={bottleName}
+                        vol={vol}
+                        cl={cl}
+                        tagLine={tagLine}
+                        color={color}
+                        batchDate={batchDate}
+                        bottleType={bottleType}
+                        file={file}
+                      />
+                    ) : G.curLabel === 7 ? (
+                      <Label7
+                        bottleName={bottleName}
+                        vol={vol}
+                        cl={cl}
+                        tagLine={tagLine}
+                        color={color}
+                        batchDate={batchDate}
+                        bottleType={bottleType}
+                        file={file}
+                      />
+                    ) : G.curLabel === 8 ? (
+                      <Label8
+                        bottleName={bottleName}
+                        vol={vol}
+                        cl={cl}
+                        tagLine={tagLine}
+                        color={color}
+                        batchDate={batchDate}
+                        bottleType={bottleType}
+                        file={file}
+                      />
+                    ) : G.curLabel === 9 ? (
+                      <Label9
+                        bottleName={bottleName}
+                        vol={vol}
+                        cl={cl}
+                        tagLine={tagLine}
+                        color={color}
+                        batchDate={batchDate}
+                        bottleType={bottleType}
+                        file={file}
+                      />
+                    ) : G.curLabel === 10 ? (
+                      <Label10
+                        bottleName={bottleName}
+                        vol={vol}
+                        cl={cl}
+                        tagLine={tagLine}
+                        color={color}
+                        batchDate={batchDate}
+                        bottleType={bottleType}
+                        file={file}
+                      />
+                    ) : G.curLabel === 11 ? (
+                      <Label11
+                        bottleName={bottleName}
+                        vol={vol}
+                        cl={cl}
+                        tagLine={tagLine}
+                        color={color}
+                        batchDate={batchDate}
+                        bottleType={bottleType}
+                        file={file}
+                      />
+                    ) : G.curLabel === 12 ? (
+                      <Label12
+                        bottleName={bottleName}
+                        vol={vol}
+                        cl={cl}
+                        tagLine={tagLine}
+                        color={color}
+                        batchDate={batchDate}
+                        bottleType={bottleType}
+                        file={file}
+                      />
+                    ) : G.curLabel === 13 ? (
+                      <Label13
+                        bottleName={bottleName}
+                        vol={vol}
+                        cl={cl}
+                        tagLine={tagLine}
+                        color={color}
+                        batchDate={batchDate}
+                        bottleType={bottleType}
+                        file={file}
+                      />
+                    ) : G.curLabel === 14 ? (
+                      <Label14
+                        bottleName={bottleName}
+                        vol={vol}
+                        cl={cl}
+                        tagLine={tagLine}
+                        color={color}
+                        batchDate={batchDate}
+                        bottleType={bottleType}
+                        file={file}
+                      />
+                    ) : G.curLabel === 15 ? (
+                      <Label15
+                        bottleName={bottleName}
+                        vol={vol}
+                        cl={cl}
+                        tagLine={tagLine}
+                        color={color}
+                        batchDate={batchDate}
+                        bottleType={bottleType}
+                        file={file}
+                      />
+                    ) : G.curLabel === 16 ? (
+                      <Label16
+                        bottleName={bottleName}
+                        vol={vol}
+                        cl={cl}
+                        tagLine={tagLine}
+                        color={color}
+                        batchDate={batchDate}
+                        bottleType={bottleType}
+                        file={file}
+                      />
+                    ) : G.curLabel === 17 ? (
+                      <Label17
+                        bottleName={bottleName}
+                        vol={vol}
+                        cl={cl}
+                        tagLine={tagLine}
+                        color={color}
+                        batchDate={batchDate}
+                        bottleType={bottleType}
+                        file={file}
+                      />
+                    ) : G.curLabel === 18 ? (
+                      <Label18
+                        bottleName={bottleName}
+                        vol={vol}
+                        cl={cl}
+                        tagLine={tagLine}
+                        color={color}
+                        batchDate={batchDate}
+                        bottleType={bottleType}
+                        file={file}
+                      />
+                    ) : G.curLabel === 19 ? (
+                      <Label19
+                        bottleName={bottleName}
+                        vol={vol}
+                        cl={cl}
+                        tagLine={tagLine}
+                        color={color}
+                        batchDate={batchDate}
+                        bottleType={bottleType}
+                        file={file}
+                      />
+                    ) : G.curLabel === 20 ? (
+                      <Label20
+                        bottleName={bottleName}
+                        vol={vol}
+                        cl={cl}
+                        tagLine={tagLine}
+                        color={color}
+                        batchDate={batchDate}
+                        bottleType={bottleType}
+                        file={file}
+                      />
+                    ) : G.curLabel === 21 ? (
+                      <Label21
+                        bottleName={bottleName}
+                        vol={vol}
+                        cl={cl}
+                        tagLine={tagLine}
+                        color={color}
+                        batchDate={batchDate}
+                        bottleType={bottleType}
+                        file={file}
+                      />
+                    ) : G.curLabel === 22 ? (
+                      <Label22
+                        bottleName={bottleName}
+                        vol={vol}
+                        cl={cl}
+                        tagLine={tagLine}
+                        color={color}
+                        batchDate={batchDate}
+                        bottleType={bottleType}
+                        file={file}
+                      />
+                    ) : G.curLabel === 23 ? (
+                      <Label23
+                        bottleName={bottleName}
+                        vol={vol}
+                        cl={cl}
+                        tagLine={tagLine}
+                        color={color}
+                        batchDate={batchDate}
+                        bottleType={bottleType}
+                        file={file}
+                      />
+                    ) : G.curLabel === 24 ? (
+                      <Label24
+                        bottleName={bottleName}
+                        vol={vol}
+                        cl={cl}
+                        tagLine={tagLine}
+                        color={color}
+                        batchDate={batchDate}
+                        bottleType={bottleType}
+                        file={file}
+                      />
+                    ) : G.curLabel === 25 ? (
+                      <Label25
+                        bottleName={bottleName}
+                        vol={vol}
+                        cl={cl}
+                        tagLine={tagLine}
+                        color={color}
+                        batchDate={batchDate}
+                        bottleType={bottleType}
+                        file={file}
+                      />
+                    ) : G.curLabel === 26 ? (
+                      <Label26
+                        bottleName={bottleName}
+                        vol={vol}
+                        cl={cl}
+                        tagLine={tagLine}
+                        color={color}
+                        batchDate={batchDate}
+                        bottleType={bottleType}
+                        file={file}
+                      />
+                    ) : G.curLabel === 27 ? (
+                      <Label27
+                        bottleName={bottleName}
+                        vol={vol}
+                        cl={cl}
+                        tagLine={tagLine}
+                        color={color}
+                        batchDate={batchDate}
+                        bottleType={bottleType}
+                        file={file}
+                      />
+                    ) : G.curLabel === 28 ? (
+                      <Label28
+                        bottleName={bottleName}
+                        vol={vol}
+                        cl={cl}
+                        tagLine={tagLine}
+                        color={color}
+                        batchDate={batchDate}
+                        bottleType={bottleType}
+                        file={file}
+                      />
+                    ) : G.curLabel === 29 ? (
+                      <Label29
+                        bottleName={bottleName}
+                        vol={vol}
+                        cl={cl}
+                        tagLine={tagLine}
+                        color={color}
+                        batchDate={batchDate}
+                        bottleType={bottleType}
+                        file={file}
+                      />
+                    ) : (
+                      <Label30
+                        bottleName={bottleName}
+                        vol={vol}
+                        cl={cl}
+                        tagLine={tagLine}
+                        color={color}
+                        batchDate={batchDate}
+                        bottleType={bottleType}
+                        file={file}
+                      />
+                    )}
+                  </div>
+                  <div className="overlay"></div>
+                </div>
+                {(G.curLabel === 14 ||
+                  G.curLabel === 20 ||
+                  G.curLabel === 23) && (
+                  <Button
+                    variant="contained"
+                    component="label"
+                    className="upload-btn"
+                  >
+                    {T("home.upload")}
+                    <input
+                      hidden
+                      accept="image/*"
+                      type="file"
+                      onChange={handleChange}
+                    />
+                  </Button>
+                )}
+              </div>
+              <div className="col-4 edit-right">
+                <div className="height-60"></div>
+
+                <button className="right-arrow-btn" onClick={rightLabel}>
+                  <EastIcon />
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
     </>
   );
 };

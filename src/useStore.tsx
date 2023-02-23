@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { useSelector, useDispatch } from "react-redux";
 
-// import img from "./assets/images/img1.webp";
 const locales = {
   "en-US": require("./locales/en-US.json"),
   "es-ES": require("./locales/es-ES.json"),
@@ -98,6 +97,7 @@ declare interface StoreObject {
   // images
   curImageX: number;
   curImageY: number;
+  zoom: number;
 }
 const appKey = "myProject-v.1.10";
 
@@ -177,6 +177,7 @@ const initialState: StoreObject = {
   // images
   curImageX: 0,
   curImageY: 0,
+  zoom: 1,
 };
 
 export const slice = createSlice({
